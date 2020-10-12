@@ -30,16 +30,16 @@ typedef struct {
 
 typedef struct {
     float* current;
-    float* last;
     float* begin;
     float* end;
 }CircularBuffer;
 
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead);
-void writeHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrNewWavFile, size_t* numWrite);
 void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2);
 
 void Init_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config, size_t* numRead);
 void Update_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config);
+void SetCurrent_CircBuff(CircularBuffer* circ_Config);
+void Convolution_CircBuff(CircularBuffer* circ_Config);
 
 void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config);

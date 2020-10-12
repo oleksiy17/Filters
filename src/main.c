@@ -17,7 +17,7 @@ int main()
     size_t numRead = 0;
     size_t numWrite = 0;
 
-    float h[TAP_64] = { -0.00037386,  -0.00108526,  -0.00085250,   0.00053048,   0.00206063,   0.00190208,  -0.00080576,  -0.00412507,
+    /*static float h[TAP_64] = { -0.00037386,  -0.00108526,  -0.00085250,   0.00053048,   0.00206063,   0.00190208,  -0.00080576,  -0.00412507,
 -0.00413883,   0.00099226,   0.00748067,   0.00798753,  -0.00071111,  -0.01198145,  -0.01361212,  -0.00047492,
 0.01712166,   0.02079374,   0.00290743,  -0.02212723,  -0.02889811,  -0.00668534,   0.02612942,  0.03695297,
 0.01157396,  -0.02837492,  -0.04382455,  -0.01700464,   0.02841432,   0.04845285,   0.02217333,  -0.02621595,
@@ -25,8 +25,21 @@ int main()
 0.01157396,   0.03695297,   0.02612942,  -0.00668534,  -0.02889811,  -0.02212723,   0.00290743,   0.02079374,
 0.01712166,  -0.00047492,  -0.01361212,  -0.01198145,  -0.00071111,   0.00798753,   0.00748067,   0.00099226,
 -0.00413883,  -0.00412507,  -0.00080576,   0.00190208,   0.00206063,   0.00053048,  -0.00085250,  -0.00108526,
--0.00037386 };
-    float buffer[TAP_64] = {0};
+-0.00037386 };*/
+    static float h[TAP_64] = { -0.00112908507,   0.00154856213,  -0.00017314556,  -0.00183074641,   0.00212721904,   0.00020970832,
+-0.00287886830,   0.00251786191,   0.00079872872,  -0.00303662719,  0.00162731680,   0.00060903567,
+-0.00000029979,  -0.00107897700,  -0.00266443131,   0.00836662042,  -0.00449003157,  -0.01182883190,
+0.02232157836,  -0.00575360036,  -0.02842951281,   0.03919585291,  -0.00155409794,  -0.05104705834,
+0.05392439940,   0.00981564039,  -0.07487481025,   0.06114398560,   0.02685304194,  -0.09316994126,
+0.05781345146,   0.04486140921,   0.90041130551,   0.04486140921,   0.05781345146,  -0.09316994126,
+0.02685304194,   0.06114398560,  -0.07487481025,   0.00981564039,   0.05392439940,  -0.05104705834,
+-0.00155409794,   0.03919585291,  -0.02842951281,  -0.00575360036,   0.02232157836,  -0.01182883190,
+-0.00449003157,   0.00836662042,  -0.00266443131,  -0.00107897700,  -0.00000029979,   0.00060903567,
+0.00162731680,  -0.00303662719,   0.00079872872,  0.00251786191,  -0.00287886830,   0.00020970832,
+0.00212721904,  -0.00183074641,  -0.00017314556,   0.00154856213,  -0.00112908507 };
+
+
+    static float buffer[TAP_64] = { 0 };
     //float h[TAP_64] = { 0 };
     riffHeader RIFF;
     riffHeader* ptrRIFF = &RIFF;
@@ -37,13 +50,18 @@ int main()
     dataHeader DATA;
     dataHeader* ptrDATA = &DATA;
 
-    CircularBuffer circ_Config;
+    static CircularBuffer circ_Config;
+    float tot = 0;
+    for (int j = 0; j < TAP_64; j++)
+    {
+        tot += h[j];
+    }
 
-   
+    printf("tot: %f\n", tot);
 
     fileAdd = "C:/Filters/test_signal/test.wav";
     newFileAdd = "C:/Filters/test_signal/fir.wav";
- 
+
     if ((ptrWavFile = fopen(fileAdd, "rb")) == NULL)      /*  Open existance .wav file    */
     {
         printf("ERROR in opening existance file!\n");
@@ -59,7 +77,6 @@ int main()
     //FIR_coeff_calc(h, ptrFMT->sample_rate, 0.3, 0.35);
     Init_CircBuff(buffer, ptrWavFile, &circ_Config, &numRead);
 
-    //writeHeader(ptrRIFF, ptrFMT, ptrDATA, ptrNewWavFile, &numWrite);
     numWrite = fwrite(ptrRIFF, sizeof(uint8_t), sizeof(riffHeader), ptrNewWavFile);
     numWrite = fwrite(ptrFMT, sizeof(uint8_t), sizeof(fmtHeader), ptrNewWavFile);
     numWrite = fwrite(ptrDATA, sizeof(uint8_t), sizeof(dataHeader), ptrNewWavFile);
@@ -94,14 +111,6 @@ void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FIL
 
 }
 
-void writeHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrNewWavFile, size_t* numWrite)
-{
-    numWrite = fwrite(ptrRIFF, sizeof(uint8_t), sizeof(riffHeader), ptrNewWavFile);
-    numWrite = fwrite(ptrFMT, sizeof(uint8_t), sizeof(fmtHeader), ptrNewWavFile);
-    numWrite = fwrite(ptrDATA, sizeof(uint8_t), sizeof(dataHeader), ptrNewWavFile);
-}
-
-
 
 void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2)
 {
@@ -115,7 +124,7 @@ void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2)
     int loop;
     int i;
 
-    loop = TAP_64/2;
+    loop = TAP_64 / 2;
 
     printf("Sample Rate : %f\nsmooth_low = %f\nsmooth_high = %f\n", sampRate, smooth_low, smooth_high);
 
@@ -132,7 +141,7 @@ void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2)
     {
 
         hd = (float)(2.0 * (smooth_low * (sinf(M2_PI * smooth_low *i) / (M2_PI * smooth_low *i)) - smooth_high * (sinf(M2_PI * smooth_high *i) / (M2_PI * smooth_high *i))));
-        blackman =(float)( 0.42 + 0.5*cosf((M2_PI*i) / (TAP_64 - 1)) + 0.08*cosf((2 * M2_PI*i) / (TAP_64 - 1)));
+        blackman = (float)(0.42 + 0.5*cosf((M2_PI*i) / (TAP_64 - 1)) + 0.08*cosf((2 * M2_PI*i) / (TAP_64 - 1)));
         h[i] = (hd * blackman) / div;
         h[TAP_64 - 1 - i] = h[i];
 
@@ -146,71 +155,82 @@ void Init_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config, size
     int i;
     int seek;
     float val;
+    float* ptrVal;
 
-    float* ptrVal = &val;
-    
+    val = 0.0;
+    ptrVal = &val;
+
+    numRead = fread((float*)ptrVal, (size_t)sizeof(float), (size_t)1, (FILE*)readFile);
+    seek = fseek(readFile, sizeof(float), SEEK_CUR);
+    buf[0] = val;
+
     circ_Config->begin = &buf[0];
     circ_Config->end = &buf[64];
-
-    for (i = (TAP_64 - 1); i >= 0; i--)
-    {
-        numRead = fread(ptrVal, sizeof(float), 1, readFile);
-        buf[i] = *ptrVal;
-        seek = fseek(readFile, sizeof(float), SEEK_CUR);
-    }
-
     circ_Config->current = &buf[0];
-    circ_Config->last = &buf[64];
+
+    for (i = 1; i < TAP_64; i++)
+    {
+        buf[i] = 0.0;
+    }
+}
+
+void SetCurrent_CircBuff(CircularBuffer* circ_Config)
+{
+    if (circ_Config->current == circ_Config->begin)
+    {
+        circ_Config->current = circ_Config->end;
+    }
+    else
+    {
+        circ_Config->current--;
+    }
+}
+
+void Convolution_CircBuff(CircularBuffer* circ_Config)
+{
+    if (circ_Config->current == circ_Config->end)
+    {
+        circ_Config->current = circ_Config->begin;
+    }
+    else
+    {
+        circ_Config->current++;
+    }
 }
 
 void Update_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config)
 {
-    static count = TAP_64;
     int seek;
     float val;
-    float* ptrVal = &val;
+    float* ptrVal;
     size_t numRead;
 
-    circ_Config->current--;
-    if (circ_Config->current < circ_Config->begin)
-    {
-        circ_Config->current = circ_Config->end;
-    }
+    val = 0.0;
+    ptrVal = &val;
 
-    if (count <= 480000)
-    {
-        numRead = fread(ptrVal, sizeof(float), 1, readFile);
-        *(circ_Config->current) = *ptrVal;
-        seek = fseek(readFile, sizeof(float), SEEK_CUR);
-    }
-    else
-    {
-        *(circ_Config->current) = 0.0;
-    }
+    SetCurrent_CircBuff(circ_Config);   //set current posuition for re-writting
+    numRead = fread(ptrVal, sizeof(float), 1, readFile);
+    seek = fseek(readFile, sizeof(float), SEEK_CUR);
 
+    *(circ_Config->current) = val;
 }
 
 void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config, FILE* ptrNewWavFile, FILE* ptrWavFile)
 {
-    int i;
-    int loop;
-    size_t read;
-    float sum = 0.0;
-
-    int num_written = TAP_64;
-
+    int outerIdX;
+    int innerIdx;
+    float sum;
     size_t numWrite;
 
-    for (loop = 0; loop < 480000; loop++)
-    {
-        for (i = 0; i < TAP_64; i++)
-        {
-            sum += h[i] * *(circ_Config->current);
+    
 
-            if ((++circ_Config->current) > circ_Config->end)
-            {
-                circ_Config->current = circ_Config->begin;
-            }
+    for (outerIdX = 1; outerIdX < 480000; outerIdX++)               // loop = 1 becouse of init_circular buffer function init 1st valuse ftom 480000
+    {
+        sum = 0.0;
+        for (innerIdx = 0; innerIdx < TAP_64; innerIdx++)
+        {
+            sum += h[innerIdx] * *(circ_Config->current);
+            Convolution_CircBuff(circ_Config);
         }
 
         numWrite = fwrite(&sum, sizeof(float), 1, ptrNewWavFile);
@@ -218,7 +238,5 @@ void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config, FILE* ptr
 
         Update_CircBuff(buffer, ptrWavFile, circ_Config);
     }
-    
-    
-
 }
+
