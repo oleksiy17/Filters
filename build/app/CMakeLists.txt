@@ -7,6 +7,9 @@ project(${PR_NAME})
 add_executable(${PR_NAME}
 	../../src/main.c
 	../../src/Filter_process.c
+	../../src/fir_float.c
+	../../src/iir_float.c
+	../../src/ring_buffer.c	
 	../../src/Filter_control.c)
 
 target_include_directories(${PR_NAME} PRIVATE ../../inc)

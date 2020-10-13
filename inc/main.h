@@ -1,10 +1,13 @@
+#ifndef __MAIN_H_
+#define __MAIN_H_
+
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdint.h"
-#include "math.h"
 
-#define M2_PI 6.283185307179
-#define TAP_64 65
+#include "ring_buffer.h"
+#include "fir_float.h"
+
 
 typedef struct {
     uint8_t    riff[4];                    // RIFF string
@@ -28,18 +31,9 @@ typedef struct {
     uint32_t   data_size;                  // NumSamples * NumChannels * BitsPerSample/8 - size of the next chunk that will be read
 }dataHeader;
 
-typedef struct {
-    float* current;
-    float* begin;
-    float* end;
-}CircularBuffer;
-
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead);
-void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2);
 
-void Init_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config, size_t* numRead);
-void Update_CircBuff(float* buf, FILE* readFile, CircularBuffer* circ_Config);
-void SetCurrent_CircBuff(CircularBuffer* circ_Config);
-void Convolution_CircBuff(CircularBuffer* circ_Config);
+#endif // !__MAIN_H_
 
-void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config);
+
+
