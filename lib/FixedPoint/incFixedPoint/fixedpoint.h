@@ -34,6 +34,14 @@
 #define ROUNDING_BIT_32 0x80000000
 #define ROUNDING_BIT_64 0x80000000
 
+#ifndef max
+#define max(a,b)            (((a) > (b)) ? (a) : (b))
+#endif
+
+#ifndef min
+#define min(a,b)            (((a) < (b)) ? (a) : (b))
+#endif
+
 typedef unsigned char           my_uint8;
 typedef unsigned short          my_uint16;
 typedef unsigned int            my_uint32;
@@ -50,7 +58,7 @@ typedef float                   my_float;
 my_sint32 add32(const my_sint32 a, const my_sint32 b);
 my_sint32 sub32(const my_sint32 a, const my_sint32 b);
 my_sint32 mul32(const my_sint32 a, const my_sint32 b);
-my_sint64 mac32(const my_sint32 a, const my_sint32 b, my_sint64 c);
+my_sint32 mac32(const my_sint32 a, const my_sint32 b, my_sint32 c);
 my_sint64 msub32(const my_sint32 a, const my_sint32 b, my_sint64 c);
 my_sint32 abs32(const my_sint32 a);
 my_sint32 neg32(const my_sint32 a);

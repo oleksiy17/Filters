@@ -7,7 +7,9 @@
 
 #include "ring_buffer.h"
 #include "fir_float.h"
-
+#include "iir_float.h"
+#include "float_to_pcm.h"
+#include "fixedpoint.h"
 
 typedef struct {
     uint8_t    riff[4];                    // RIFF string
@@ -31,7 +33,8 @@ typedef struct {
     uint32_t   data_size;                  // NumSamples * NumChannels * BitsPerSample/8 - size of the next chunk that will be read
 }dataHeader;
 
-void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead);
+void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
+void create_new_pcm(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, int diviation);
 
 #endif // !__MAIN_H_
 

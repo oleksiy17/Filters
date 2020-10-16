@@ -1,5 +1,5 @@
 #include "fir_float.h"
-#include "ring_buffer.h"
+
 
 /*static float h[TAP_64] = { -0.00112908507,   0.00154856213,  -0.00017314556,  -0.00183074641,   0.00212721904,   0.00020970832,
                 -0.00287886830,   0.00251786191,   0.00079872872,  -0.00303662719,   0.00162731680,   0.00060903567,
@@ -14,29 +14,27 @@
                  0.00212721904,  -0.00183074641,  -0.00017314556,   0.00154856213,  -0.00112908507 };*/
 //h[TAP_64] = { 0 };
 
-void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config, FILE* ptrNewWavFile, FILE* ptrWavFile)
+void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config, FILE* ptrNewWavFile, FILE* ptrWavFile, int sampleNum)
 {
     int outerIdX;
     int innerIdx;
     float sum;
     size_t numWrite;
 
-
-
-    for (outerIdX = 1; outerIdX < 480000; outerIdX++)               // loop = 1 becouse of init_circular buffer function init 1st valuse ftom 480000
+    for (outerIdX = 0; outerIdX < sampleNum; outerIdX++)               // loop = 1 becouse of init_circular buffer function init 1st valuse ftom 480000
     {
         sum = 0.0;
         for (innerIdx = 0; innerIdx < TAP_64; innerIdx++)
         {
-            sum += h[innerIdx] * *(circ_Config->current);
+            sum += h[innerIdx] * *((float*)(circ_Config->current));
             Convolution_CircBuff(circ_Config);
         }
 
         numWrite = fwrite(&sum, sizeof(float), 1, ptrNewWavFile);
         numWrite = fwrite(&sum, sizeof(float), 1, ptrNewWavFile);
-
         Update_CircBuff(buffer, ptrWavFile, circ_Config);
     }
+
 }
 
 void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2)

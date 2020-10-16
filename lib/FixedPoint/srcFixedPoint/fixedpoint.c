@@ -98,17 +98,21 @@ my_sint64 mul64(const my_sint64 a, const my_sint64 b, const my_sint64 shift)
 
 
 
-my_sint64 mac32(const my_sint32 a, const my_sint32 b, const my_sint64 c)
+my_sint32 mac32(const my_sint32 a, const my_sint32 b, const my_sint32 c)
 {
     my_sint64 acc;
-    my_sint64 sum;
+    my_sint32 sum;
+    my_sint32 acc_32;
 
     acc = (my_sint64)a * (my_sint64)b;
-    sum = acc + c;
+    acc = acc >> FRACTION_BASE;
+    acc_32 = (my_sint32)acc;
 
-    if (((acc ^ c) & MIN_VAL_64) == 0)
+    sum = acc_32 + c;
+
+    if (((acc_32 ^ c) & MIN_VAL_32) == 0)
     {
-        sum = saturation64(&sum, &acc);
+        sum = saturation64(&sum, &acc_32);
     }
 
     return sum;
@@ -263,7 +267,11 @@ my_sint64 saturation64(my_sint64* sum, my_sint64* term)
 
 my_sint32 float_To_Fixed(float floatNum, my_uint8 shift)
 {
-    return (my_sint32)(floatNum * (1u << shift));
+    my_sint32 tmp = (floatNum * (1u << shift));
+    /*tmp = min(tmp, MAX_VAL_32);
+    tmp = max(tmp, MIN_VAL_32);*/
+
+    return tmp;
 }
 
 

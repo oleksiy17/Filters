@@ -10,7 +10,7 @@
 static float h[TAP_64];
 
 void FIR_coeff_calc(float* h, float sampRate, float cof1, float cof2);
-void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config);
+void FIR_tration(float* h, float* buffer, CircularBuffer* circ_Config, FILE* ptrNewWavFile, FILE* ptrWavFile, int sampleNum);
 
 #endif // !__FIR_FLOAT_H_
 
