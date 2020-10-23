@@ -118,7 +118,25 @@ my_sint32 mac32(const my_sint32 a, const my_sint32 b, const my_sint32 c)
     return sum;
 }
 
-my_sint64 msub32(const my_sint32 a, const my_sint32 b, const my_sint64 c)
+my_sint64 mac64(const my_sint32 a, const my_sint32 b, const my_sint64 c)
+{
+    my_sint64 acc;
+    my_sint64 sum;
+
+    acc = (my_sint64)a * (my_sint64)b;
+    acc = acc << 1;
+    
+    sum = acc + c;
+
+    if (((acc ^ c) & MIN_VAL_64) == 0)
+    {
+        sum = saturation64(&sum, &acc);
+    }
+
+    return sum;
+}
+
+my_sint32 msub32(const my_sint32 a, const my_sint32 b, const my_sint32 c)
 {
     my_sint64 acc;
     my_sint64 dif;
@@ -127,6 +145,24 @@ my_sint64 msub32(const my_sint32 a, const my_sint32 b, const my_sint64 c)
     dif = acc - c;
 
     if (((acc ^ c) & MIN_VAL_64) == 1)
+    {
+        dif = saturation64(&dif, &acc);
+    }
+
+    return dif;
+}
+
+my_sint64 msub64(const my_sint32 a, const my_sint32 b, const my_sint64 c)
+{
+    my_sint64 acc;
+    my_sint64 dif;
+
+    acc = (my_sint64)a * (my_sint64)b;
+    acc = acc << 1;
+
+    dif = c - acc;
+
+    if (((c ^ acc) & MIN_VAL_64) == 1)
     {
         dif = saturation64(&dif, &acc);
     }
@@ -148,11 +184,11 @@ my_sint32 lsh32(const my_sint32 a, const my_sint32 b)
 
     if (((a & MIN_VAL_32) == 0))    // case for positive numbers
     {
-        if (a | EMPTY_MASK)         // if number is 0 return 0 and skip calculation
+        if (a | EMPTY_MASK_32)         // if number is 0 return 0 and skip calculation
         {
             c = a << b;
             
-            if ((c & MIN_VAL_32) | (c & EMPTY_MASK))     //check if sign was changed or all "1" was shifted 
+            if ((c & MIN_VAL_32) | (c & EMPTY_MASK_32))     //check if sign was changed or all "1" was shifted 
             {
                 c = MAX_VAL_32;
             }
@@ -162,6 +198,32 @@ my_sint32 lsh32(const my_sint32 a, const my_sint32 b)
     return c;
 }
 
+my_sint64 lsh64(const my_sint64 a, const my_sint64 b)
+{
+    my_sint64 c;
+    c = 0;
+
+    if (a & MIN_VAL_64)     //case for negative numbers
+    {
+        c = a << b;
+        c = c | MIN_VAL_64;     // always add a sign bit
+    }
+
+    if (((a & MIN_VAL_64) == 0))    // case for positive numbers
+    {
+        if (a | EMPTY_MASK_64)         // if number is 0 return 0 and skip calculation
+        {
+            c = a << b;
+
+            if ((c & MIN_VAL_64) | (c & EMPTY_MASK_64))     //check if sign was changed or all "1" was shifted 
+            {
+                c = MAX_VAL_64;
+            }
+        }
+    }
+
+    return c;
+}
 
 my_sint32 rsh32(const my_sint32 a, const my_sint32 b)
 {

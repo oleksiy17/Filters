@@ -25,10 +25,8 @@
 
 #define Q20_SHIFT       11
 
-#define EMPTY_MASK      0x00000000
-#define T1              2.823529
-#define T2              1.882352
-#define NORM_FACTOR     0.15195522
+#define EMPTY_MASK_32   0x00000000
+#define EMPTY_MASK_64   0x0000000000000000
 #define ESTIMATE_VAL    0x80000
 #define ONE             0xFFFFF
 #define ROUNDING_BIT_32 0x80000000
@@ -59,10 +57,13 @@ my_sint32 add32(const my_sint32 a, const my_sint32 b);
 my_sint32 sub32(const my_sint32 a, const my_sint32 b);
 my_sint32 mul32(const my_sint32 a, const my_sint32 b);
 my_sint32 mac32(const my_sint32 a, const my_sint32 b, my_sint32 c);
-my_sint64 msub32(const my_sint32 a, const my_sint32 b, my_sint64 c);
+my_sint64 mac64(const my_sint32 a, const my_sint32 b, const my_sint64 c);
+my_sint32 msub32(const my_sint32 a, const my_sint32 b, my_sint32 c);
+my_sint64 msub64(const my_sint32 a, const my_sint32 b, const my_sint64 c);
 my_sint32 abs32(const my_sint32 a);
 my_sint32 neg32(const my_sint32 a);
 my_sint32 lsh32(const my_sint32 a, const my_sint32 b);
+my_sint64 lsh64(const my_sint64 a, const my_sint64 b);
 my_sint32 rsh32(const my_sint32 a, const my_sint32 b);
 my_sint32 div32(const my_sint32 numenator, const my_sint32 denuminator);
 

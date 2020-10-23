@@ -1,15 +1,20 @@
 #ifndef __MAIN_H_
 #define __MAIN_H_
 
+
+//#define FIR_float
+//#define IIR_float
+//#define GAIN
+#define COMPRESSOR
+
 #include "stdlib.h"
 #include "stdio.h"
 #include "stdint.h"
 
-#include "ring_buffer.h"
-#include "fir_float.h"
-#include "iir_float.h"
-#include "float_to_pcm.h"
 #include "fixedpoint.h"
+
+#include "effect_control.h"
+#include "effect_process.h"
 
 typedef struct {
     uint8_t    riff[4];                    // RIFF string
@@ -33,8 +38,35 @@ typedef struct {
     uint32_t   data_size;                  // NumSamples * NumChannels * BitsPerSample/8 - size of the next chunk that will be read
 }dataHeader;
 
+typedef struct {
+    fmtHeader* fmt;
+    dataHeader* data;
+    void* audio;
+    float Q;
+    float freq;
+    float gain;     //in dB
+}effect_parameters;
+
+
+typedef struct {
+    fmtHeader* fmt;
+    dataHeader* data;
+    void* audio;
+    float threshold;
+    float ratio;
+    float tauAttack;
+    float tauRelease;
+    float makeUpGain;
+    
+}effect_params_compressor;
+
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
-void create_new_pcm(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, int diviation);
+
+
+void effect_compressor(effect_params_compressor effect_par_comp);
+void effect_fir(effect_parameters effect_params);
+void effect_iir(effect_parameters effect_params);
+void effect_gain(effect_parameters effect_params);
 
 #endif // !__MAIN_H_
 
