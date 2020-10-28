@@ -158,8 +158,11 @@ int32_t effect_update_coeffs(
     update_coeffs->threshold = update_params->threshold;
     update_coeffs->ratio = update_params->ratio;
 
-    update_coeffs->alphaAttack = powf(M_e, ((-1.0) / (0.001*update_params->tauAttack*update_params->samplerate)));
-    update_coeffs->alphaRelease = powf(M_e, ((-1.0) / (0.001*update_params->tauRelease*update_params->samplerate)));
+    update_coeffs->alphaAttack = powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
+    update_coeffs->alphaRelease = powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));
+
+    /*update_coeffs->alphaAttack = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
+    update_coeffs->alphaRelease = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));*/
 
     update_coeffs->makeUpGain = update_params->makeUpGain;
     update_coeffs->samplerate = update_params->samplerate;

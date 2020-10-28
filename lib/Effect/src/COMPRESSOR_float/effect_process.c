@@ -22,16 +22,16 @@ typedef struct {
 }tStereo;
 
 typedef struct {
-    tStereo in_amp;             //
-    tStereo out_amp;
+    tStereo x;             //
+    tStereo y;
 
-    tStereo in_dB;        //
-    tStereo out_dB;       //
+    tStereo x_dB;        //
+    tStereo y_dB;       //
 
-    tStereo prev_out_dB;
+    tStereo prev_y_dB;
 
-    tStereo delta_in_db;
-    tStereo delta_out_db;
+    tStereo det_x_dB;
+    tStereo det_y_dB;
 
     tStereo c_gain;
 }compressor_states;
@@ -67,22 +67,22 @@ int32_t effect_reset(
 {
     compressor_states* reset_states = (compressor_states*)states;
 
-    reset_states->in_amp.L = 0.0;
-    reset_states->out_amp.L = 0.0;
-    reset_states->prev_out_dB.L = 0.0;
-    reset_states->delta_in_db.L = 0.0;
-    reset_states->delta_out_db.L = 0.0;
-    reset_states->in_dB.L = 0.0;
-    reset_states->out_dB.L = 0.0;
+    reset_states->x.L = 0.0;
+    reset_states->y.L = 0.0;
+    reset_states->prev_y_dB.L = 0.0;
+    reset_states->det_x_dB.L = 0.0;
+    reset_states->det_y_dB.L = 0.0;
+    reset_states->x_dB.L = 0.0;
+    reset_states->y_dB.L = 0.0;
     reset_states->c_gain.L = 0.0;
 
-    reset_states->in_amp.R = 0.0;
-    reset_states->out_amp.R = 0.0;
-    reset_states->prev_out_dB.R = 0.0;
-    reset_states->delta_in_db.R = 0.0;
-    reset_states->delta_out_db.R = 0.0;
-    reset_states->in_dB.R = 0.0;
-    reset_states->out_dB.R = 0.0;
+    reset_states->x.R = 0.0;
+    reset_states->y.R = 0.0;
+    reset_states->prev_y_dB.R = 0.0;
+    reset_states->det_x_dB.R = 0.0;
+    reset_states->det_y_dB.R = 0.0;
+    reset_states->x_dB.R = 0.0;
+    reset_states->y_dB.R = 0.0;
     reset_states->c_gain.R = 0.0;
 }
 
@@ -112,87 +112,119 @@ int32_t effect_process(
     coeffs_c = (compressor_coeffs*)coeffs;
     states_c = (compressor_states*)states;
     audio_c = (tStereo*)audio;
-
+    float c_dB;
     for (i = 0; i < samples_count; i++)
     {
-        states_c->in_amp = ((tStereo*)audio_c)[i];
+        states_c->x = ((tStereo*)audio_c)[i];
 
                             /*      Left channel       */
 
-        if (fabsf(states_c->in_amp.L) < 0.000001)
+        //ABS lin/log
+        if (fabsf(states_c->x.L) < 0.000001)
         {
-            states_c->in_dB.L = -120;                                       // input signal AMP -> GAIN conversion
+            states_c->x_dB.L = -120;                                       // input signal AMP -> GAIN conversion
         }
         else
         {
-            states_c->in_dB.L = 20 * log10f(fabsf(states_c->in_amp.L));   // input signal AMP -> GAIN conversion
+            states_c->x_dB.L = 20 * log10f(fabsf(states_c->x.L));   // input signal AMP -> GAIN conversion
         }
 
-        if (states_c->in_dB.L >= coeffs_c->threshold)
+        // -CT + CS
+        if (states_c->x_dB.L > coeffs_c->threshold)
         {
-            states_c->out_dB.L = coeffs_c->threshold + ((states_c->in_dB.L - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
+            states_c->y_dB.L = (1.0 - (1.0/coeffs_c->ratio))*(coeffs_c->threshold - states_c->x_dB.L);     //hard knee gain computition
         }
         else
         {
-            states_c->out_dB.L = states_c->in_dB.L;
+            states_c->y_dB.L = 0;                         // if threshold is not reached               
         }
 
-        states_c->delta_in_db.L = states_c->in_dB.L - states_c->out_dB.L;
+        states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain + states_c->y_dB.L) / 20));
 
-        if (states_c->delta_in_db.L > states_c->prev_out_dB.L)
+        if (states_c->c_gain.L > states_c->prev_y_dB.L)
         {
-            states_c->delta_out_db.L = (coeffs_c->alphaAttack * states_c->prev_out_dB.L) + (1.0 - coeffs_c->alphaAttack) * states_c->delta_in_db.L;
+            states_c->det_x_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
         }
         else
         {
-            states_c->delta_out_db.L = coeffs_c->alphaRelease * states_c->prev_out_dB.L + (1.0 - coeffs_c->alphaRelease) * states_c->delta_in_db.L;
+            states_c->det_x_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
         }
 
+        states_c->prev_y_dB.L = states_c->det_x_dB.L;
 
-        states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain - states_c->delta_out_db.L) / 20));
-        states_c->prev_out_dB.L = states_c->delta_out_db.L;
+        states_c->y.L = states_c->x.L * states_c->det_x_dB.L;//states_c->c_gain.R;
+        ((tStereo*)audio_c)[i].L = states_c->c_gain.L;//states_c->y.L;
+        ((tStereo*)audio_c)[i].R = states_c->det_x_dB.L;//states_c->c_gain.L;//states_c->c_gain.L * states_c->x.L;//states_c->y.R;
+        /*if (fabsf(states_c->x.L) < 0.000001)
+        {
+            states_c->x_dB.L = -120;                                       // input signal AMP -> GAIN conversion
+        } else
+            {
+             states_c->x_dB.L = 20 * log10f(fabsf(states_c->x.L));   // input signal AMP -> GAIN conversion
+            }
 
-        states_c->out_amp.L = states_c->in_amp.L*states_c->c_gain.L;
-        ((tStereo*)audio_c)[i].L = states_c->out_amp.L;
+        if (states_c->x_dB.L > coeffs_c->threshold)
+        {
+            states_c->y_dB.L = coeffs_c->threshold + ((states_c->x_dB.L - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
+        } else
+            {
+                states_c->y_dB.L = states_c->x_dB.L;                         // if threshold is not reached               
+            }
+
+        states_c->det_x_dB.L = states_c->y_dB.L - states_c->x_dB.L;
+        states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain + states_c->det_x_dB.L) / 20));
+
+        if (states_c->c_gain.L > states_c->prev_y_dB.L)
+        {
+            states_c->det_y_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
+        } else
+            {
+                states_c->det_y_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
+            }
+
+        states_c->prev_y_dB.L = states_c->det_y_dB.L;
+         
+        ((tStereo*)audio_c)[i].L = states_c->x.L * states_c->det_y_dB.L;*/
 
                              /*      Right channel       */
 
-
-        if (fabsf(states_c->in_amp.R) < 0.000001)
+        if (fabsf(states_c->x.R) < 0.000001)
         {
-            states_c->in_dB.R = -120;                                       // input signal AMP -> GAIN conversion
+            states_c->x_dB.R = -120;                                       // input signal AMP -> GAIN conversion
         }
         else
         {
-            states_c->in_dB.R = 20 * log10f(fabsf(states_c->in_amp.R));   // input signal AMP -> GAIN conversion
+            states_c->x_dB.R = 20 * log10f(fabsf(states_c->x.R));   // input signal AMP -> GAIN conversion
         }
 
-        if (states_c->in_dB.R >= coeffs_c->threshold)
+        if (states_c->x_dB.R >= coeffs_c->threshold)
         {
-            states_c->out_dB.R = coeffs_c->threshold + ((states_c->in_dB.R - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
+            states_c->y_dB.R = coeffs_c->threshold + ((states_c->x_dB.R - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
         }
         else
         {
-            states_c->out_dB.R = states_c->in_dB.R;                         // if threshold is not reached               
+            states_c->y_dB.R = states_c->x_dB.R;                         // if threshold is not reached               
         }
 
-        states_c->delta_in_db.R = states_c->in_dB.R - states_c->out_dB.R;   // gain difference out - in
+        states_c->det_x_dB.R = states_c->x_dB.R - states_c->y_dB.R;   // gain difference out - in
+        
 
-        if (states_c->delta_in_db.R > states_c->prev_out_dB.R)              // comparison of current gain and previos gain
+        if (states_c->det_x_dB.R > states_c->prev_y_dB.R)              // comparison of current gain and previos gain
         {
-            states_c->delta_out_db.R = (coeffs_c->alphaAttack * states_c->prev_out_dB.R) + (1.0 - coeffs_c->alphaAttack) * states_c->delta_in_db.R;     // if current gain higher than previous -> attac
+            states_c->det_y_dB.R = coeffs_c->alphaAttack * states_c->prev_y_dB.R + (1.0 - coeffs_c->alphaAttack) * states_c->det_x_dB.R;     // if current gain higher than previous -> attac
         }
         else
         {
-            states_c->delta_out_db.R = coeffs_c->alphaRelease * states_c->prev_out_dB.R + (1.0 - coeffs_c->alphaRelease) * states_c->delta_in_db.R;     // attenuate
+            states_c->det_y_dB.R =coeffs_c->alphaRelease * states_c->prev_y_dB.R + (1.0 - coeffs_c->alphaRelease) * states_c->det_x_dB.R;    // attenuate
         }
 
+        states_c->c_gain.R = pow(10.0, ((coeffs_c->makeUpGain - states_c->det_y_dB.R) / 20));
 
-        states_c->c_gain.R = pow(10.0, ((coeffs_c->makeUpGain - states_c->delta_out_db.R) / 20));
-        states_c->prev_out_dB.R = states_c->delta_out_db.R;
 
-        states_c->out_amp.R = states_c->in_amp.R * states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].R = states_c->out_amp.R;
+        states_c->prev_y_dB.R = states_c->det_y_dB.R;
+
+        states_c->y.R = states_c->x.R * states_c->c_gain.R;//states_c->c_gain.R;
+        //((tStereo*)audio_c)[i].R = states_c->x.R//states_c->y.R;
 
     }
 }

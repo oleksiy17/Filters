@@ -1,0 +1,8 @@
+﻿  effect_control.c
+c:\filters\lib\effect\src\compressor_float\effect_control.c(161): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_float\effect_control.c(162): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_float\effect_control.c(47): warning C4716: 'effect_control_get_sizes': must return a value
+c:\filters\lib\effect\src\compressor_float\effect_control.c(80): warning C4716: 'effect_control_initialize': must return a value
+c:\filters\lib\effect\src\compressor_float\effect_control.c(139): warning C4716: 'effect_set_parameter': must return a value
+c:\filters\lib\effect\src\compressor_float\effect_control.c(169): warning C4716: 'effect_update_coeffs': must return a value
+  COMPRESSOR_float.vcxproj -> C:\Filters\build\tmp\lib\Effect\COMPRESSOR_float\Debug\COMPRESSOR_float.lib

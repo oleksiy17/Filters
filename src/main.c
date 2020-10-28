@@ -18,7 +18,7 @@ int main()
     riffHeader RIFF;
     riffHeader* ptrRIFF = &RIFF;
     fmtHeader FMT;
-    fmtHeader* ptrFMT = &FMT;
+    fmtHeader* ptrFMT = &FMT; 
     dataHeader DATA;
     dataHeader* ptrDATA = &DATA;
 
@@ -55,10 +55,10 @@ int main()
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
     effect_par_comp.threshold = -6;
-    effect_par_comp.ratio = 2;
+    effect_par_comp.ratio = 40;
     effect_par_comp.tauAttack = 100;
-    effect_par_comp.tauRelease = 300;
-    effect_par_comp.makeUpGain = -6;
+    effect_par_comp.tauRelease = 200;
+    effect_par_comp.makeUpGain = 0;
 
     numRead = fread(audio, 1, DATA.data_size, ptrWavFile);
 
