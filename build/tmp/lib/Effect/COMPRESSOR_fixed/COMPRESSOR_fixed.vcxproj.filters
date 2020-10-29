@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Filters\lib\Effect\src\COMPRESSOR_fixed\effect_control.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Filters\lib\Effect\src\COMPRESSOR_fixed\effect_process.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Filters\build\lib\Effect\COMPRESSOR_fixed\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F798FAF7-59E7-3B35-9168-A504A5EB504E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

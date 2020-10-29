@@ -153,8 +153,8 @@ int32_t effect_process(
         states_c->prev_y_dB.L = states_c->det_x_dB.L;
 
         states_c->y.L = states_c->x.L * states_c->det_x_dB.L;//states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].L = states_c->c_gain.L;//states_c->y.L;
-        ((tStereo*)audio_c)[i].R = states_c->det_x_dB.L;//states_c->c_gain.L;//states_c->c_gain.L * states_c->x.L;//states_c->y.R;
+        ((tStereo*)audio_c)[i].L = states_c->y.L;
+       
         /*if (fabsf(states_c->x.L) < 0.000001)
         {
             states_c->x_dB.L = -120;                                       // input signal AMP -> GAIN conversion
@@ -224,7 +224,7 @@ int32_t effect_process(
         states_c->prev_y_dB.R = states_c->det_y_dB.R;
 
         states_c->y.R = states_c->x.R * states_c->c_gain.R;//states_c->c_gain.R;
-        //((tStereo*)audio_c)[i].R = states_c->x.R//states_c->y.R;
+        ((tStereo*)audio_c)[i].R = states_c->y.R;
 
     }
 }

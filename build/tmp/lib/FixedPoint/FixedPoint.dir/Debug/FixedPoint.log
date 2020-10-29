@@ -1,1 +1,3 @@
-﻿  FixedPoint.vcxproj -> C:\Filters\build\tmp\lib\FixedPoint\Debug\FixedPoint.lib
+﻿  tables.c
+c:\filters\lib\fixedpoint\src\tables.c(2): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+  FixedPoint.vcxproj -> C:\Filters\build\tmp\lib\FixedPoint\Debug\FixedPoint.lib

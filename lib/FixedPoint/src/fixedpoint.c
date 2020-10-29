@@ -485,4 +485,21 @@ my_sint32 my_pow(my_sint32 a, my_sint32 x)
     return result;
 }
 
+my_sint32 log10x(my_sint32 a)    // Input parameter in Q31
+{
+    my_sint32 Idx;          // may be a structure
+    my_sint32 units;
+    my_sint32 arr_dif;
+    my_sint64 delta;
+    my_sint32 result;
+
+    Idx = rsh32(a, (my_sint32)LOG_IDX_OFFSET);                              //  Find index of array by shifting right log value by 22
+    units = sub32(a, (my_uint32)lsh32(Idx, (my_sint32)LOG_IDX_OFFSET));       //  Find difference betveen number of units in given value and a nearest array value
+    arr_dif = sub32(arr_log10[Idx + 1], arr_log10[Idx]);                            //  Find difference in nearest array values
+    delta = mul64((my_sint64)arr_dif, (my_sint64)units, (my_sint64)LOG_IDX_OFFSET);      //  Myltiplie number of units in given range on given range and divide it to total amount of units in range( shift right by 22 )
+    result = add32((my_sint32)delta, arr_log10[Idx]);                            //  Add finded delta to nearest array value to complete interpolation
+
+    return result;      //returning Q5.26 format
+}
+
 

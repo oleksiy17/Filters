@@ -1,3 +1,6 @@
+//#ifndef __FIXEDPOINT_H_
+//#define __FIXEDPOINT_H_
+
 #include <stdint.h>
 #include <stdio.h>
 #include "math.h"
@@ -31,6 +34,26 @@
 #define ONE             0xFFFFF
 #define ROUNDING_BIT_32 0x80000000
 #define ROUNDING_BIT_64 0x80000000
+
+#define Q31 31
+#define Q30 30
+#define Q29 29
+#define Q28 28
+#define Q27 27
+#define Q26 26
+#define Q25 25
+#define Q24 24
+#define Q23 23
+#define Q22 22
+#define Q21 21
+#define Q20 20
+#define Q19 19
+#define Q18 18
+#define Q17 17
+#define Q16 16
+#define Q15 15
+#define Q14 14
+#define Q13 13
 
 #ifndef max
 #define max(a,b)            (((a) > (b)) ? (a) : (b))
@@ -89,3 +112,6 @@ my_float div_f(const my_float numenator, const my_float denuminator);
 my_sint32 log2x(my_sint32 a);
 my_sint32 pow2x(my_sint32 a);
 my_sint32 my_pow(my_sint32 a, my_sint32 x);
+my_sint32 log10x(my_sint32 a);
+
+//#endif // !__FIXEDPOINT_H_

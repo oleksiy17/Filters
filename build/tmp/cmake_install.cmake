@@ -35,7 +35,7 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("C:/Filters/build/tmp/lib/FixedPoint/cmake_install.cmake")
-  include("C:/Filters/build/tmp/lib/Effect/COMPRESSOR_float/cmake_install.cmake")
+  include("C:/Filters/build/tmp/lib/Effect/COMPRESSOR_fixed/cmake_install.cmake")
   include("C:/Filters/build/tmp/app/cmake_install.cmake")
 
 endif()
