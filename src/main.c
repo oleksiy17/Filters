@@ -54,7 +54,7 @@ int main()
     effect_par_comp.fmt = ptrFMT;
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -6;
+    effect_par_comp.threshold = -15;
     effect_par_comp.ratio = 40;
     effect_par_comp.tauAttack = 100;
     effect_par_comp.tauRelease = 200;
@@ -78,41 +78,18 @@ int main()
     effect_compressor(effect_par_comp);
 #endif // COMPRESSOR
 
-
     numWrite = fwrite(audio, 1, DATA.data_size, ptrNewWavFIR);
 
-    int a = fclose(ptrWavFile);
-    a = fclose(ptrNewWavFIR);
+    int c = fclose(ptrWavFile);
+    c = fclose(ptrNewWavFIR);
     
-    /*float k = 0.0;
-
-    for (int i = 0; i < 52; i++)
-    {
-        for (int j = 0; j < 10; j++)
-        {
-            printf("%d, ", float_To_Fixed(log10f(k/512.0), Q24));
-            k += 1.0;
-        }
-        printf("\n");
-
-    }*/
-
-    /*float k = 14.8572 / 512.0;
-
-    float k_log10 = log10f(k);
-
-    printf("k = %f; k_log10 = %f\n", k, k_log10);
-
-    my_sint32 l = float_To_Fixed(k, Q31);
-
-    my_sint32 l_log10x = log10x(l);
-
-    printf("l = %d; l_log10x = %d\n", l, l_log10x);
-
-    printf("fixed log to float log -> %d is %f", l_log10x, fixed_To_Float(l_log10x, Q24));
+    /*float var = -4.1;
+    my_sint32 fix = float_To_Fixed(var, Q23);
+    fix = pow10x(fix);
+    printf("10^%f = %f\n", var, fixed_To_Float(fix, Q23));
     */
+
     return 0;
- 
 }
 
 void effect_compressor(effect_params_compressor effect_par_comp)

@@ -161,8 +161,8 @@ int32_t effect_update_coeffs(
     update_coeffs->threshold = float_To_Fixed(update_params->threshold, Q23);               // Rande from 0 to -128 dB    
     update_coeffs->ratio = float_To_Fixed(update_params->ratio, Q23);                       // Range from 1 to 127 
 
-    update_coeffs->alphaAttack = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate))), Q31);
-    update_coeffs->alphaRelease = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate))), Q31);
+    update_coeffs->alphaAttack = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate))), Q23);
+    update_coeffs->alphaRelease = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate))), Q23);
 
     /*update_coeffs->alphaAttack = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
     update_coeffs->alphaRelease = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));*/

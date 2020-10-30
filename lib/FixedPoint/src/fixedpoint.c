@@ -84,6 +84,18 @@ my_sint32 mul32(const my_sint32 a, const my_sint32 b)
     return c;
 }
 
+my_sint32 mul32_q(const my_sint32 a, const my_sint32 b, const my_sint32 shift)
+{
+    my_sint64 prod = 0;
+
+    prod = (my_sint64)a * (my_sint64)b;
+
+    prod <<= 1;             //sign bit cancelation
+    prod <<= (31 - shift);  // headroom cancelation
+    prod >>= 32;            // format rounding
+
+    return (my_sint32)prod;
+}
 
 my_sint64 mul64(const my_sint64 a, const my_sint64 b, const my_sint64 shift)
 {
@@ -429,6 +441,43 @@ my_sint32 div32(const my_sint32 numenator, const my_sint32 denuminator)
     return ret;
 }
 
+my_sint32 div32_1_x(const my_sint32 denuminator, const my_sint32 Q)
+{
+    my_uint32 i;
+    my_uint32 ret;
+
+    my_sint64 var_mul;
+    my_sint64 var_sub;
+    my_sint64 estimate;
+    my_sint64 one;
+
+    my_sint64 new_denum = denuminator;                              // Q31 denuminator in 64 bit integer;
+
+    if (((my_sint32)Q31 - (my_sint32)Q) == 0)
+    {
+        estimate = 0x20000000;
+        one = 0x7FFFFFFF;
+    }
+    else
+    {
+        estimate = 0x20000000 >> ((my_sint32)Q31 - (my_sint32)Q);
+        one = 0x7FFFFFFF >> ((my_sint32)Q31 - (my_sint32)Q);
+    }
+
+    
+    for (i = 0; i < 13; i++)
+    {
+        /*  x(n+1) = x(n) + x(n) * (1 - (denumenator * x(n))) */
+
+        var_mul = mul64(new_denum, estimate, (my_sint64)Q);     //  denumenator * x(n)
+        var_sub = sub64(one, var_mul);   //  1 - (denumenator * x(n))
+        var_mul = mul64(estimate, var_sub, (my_sint64)Q);         //  x(n) * (1 - (denumenator * x(n)))
+        estimate = add64(estimate, var_mul);        //  x(n + 1) = x(n) + x(n) * (1 - (denumenator * x(n)))
+    }
+
+    return (my_sint32)estimate;
+}
+
 my_float div_f(const my_float numenator, const my_float denuminator)
 {
     my_float result = numenator / denuminator;
@@ -468,6 +517,24 @@ my_sint32 pow2x(my_sint32 a)            //input parameter in Q5.26
     delta = mul64((my_sint64)arr_dif, (my_sint64)units, (my_sint64)POW_IDX_OFFSET);
     result = add32((my_sint32)delta, arr_pow[Idx]);
     
+    return result;
+}
+
+my_sint32 pow10x(my_sint32 a)            //input parameter in Q5.26
+{
+    my_sint32 Idx;
+    my_sint32 units;
+    my_sint32 arr_dif;
+    my_sint64 delta;
+    my_sint32 result;
+
+    Idx = rsh32(a, (my_sint32)16);
+    units = sub32(a, (my_uint32)lsh32(Idx, (my_sint32)16));
+    Idx = 512 +Idx;
+    arr_dif = sub32(arr_pow10[Idx], arr_pow10[Idx + 1]);
+    delta = mul64((my_sint64)arr_dif, (my_sint64)units, (my_sint64)16);
+    result = add32((my_sint32)delta, arr_pow10[Idx]);
+
     return result;
 }
 

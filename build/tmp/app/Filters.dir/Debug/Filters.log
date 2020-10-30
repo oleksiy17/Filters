@@ -1,8 +1,8 @@
 ﻿  main.c
 c:\filters\src\main.c(12): warning C4101: 'newFileIIR': unreferenced local variable
-c:\filters\src\main.c(144): warning C4244: 'function': conversion from 'uint32_t' to 'float', possible loss of data
-c:\filters\src\main.c(226): warning C4244: 'function': conversion from 'uint32_t' to 'float', possible loss of data
-c:\filters\src\main.c(238): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
-c:\filters\src\main.c(239): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
-c:\filters\src\main.c(244): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+c:\filters\src\main.c(121): warning C4244: 'function': conversion from 'uint32_t' to 'float', possible loss of data
+c:\filters\src\main.c(203): warning C4244: 'function': conversion from 'uint32_t' to 'float', possible loss of data
+c:\filters\src\main.c(215): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+c:\filters\src\main.c(216): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+c:\filters\src\main.c(221): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
   Filters.vcxproj -> C:\Filters\build\tmp\app\Debug\Filters.exe
