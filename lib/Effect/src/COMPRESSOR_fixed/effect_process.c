@@ -5,6 +5,12 @@
 #include <stddef.h>
 #include "fixedpoint.h"
 
+#define X_MIN_VAL_THRESHOLD    0x800
+#define MIN_dB                 0xC3CB43FF 
+#define TWENTY_Q23             0xA000000
+#define ONE_Q23                0x800000
+
+
 typedef struct {
     my_sint32 threshold;
     my_sint32 ratio;
@@ -126,15 +132,14 @@ int32_t effect_process(
                             /*      Left channel   */    
 
         //ABS lin/log
-        if (abs32(states_c->x.L) < 0x800)                         // in < 1/1048576
+        if (abs32(states_c->x.L) < X_MIN_VAL_THRESHOLD)                         // in < 1/1048576
         {
-            states_c->x_dB.L = 0xC3CB43FF;                      // input signal AMP -> GAIN conversion -120,41198 Q8.23
+            states_c->x_dB.L = MIN_dB;                      // input signal AMP -> GAIN conversion -120,41198 Q8.23
         }
         else
         {
-            states_c->x_dB.L = mul32_q(log10x(abs32(states_c->x.L)), (my_sint32)0xA000000, Q23);    // input signal AMP -> GAIN conversion       // x_dB in Q8.23
+            states_c->x_dB.L = mul32_q(log10x(abs32(states_c->x.L)), (my_sint32)TWENTY_Q23, Q23);    // input signal AMP -> GAIN conversion       // x_dB in Q8.23
         }
-
 
         // -CT + CS
         if (states_c->x_dB.L > coeffs_c->threshold)
@@ -142,19 +147,19 @@ int32_t effect_process(
             //states_c->y_dB.L = (1.0 - (1.0/coeffs_c->ratio))*(coeffs_c->threshold - states_c->x_dB.L);     //hard knee gain computition
             axil_1 = sub32(coeffs_c->threshold, states_c->x_dB.L);      // Q8.23
             axil_2 = div32_1_x(coeffs_c->ratio, Q23);                   // Q8.23
-            axil_2 = sub32(0x800000, axil_2);                           // Q8.23
+            axil_2 = sub32(ONE_Q23, axil_2);                           // Q8.23
 
             states_c->y_dB.L = mul32_q(axil_2, axil_1, Q23);            // Q8.23
         }
         else
         {
-            states_c->y_dB.L = 0;                         // if threshold is not reached      Q8.23          
+            states_c->y_dB.L = 0;                              
         }
 
         //states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain + states_c->y_dB.L) / 20));
 
         axil_1 = add32(coeffs_c->makeUpGain, states_c->y_dB.L);
-        axil_2 = div32_1_x((my_sint32)20, Q23);
+        axil_2 = div32_1_x((my_sint32)TWENTY_Q23, Q23);
         axil_1 = mul32_q(axil_1, axil_2, Q23);
         states_c->c_gain.L = pow10x(axil_1);
 
@@ -162,10 +167,10 @@ int32_t effect_process(
         {
             //states_c->det_x_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
 
-            axil_1 = sub32(0x800000, coeffs_c->alphaAttack);
+            axil_1 = sub32(ONE_Q23, coeffs_c->alphaAttack);
             axil_1 = mul32_q(axil_1, states_c->c_gain.L, Q23);
 
-            axil_2 = add32(coeffs_c->alphaAttack, states_c->prev_y_dB.L);
+            axil_2 = mul32_q(coeffs_c->alphaAttack, states_c->prev_y_dB.L, Q23);
 
             states_c->det_x_dB.L = add32(axil_1, axil_2);
         }
@@ -173,10 +178,10 @@ int32_t effect_process(
         {
             //states_c->det_x_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
 
-            axil_1 = sub32(0x800000, coeffs_c->alphaRelease);
+            axil_1 = sub32(ONE_Q23, coeffs_c->alphaRelease);
             axil_1 = mul32_q(axil_1, states_c->c_gain.L, Q23);
 
-            axil_2 = add32(coeffs_c->alphaRelease, states_c->prev_y_dB.L);
+            axil_2 = mul32_q(coeffs_c->alphaRelease, states_c->prev_y_dB.L, Q23);
 
             states_c->det_x_dB.L = add32(axil_1, axil_2);
         }
@@ -185,37 +190,6 @@ int32_t effect_process(
 
         states_c->y.L = mul32_q(states_c->x.L, states_c->det_x_dB.L, Q23);     // states_c->x.L * states_c->det_x_dB.L;//states_c->c_gain.R;
         ((tStereo*)audio_c)[i].L = states_c->y.L;
-       
-        /*if (fabsf(states_c->x.L) < 0.000001)
-        {
-            states_c->x_dB.L = -120;                                       // input signal AMP -> GAIN conversion
-        } else
-            {
-             states_c->x_dB.L = 20 * log10f(fabsf(states_c->x.L));   // input signal AMP -> GAIN conversion
-            }
-
-        if (states_c->x_dB.L > coeffs_c->threshold)
-        {
-            states_c->y_dB.L = coeffs_c->threshold + ((states_c->x_dB.L - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
-        } else
-            {
-                states_c->y_dB.L = states_c->x_dB.L;                         // if threshold is not reached               
-            }
-
-        states_c->det_x_dB.L = states_c->y_dB.L - states_c->x_dB.L;
-        states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain + states_c->det_x_dB.L) / 20));
-
-        if (states_c->c_gain.L > states_c->prev_y_dB.L)
-        {
-            states_c->det_y_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
-        } else
-            {
-                states_c->det_y_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
-            }
-
-        states_c->prev_y_dB.L = states_c->det_y_dB.L;
-         
-        ((tStereo*)audio_c)[i].L = states_c->x.L * states_c->det_y_dB.L;*/
 
                              /*      Right channel       */
 
@@ -255,7 +229,7 @@ int32_t effect_process(
         states_c->prev_y_dB.R = states_c->det_y_dB.R;
 
         states_c->y.R = states_c->x.R * states_c->c_gain.R;//states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].R = states_c->y.R;
+        ((tStereo*)audio_c)[i].R = states_c->det_x_dB.L;//states_c->y.R;
 
     }
 }

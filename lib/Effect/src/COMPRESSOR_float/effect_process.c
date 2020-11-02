@@ -112,7 +112,9 @@ int32_t effect_process(
     coeffs_c = (compressor_coeffs*)coeffs;
     states_c = (compressor_states*)states;
     audio_c = (tStereo*)audio;
-    float c_dB;
+    float axil1;
+    float axil2;
+
     for (i = 0; i < samples_count; i++)
     {
         states_c->x = ((tStereo*)audio_c)[i];
@@ -143,11 +145,20 @@ int32_t effect_process(
 
         if (states_c->c_gain.L > states_c->prev_y_dB.L)
         {
-            states_c->det_x_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
+            axil1 = 1.0 - coeffs_c->alphaAttack;
+            axil1 *= states_c->c_gain.L;
+            axil2 = coeffs_c->alphaAttack*states_c->prev_y_dB.L;
+            states_c->det_x_dB.L = axil1 + axil2;
+            //states_c->det_x_dB.L = (1.0 - coeffs_c->alphaAttack)*states_c->c_gain.L + coeffs_c->alphaAttack*states_c->prev_y_dB.L;
         }
         else
         {
-            states_c->det_x_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
+            axil1 = 1.0 - coeffs_c->alphaAttack;
+            axil1 *= states_c->c_gain.L;
+            axil2 = coeffs_c->alphaAttack*states_c->prev_y_dB.L;
+            states_c->det_x_dB.L = axil1 + axil2;
+
+            //states_c->det_x_dB.L = (1.0 - coeffs_c->alphaRelease)*states_c->c_gain.L + coeffs_c->alphaRelease*states_c->prev_y_dB.L;
         }
 
         states_c->prev_y_dB.L = states_c->det_x_dB.L;

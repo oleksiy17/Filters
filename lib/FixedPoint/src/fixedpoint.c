@@ -455,17 +455,25 @@ my_sint32 div32_1_x(const my_sint32 denuminator, const my_sint32 Q)
 
     if (((my_sint32)Q31 - (my_sint32)Q) == 0)
     {
-        estimate = 0x20000000;
+        estimate = 0x40000000;
         one = 0x7FFFFFFF;
     }
     else
     {
-        estimate = 0x20000000 >> ((my_sint32)Q31 - (my_sint32)Q);
+        if (new_denum >> Q == 0)
+        {
+            estimate = 0x20000000 >> ((my_sint32)Q31 - (my_sint32)Q);
+        }
+        else
+        {
+            estimate = 0x20000000 >> ((my_sint32)Q31 - (my_sint32)Q + 4);
+        }
+        
         one = 0x7FFFFFFF >> ((my_sint32)Q31 - (my_sint32)Q);
     }
 
     
-    for (i = 0; i < 13; i++)
+    for (i = 0; i < 20; i++)
     {
         /*  x(n+1) = x(n) + x(n) * (1 - (denumenator * x(n))) */
 

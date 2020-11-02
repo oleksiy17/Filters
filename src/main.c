@@ -54,8 +54,8 @@ int main()
     effect_par_comp.fmt = ptrFMT;
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -15;
-    effect_par_comp.ratio = 40;
+    effect_par_comp.threshold = -18;
+    effect_par_comp.ratio = 100;
     effect_par_comp.tauAttack = 100;
     effect_par_comp.tauRelease = 200;
     effect_par_comp.makeUpGain = 0;
@@ -83,13 +83,27 @@ int main()
     int c = fclose(ptrWavFile);
     c = fclose(ptrNewWavFIR);
     
-    /*float var = -4.1;
-    my_sint32 fix = float_To_Fixed(var, Q23);
-    fix = pow10x(fix);
-    printf("10^%f = %f\n", var, fixed_To_Float(fix, Q23));
-    */
 
-    return 0;
+    printf("%d\n", float_To_Fixed(-17.0856323, Q23));
+    printf("%d\n", float_To_Fixed(-0.905224025, Q23));
+    printf("%d\n", float_To_Fixed(0.90102905, Q23));
+    printf("%d\n", float_To_Fixed(0.000412888, Q23));
+    printf("%d\n\n", float_To_Fixed(0.0000577, Q23));
+
+    printf("%d\n", float_To_Fixed(-27.6097908, Q23));
+    printf("%d\n", float_To_Fixed(0, Q23));
+    printf("%d\n", float_To_Fixed(1, Q23));
+    printf("%d\n", float_To_Fixed(0.0009709, Q23));
+    printf("%d\n\n", float_To_Fixed(0.000036265, Q23));
+
+    printf("%d\n", float_To_Fixed(-13.428091, Q23));
+    printf("%d\n", float_To_Fixed(-4.52618980, Q23));
+    printf("%d\n", float_To_Fixed(0.593868792, Q23));
+    printf("%d\n", float_To_Fixed(0.00114267506, Q23));
+    printf("%d\n\n", float_To_Fixed(-0.00024351, Q23));
+    
+    printf("%d\n", float_To_Fixed(0.0004582, Q23));
+       return 0;
 }
 
 void effect_compressor(effect_params_compressor effect_par_comp)
