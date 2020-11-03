@@ -1,11 +1,11 @@
 ﻿  effect_process.c
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(196): warning C4244: 'function': conversion from 'my_sint32' to 'float', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(202): warning C4244: 'function': conversion from 'my_sint32' to 'float', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(202): warning C4244: '=': conversion from 'float' to 'my_sint32', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(219): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(223): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(226): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(93): warning C4716: 'effect_reset': must return a value
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(250): warning C4244: 'function': conversion from 'my_sint32' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(256): warning C4244: 'function': conversion from 'my_sint32' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(256): warning C4244: '=': conversion from 'float' to 'my_sint32', possible loss of data
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(273): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(277): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(280): warning C4244: '=': conversion from 'double' to 'my_sint32', possible loss of data
 c:\filters\lib\effect\src\compressor_fixed\effect_process.c(59): warning C4716: 'effect_process_get_sizes': must return a value
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(235): warning C4716: 'effect_process': must return a value
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(93): warning C4716: 'effect_reset': must return a value
+c:\filters\lib\effect\src\compressor_fixed\effect_process.c(289): warning C4716: 'effect_process': must return a value
   COMPRESSOR_fixed.vcxproj -> C:\Filters\build\tmp\lib\Effect\COMPRESSOR_fixed\Debug\COMPRESSOR_fixed.lib

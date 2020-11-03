@@ -6,7 +6,7 @@
 #include "fixedpoint.h"
 
 #define X_MIN_VAL_THRESHOLD    0x800
-#define MIN_dB                 0xC3CB43FF 
+#define MIN_DB                 0xC3CB43C0 
 #define TWENTY_Q23             0xA000000
 #define ONE_Q23                0x800000
 
@@ -134,7 +134,7 @@ int32_t effect_process(
         //ABS lin/log
         if (abs32(states_c->x.L) < X_MIN_VAL_THRESHOLD)                         // in < 1/1048576
         {
-            states_c->x_dB.L = MIN_dB;                      // input signal AMP -> GAIN conversion -120,41198 Q8.23
+            states_c->x_dB.L = MIN_DB;                      // input signal AMP -> GAIN conversion -120,41198 Q8.23
         }
         else
         {
@@ -193,9 +193,63 @@ int32_t effect_process(
 
                              /*      Right channel       */
 
+        if (abs32(states_c->x.R) < X_MIN_VAL_THRESHOLD)
+        {
+            states_c->x_dB.R = MIN_DB;
+        }
+        else
+        {
+            states_c->x_dB.R = states_c->x_dB.R = mul32_q(log10x(abs32(states_c->x.R)), TWENTY_Q23, Q23);
+        }
+
+        if (states_c->x_dB.R >= coeffs_c->threshold)
+        {
+            axil_1 = sub32(states_c->x_dB.R, coeffs_c->threshold);
+            axil_2 = div32_1_x(coeffs_c->ratio, Q23);
+            axil_1 = mul32_q(axil_1, axil_2, Q23);
+
+            states_c->y_dB.R = add32(coeffs_c->threshold, axil_1);
+        }
+        else
+        {
+            states_c->y_dB.R = states_c->x_dB.R;
+        }
+
+        states_c->det_x_dB.R = sub32(states_c->x_dB.R, states_c->y_dB.R);
+
+        if (states_c->det_x_dB.R > states_c->prev_y_dB.R)
+        {
+            axil_1 = sub32(ONE_Q23, coeffs_c->alphaAttack);
+            axil_1 = mul32_q(axil_1, states_c->det_x_dB.R, Q23);
+
+            axil_2 = mul32_q(coeffs_c->alphaAttack, states_c->prev_y_dB.R, Q23);
+            
+            states_c->det_y_dB.R = add32(axil_1, axil_2);
+        }
+        else
+        {
+            axil_1 = sub32(ONE_Q23, coeffs_c->alphaRelease);
+            axil_1 = mul32_q(axil_1, states_c->det_x_dB.R, Q23);
+
+            axil_2 = mul32_q(coeffs_c->alphaRelease, states_c->prev_y_dB.R, Q23);
+
+            states_c->det_y_dB.R = add32(axil_1, axil_2);
+        }
+
+        axil_1 = sub32(coeffs_c->makeUpGain, states_c->det_y_dB.R);
+        axil_2 = div32_1_x(TWENTY_Q23, Q23);
+
+        states_c->c_gain.R = pow10x(axil_2);
+
+        states_c->prev_y_dB.R = states_c->det_y_dB.R;
+
+        states_c->y.R = mul32_q(states_c->x.R, states_c->c_gain.R, Q23);
+        ((tStereo*)audio_c)[i].R = states_c->y.R;
+
+        /********************************************************************/
         if (fabsf(states_c->x.R) < 0.000001)
         {
-            states_c->x_dB.R = 0xC;                                       // input signal AMP -> GAIN conversion
+            states_c->x_dB.R = -120;                                       // input signal AMP -> GAIN conversion
         }
         else
         {
@@ -212,7 +266,7 @@ int32_t effect_process(
         }
 
         states_c->det_x_dB.R = states_c->x_dB.R - states_c->y_dB.R;   // gain difference out - in
-        
+
 
         if (states_c->det_x_dB.R > states_c->prev_y_dB.R)              // comparison of current gain and previos gain
         {
@@ -220,7 +274,7 @@ int32_t effect_process(
         }
         else
         {
-            states_c->det_y_dB.R =coeffs_c->alphaRelease * states_c->prev_y_dB.R + (1.0 - coeffs_c->alphaRelease) * states_c->det_x_dB.R;    // attenuate
+            states_c->det_y_dB.R = coeffs_c->alphaRelease * states_c->prev_y_dB.R + (1.0 - coeffs_c->alphaRelease) * states_c->det_x_dB.R;    // attenuate
         }
 
         states_c->c_gain.R = pow(10.0, ((coeffs_c->makeUpGain - states_c->det_y_dB.R) / 20));
@@ -229,8 +283,8 @@ int32_t effect_process(
         states_c->prev_y_dB.R = states_c->det_y_dB.R;
 
         states_c->y.R = states_c->x.R * states_c->c_gain.R;//states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].R = states_c->det_x_dB.L;//states_c->y.R;
-
+        ((tStereo*)audio_c)[i].R = states_c->y.R;
+        
     }
 }
 

@@ -25,7 +25,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/pcm.wav";
+    fileAdd = "C:/Filters/test_signal/ieee.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");     /*  Open existance .wav file    */
@@ -54,10 +54,10 @@ int main()
     effect_par_comp.fmt = ptrFMT;
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -18;
-    effect_par_comp.ratio = 100;
+    effect_par_comp.threshold = -25;
+    effect_par_comp.ratio = 50;
     effect_par_comp.tauAttack = 100;
-    effect_par_comp.tauRelease = 200;
+    effect_par_comp.tauRelease = 100;
     effect_par_comp.makeUpGain = 0;
 
     numRead = fread(audio, 1, DATA.data_size, ptrWavFile);
@@ -84,8 +84,8 @@ int main()
     c = fclose(ptrNewWavFIR);
     
 
-    printf("%d\n", float_To_Fixed(-17.0856323, Q23));
-    printf("%d\n", float_To_Fixed(-0.905224025, Q23));
+    printf("%d\n", float_To_Fixed(-120.4119982655924780854955578898, Q23));
+    /*printf("%d\n", float_To_Fixed(-0.905224025, Q23));
     printf("%d\n", float_To_Fixed(0.90102905, Q23));
     printf("%d\n", float_To_Fixed(0.000412888, Q23));
     printf("%d\n\n", float_To_Fixed(0.0000577, Q23));
@@ -102,7 +102,7 @@ int main()
     printf("%d\n", float_To_Fixed(0.00114267506, Q23));
     printf("%d\n\n", float_To_Fixed(-0.00024351, Q23));
     
-    printf("%d\n", float_To_Fixed(0.0004582, Q23));
+    printf("%d\n", float_To_Fixed(0.0004582, Q23));*/
        return 0;
 }
 
