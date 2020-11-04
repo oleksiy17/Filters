@@ -15,6 +15,9 @@ typedef struct {
     float tauRelease;
     float makeUpGain;
     float samplerate;
+
+    float tauEnvAtt;
+    float tauEnvRel;
     /*float kneeWidth;*/
 }comprssor_params;
 
@@ -24,6 +27,9 @@ typedef struct {
 
     float alphaAttack;
     float alphaRelease;
+
+    float attackEnv;
+    float releaseEnv;
 
     float makeUpGain;
     float samplerate;
@@ -127,9 +133,22 @@ int32_t effect_set_parameter(
             set_params->makeUpGain = value;
             break;
         }
+
         case 5:
         {
             set_params->samplerate = value;
+            break;
+        }
+
+        case 6:
+        {
+            set_params->tauEnvAtt = value;
+            break;
+        }
+
+        case 7:
+        {
+            set_params->tauEnvRel = value;
             break;
         }
 
@@ -155,16 +174,21 @@ int32_t effect_update_coeffs(
     comprssor_params* update_params = (comprssor_params*)params;
     compressor_coeffs* update_coeffs = (compressor_coeffs*)coeffs;
 
-    update_coeffs->threshold = update_params->threshold;
+    //update_coeffs->threshold = update_params->threshold;
+    update_coeffs->threshold =  powf(10.0, (update_params->threshold/20.0));  //in linear
     update_coeffs->ratio = update_params->ratio;
 
-    update_coeffs->alphaAttack = powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
-    update_coeffs->alphaRelease = powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));
+    update_coeffs->alphaAttack = powf(M_e, (-(log(9)) / (0.001*update_params->tauAttack*update_params->samplerate)));
+    update_coeffs->alphaRelease = powf(M_e, (-(log(9)) / (0.001*update_params->tauRelease*update_params->samplerate)));
+
+    update_coeffs->attackEnv = powf(M_e, (-(log(9)) / (0.001*update_params->tauEnvAtt*update_params->samplerate)));
+    update_coeffs->releaseEnv = powf(M_e, (-(log(9)) / (0.001*update_params->tauEnvRel*update_params->samplerate)));
 
     /*update_coeffs->alphaAttack = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
     update_coeffs->alphaRelease = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));*/
 
-    update_coeffs->makeUpGain = update_params->makeUpGain;
+    //update_coeffs->makeUpGain = update_params->makeUpGain;
+    update_coeffs->makeUpGain = powf(10.0, (update_params->makeUpGain/20.0));
     update_coeffs->samplerate = update_params->samplerate;
 }
 

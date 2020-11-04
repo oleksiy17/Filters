@@ -58,6 +58,8 @@ typedef struct {
     float tauRelease;
     float makeUpGain;
     
+    float envAtt;
+    float envRel;
 }effect_params_compressor;
 
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
