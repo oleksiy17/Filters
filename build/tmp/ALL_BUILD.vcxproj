@@ -164,9 +164,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{B2BC5E6F-E3F7-3068-AA25-CDD2B4DC89C0}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\lib\Effect\COMPRESSOR_float\COMPRESSOR_float.vcxproj">
-      <Project>{F0034F06-AF51-3E10-AD16-B30693257B7C}</Project>
-      <Name>COMPRESSOR_float</Name>
+    <ProjectReference Include="C:\Filters\build\tmp\lib\Effect\COMPRESSOR_fixed\COMPRESSOR_fixed.vcxproj">
+      <Project>{51EE9794-7538-3795-8D69-8336AEA78979}</Project>
+      <Name>COMPRESSOR_fixed</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Filters\build\tmp\app\Filters.vcxproj">
       <Project>{C7C63A8C-780A-323B-95E8-B878EA0006BD}</Project>

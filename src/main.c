@@ -25,7 +25,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/ieee.wav";
+    fileAdd = "C:/Filters/test_signal/pcm.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");     /*  Open existance .wav file    */
@@ -55,13 +55,13 @@ int main()
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
     effect_par_comp.threshold = -18;
-    effect_par_comp.ratio = 20000;
+    effect_par_comp.ratio = 50;
     effect_par_comp.tauAttack = 100;
     effect_par_comp.tauRelease = 300;
     effect_par_comp.makeUpGain = 0;
 
     effect_par_comp.envAtt = 0;
-    effect_par_comp.envRel = 150;
+    effect_par_comp.envRel = 50;
 
     numRead = fread(audio, 1, DATA.data_size, ptrWavFile);
 

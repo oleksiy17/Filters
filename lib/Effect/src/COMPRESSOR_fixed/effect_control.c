@@ -15,6 +15,9 @@ typedef struct {
     float tauRelease;
     float makeUpGain;
     float samplerate;
+
+    float tauEnvAtt;
+    float tauEnvRel;
     //float kneeWidth;
 
 }comprssor_params;
@@ -25,6 +28,9 @@ typedef struct {
 
     my_sint32 alphaAttack;
     my_sint32 alphaRelease;
+
+    my_sint32 attackEnv;
+    my_sint32 releaseEnv;
 
     my_sint32 makeUpGain;
     my_sint32 samplerate;
@@ -72,14 +78,18 @@ int32_t effect_control_initialize(
     init_params->tauRelease = 0.0;
     init_params->makeUpGain = 0.0;
     init_params->samplerate = 0.0;
+    init_params->tauEnvAtt = 0.0;
+    init_params->tauRelease = 0.0;
 
-    init_coeffs->threshold = 0.0;
-    init_coeffs->ratio = 0.0;
-    init_coeffs->alphaAttack = 0.0;
-    init_coeffs->alphaRelease = 0.0;
-    init_coeffs->makeUpGain = 0.0;
-    init_coeffs->samplerate = 0.0;
 
+    init_coeffs->threshold = 0;
+    init_coeffs->ratio = 0;
+    init_coeffs->alphaAttack = 0;
+    init_coeffs->alphaRelease = 0;
+    init_coeffs->makeUpGain = 0;
+    init_coeffs->samplerate = 0;
+    init_coeffs->attackEnv = 0;
+    init_coeffs->releaseEnv = 0;
 }
 
 
@@ -136,6 +146,18 @@ int32_t effect_set_parameter(
             break;
         }
 
+        case 6:
+        {
+            set_params->tauEnvAtt = value;
+            break;
+        }
+
+        case 7:
+        {
+            set_params->tauEnvRel = value;
+            break;
+        }
+
         default:
             break;
     }
@@ -158,17 +180,18 @@ int32_t effect_update_coeffs(
     comprssor_params* update_params = (comprssor_params*)params;
     compressor_coeffs* update_coeffs = (compressor_coeffs*)coeffs;
 
-    update_coeffs->threshold = float_To_Fixed(update_params->threshold, Q23);               // Rande from 0 to -128 dB    
-    update_coeffs->ratio = float_To_Fixed(update_params->ratio, Q23);                       // Range from 1 to 127 
+    
+    update_coeffs->threshold = float_To_Fixed(powf(10.0, (update_params->threshold / 20.0)), Q31);  //in linear
+    update_coeffs->ratio =  float_To_Fixed(update_params->ratio, Q25);  // Ratio [1; 63]
 
-    update_coeffs->alphaAttack = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate))), Q23);
-    update_coeffs->alphaRelease = float_To_Fixed(powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate))), Q23);
+    update_coeffs->alphaAttack = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauAttack*update_params->samplerate))), Q31);
+    update_coeffs->alphaRelease = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauRelease*update_params->samplerate))), Q31);
 
-    /*update_coeffs->alphaAttack = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauAttack*update_params->samplerate)));
-    update_coeffs->alphaRelease = 1 - powf(M_e, ((-2.2) / (0.001*update_params->tauRelease*update_params->samplerate)));*/
+    update_coeffs->attackEnv = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauEnvAtt*update_params->samplerate))), Q31);
+    update_coeffs->releaseEnv = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauEnvRel*update_params->samplerate))), Q31);
 
-    update_coeffs->makeUpGain = float_To_Fixed(update_params->makeUpGain, Q23);
-    update_coeffs->samplerate = float_To_Fixed(update_params->samplerate, Q13);         //up to 192kHz
+    update_coeffs->makeUpGain = float_To_Fixed(powf(10.0, (update_params->makeUpGain / 20.0)), Q27);    // [-10; 24] dB
+    update_coeffs->samplerate = float_To_Fixed(update_params->samplerate, Q13);
 }
 
 

@@ -424,7 +424,7 @@ my_sint32 div32(const my_sint32 numenator, const my_sint32 denuminator)
     new_num = new_num >> (FRACTION_BASE - ESTIMATE_Q20);            // >> (31 - 20)
     estimate = ESTIMATE_VAL;                                        // ESTIMATE_VAL = 0x80000
 
-    for (i = 0; i < 7; i++)
+    for (i = 0; i < 10; i++)
     {
         /*  x(n+1) = x(n) + x(n) * (1 - (denumenator * x(n))) */
 
