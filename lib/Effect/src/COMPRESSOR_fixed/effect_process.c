@@ -178,14 +178,8 @@ int32_t effect_process(
         }
         else
         {
-            axilL1 = sub32(states_c->envelope.L, coeffs_c->threshold);
-            axilL2 = div32_1_x(coeffs_c->ratio, Q25);   //result in Q25 and also in range of (0; 1]
-            axilL2 = lsh32(axilL2, (Q31 - Q25));
-            axilL1 = mul32(axilL1, axilL2);
-
-            states_c->x_sc.L = add32(coeffs_c->threshold, axilL1);
-
-            states_c->g_c.L = div32(states_c->x_sc.L, states_c->envelope.L);        //!!!
+            axilL1 = div32(coeffs_c->threshold, states_c->envelope_prev.L);
+            states_c->g_c.L = my_pow(axilL1, coeffs_c->ratio);
         }
 
 
@@ -240,14 +234,8 @@ int32_t effect_process(
         }
         else
         {
-            axilR1 = sub32(states_c->envelope.R, coeffs_c->threshold);
-            axilR2 = div32_1_x(coeffs_c->ratio, Q25);   //result in Q25 and also in range of (0; 1]
-            axilR2 = lsh32(axilR2, (Q31 - Q25));
-            axilR1 = mul32(axilR1, axilR2);
-
-            states_c->x_sc.R = add32(coeffs_c->threshold, axilR1);
-
-            states_c->g_c.R = div32(states_c->x_sc.R, states_c->envelope.R);        //!!!
+            axilR1 = div32(coeffs_c->threshold, states_c->envelope_prev.R);
+            states_c->g_c.R = my_pow(axilR1, coeffs_c->ratio);
         }
 
 

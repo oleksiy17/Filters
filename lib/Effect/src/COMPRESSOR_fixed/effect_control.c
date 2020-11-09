@@ -182,7 +182,8 @@ int32_t effect_update_coeffs(
 
     
     update_coeffs->threshold = float_To_Fixed(powf(10.0, (update_params->threshold / 20.0)), Q31);  //in linear
-    update_coeffs->ratio =  float_To_Fixed(update_params->ratio, Q25);  // Ratio [1; 63]
+    update_coeffs->ratio = float_To_Fixed((1.0 - 1.0 / update_params->ratio), Q31);  // Ratio [1; 63]
+    //update_coeffs->ratio =  float_To_Fixed(update_params->ratio, Q25);  // Ratio [1; 63]
 
     update_coeffs->alphaAttack = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauAttack*update_params->samplerate))), Q31);
     update_coeffs->alphaRelease = float_To_Fixed(powf(M_e, (-(log(9)) / (0.001*update_params->tauRelease*update_params->samplerate))), Q31);

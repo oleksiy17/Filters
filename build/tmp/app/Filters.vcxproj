@@ -111,7 +111,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\Debug\FixedPoint.lib;..\lib\Effect\COMPRESSOR_fixed\Debug\COMPRESSOR_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\Debug\FixedPoint.lib;..\lib\Effect\EXPANDER_fixed\Debug\EXPANDER_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,7 +154,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\Release\FixedPoint.lib;..\lib\Effect\COMPRESSOR_fixed\Release\COMPRESSOR_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\Release\FixedPoint.lib;..\lib\Effect\EXPANDER_fixed\Release\EXPANDER_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -197,7 +197,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\MinSizeRel\FixedPoint.lib;..\lib\Effect\COMPRESSOR_fixed\MinSizeRel\COMPRESSOR_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\MinSizeRel\FixedPoint.lib;..\lib\Effect\EXPANDER_fixed\MinSizeRel\EXPANDER_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -239,7 +239,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\RelWithDebInfo\FixedPoint.lib;..\lib\Effect\COMPRESSOR_fixed\RelWithDebInfo\COMPRESSOR_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\RelWithDebInfo\FixedPoint.lib;..\lib\Effect\EXPANDER_fixed\RelWithDebInfo\EXPANDER_fixed.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -316,9 +316,9 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{B2BC5E6F-E3F7-3068-AA25-CDD2B4DC89C0}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\lib\Effect\COMPRESSOR_fixed\COMPRESSOR_fixed.vcxproj">
-      <Project>{51EE9794-7538-3795-8D69-8336AEA78979}</Project>
-      <Name>COMPRESSOR_fixed</Name>
+    <ProjectReference Include="C:\Filters\build\tmp\lib\Effect\EXPANDER_fixed\EXPANDER_fixed.vcxproj">
+      <Project>{2AC3EE3C-3481-3DA8-9E6B-F10918CB828B}</Project>
+      <Name>EXPANDER_fixed</Name>
     </ProjectReference>
     <ProjectReference Include="C:\Filters\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
       <Project>{9A9681EC-0338-30BE-AC58-1103B4C9775D}</Project>

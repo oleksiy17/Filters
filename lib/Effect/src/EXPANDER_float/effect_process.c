@@ -12,6 +12,9 @@ typedef struct {
     float alphaAttack;
     float alphaRelease;
 
+    float attackEnv;
+    float releaseEnv;
+
     float makeUpGain;
     float samplerate;
 }compressor_coeffs;
@@ -22,18 +25,23 @@ typedef struct {
 }tStereo;
 
 typedef struct {
-    tStereo in_amp;             //
-    tStereo out_amp;
+    tStereo x;             //
+    tStereo y;
 
-    tStereo in_dB;        //
-    tStereo out_dB;       //
+    tStereo x_dB;        //
+    tStereo x_sc;       //
 
-    tStereo prev_out_dB;
+    tStereo g_c;
 
-    tStereo delta_in_db;
-    tStereo delta_out_db;
+    tStereo g_s;
+    tStereo g_sPrev;
 
-    tStereo c_gain;
+    tStereo g_m;
+
+    tStereo g_lin;
+
+    tStereo envelope;
+    tStereo envelope_prev;
 }compressor_states;
 
 
@@ -67,23 +75,31 @@ int32_t effect_reset(
 {
     compressor_states* reset_states = (compressor_states*)states;
 
-    reset_states->in_amp.L = 0.0;
-    reset_states->out_amp.L = 0.0;
-    reset_states->prev_out_dB.L = 0.0;
-    reset_states->delta_in_db.L = 0.0;
-    reset_states->delta_out_db.L = 0.0;
-    reset_states->in_dB.L = 0.0;
-    reset_states->out_dB.L = 0.0;
-    reset_states->c_gain.L = 0.0;
+    reset_states->x.L = 0.0;
+    reset_states->y.L = 0.0;
+    reset_states->x_dB.L = 0.0;
+    reset_states->x_sc.L = 0.0;
+    reset_states->g_c.L = 0.0;
+    reset_states->g_s.L = 0.0;
+    reset_states->g_sPrev.L = 1.0;
+    reset_states->g_m.L = 0.0;
+    reset_states->g_lin.L = 0.0;
+    reset_states->envelope.L = 0.0;
+    reset_states->envelope_prev.L = 0.0;
 
-    reset_states->in_amp.R = 0.0;
-    reset_states->out_amp.R = 0.0;
-    reset_states->prev_out_dB.R = 0.0;
-    reset_states->delta_in_db.R = 0.0;
-    reset_states->delta_out_db.R = 0.0;
-    reset_states->in_dB.R = 0.0;
-    reset_states->out_dB.R = 0.0;
-    reset_states->c_gain.R = 0.0;
+    reset_states->x.R = 0.0;
+    reset_states->y.R = 0.0;
+    reset_states->x_dB.R = 0.0;
+    reset_states->x_sc.R = 0.0;
+    reset_states->g_c.R = 0.0;
+    reset_states->g_s.R = 0.0;
+    reset_states->g_sPrev.R = 1.0;
+    reset_states->g_m.R = 0.0;
+    reset_states->g_lin.R = 0.0;
+    reset_states->envelope.R = 0.0;
+    reset_states->envelope_prev.R = 0.0;
+
+
 }
 
 
@@ -112,121 +128,90 @@ int32_t effect_process(
     coeffs_c = (compressor_coeffs*)coeffs;
     states_c = (compressor_states*)states;
     audio_c = (tStereo*)audio;
+    float xL_abs;
+    float xR_abs;
+    float axil1;
 
     for (i = 0; i < samples_count; i++)
     {
-        states_c->in_amp = ((tStereo*)audio_c)[i];
+        states_c->x = ((tStereo*)audio_c)[i];
+        // envelope of the signal
 
-                            /*      Left channel       */
+        xL_abs = fabsf(states_c->x.L);
 
-        if (fabsf(states_c->in_amp.L) < 0.000001)
+        if (xL_abs > states_c->envelope_prev.L)              // comparison of current gain and previos gain
         {
-            states_c->in_dB.L = -120;                                       // input signal AMP -> GAIN conversion
+
+            states_c->envelope.L = coeffs_c->attackEnv * states_c->envelope_prev.L + (1.0 - coeffs_c->attackEnv) * xL_abs;     // if current gain higher than previous -> attac
         }
         else
         {
-            states_c->in_dB.L = 20 * log10f(fabsf(states_c->in_amp.L));   // input signal AMP -> GAIN conversion
+            states_c->envelope.L = coeffs_c->releaseEnv * states_c->envelope_prev.L + (1.0 - coeffs_c->releaseEnv) * xL_abs;    // attenuate
         }
 
-        if (states_c->in_dB.L >= coeffs_c->threshold)
+        states_c->envelope_prev.L = states_c->envelope.L;
+
+        if (states_c->envelope.L < coeffs_c->threshold)
         {
-            states_c->out_dB.L = coeffs_c->threshold + ((states_c->in_dB.L - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
+            states_c->g_c.L = powf((states_c->envelope.L / coeffs_c->threshold), (coeffs_c->ratio - 1));
         }
         else
         {
-            states_c->out_dB.L = states_c->in_dB.L;
+            states_c->g_c.L = 1;
         }
 
-        states_c->delta_in_db.L = states_c->in_dB.L - states_c->out_dB.L;
-
-        if (states_c->delta_in_db.L > states_c->prev_out_dB.L)
+        if (states_c->g_c.L <= states_c->g_sPrev.L)
         {
-            states_c->delta_out_db.L = (coeffs_c->alphaAttack * states_c->prev_out_dB.L) + (1.0 - coeffs_c->alphaAttack) * states_c->delta_in_db.L;
+            states_c->g_s.L = coeffs_c->alphaAttack* states_c->g_sPrev.L + (1.0 - coeffs_c->alphaAttack)*states_c->g_c.L;
         }
         else
         {
-            states_c->delta_out_db.L = coeffs_c->alphaRelease * states_c->prev_out_dB.L + (1.0 - coeffs_c->alphaRelease) * states_c->delta_in_db.L;
+            states_c->g_s.L = coeffs_c->alphaRelease* states_c->g_sPrev.L + (1.0 - coeffs_c->alphaRelease)*states_c->g_c.L;
         }
 
-        states_c->c_gain.L = pow(10.0, ((coeffs_c->makeUpGain - states_c->delta_out_db.L) / 20));
-        states_c->prev_out_dB.L = states_c->delta_out_db.L;
+        states_c->g_sPrev.L = states_c->g_s.L;
+        states_c->g_m.L = states_c->g_s.L * coeffs_c->makeUpGain;
 
-        states_c->out_amp.L = states_c->in_amp.L*states_c->c_gain.L;
-        ((tStereo*)audio_c)[i].L = states_c->out_amp.L;
 
-                             /*      Right channel       */
 
-        if (fabsf(states_c->in_amp.R) < 0.000001)
+        xR_abs = fabsf(states_c->x.R);
+
+        if (xR_abs > states_c->envelope_prev.R)              // comparison of current gain and previos gain
         {
-            states_c->in_dB.R = -120;                                       // input signal AMP -> GAIN conversion
+
+            states_c->envelope.R = coeffs_c->attackEnv * states_c->envelope_prev.R + (1.0 - coeffs_c->attackEnv) * xR_abs;     // if current gain higher than previous -> attac
         }
         else
         {
-            states_c->in_dB.R = 20 * log10f(fabsf(states_c->in_amp.R));   // input signal AMP -> GAIN conversion
+            states_c->envelope.R = coeffs_c->releaseEnv * states_c->envelope_prev.R + (1.0 - coeffs_c->releaseEnv) * xR_abs;    // attenuate
         }
 
-        if (states_c->in_dB.R >= coeffs_c->threshold)
+        states_c->envelope_prev.R = states_c->envelope.R;
+
+        if (states_c->envelope.R < coeffs_c->threshold)
         {
-            states_c->out_dB.R = coeffs_c->threshold + ((states_c->in_dB.R - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
+            states_c->g_c.R = powf((states_c->envelope.R / coeffs_c->threshold), (coeffs_c->ratio - 1));
         }
         else
         {
-            states_c->out_dB.R = states_c->in_dB.R;                         // if threshold is not reached               
+            states_c->g_c.R = 1;
         }
 
-        states_c->delta_in_db.R = states_c->in_dB.R - states_c->out_dB.R;   // gain difference out - in
-
-        if (states_c->delta_in_db.R > states_c->prev_out_dB.R)              // comparison of current gain and previos gain
+        if (states_c->g_c.R <= states_c->g_sPrev.R)
         {
-            states_c->delta_out_db.R = (coeffs_c->alphaAttack * states_c->prev_out_dB.R) + 2.2*(1.0 - coeffs_c->alphaAttack) * states_c->delta_in_db.R;     // if current gain higher than previous -> attac
+            states_c->g_s.R = coeffs_c->alphaAttack* states_c->g_sPrev.R + (1.0 - coeffs_c->alphaAttack)*states_c->g_c.R;
         }
         else
         {
-            states_c->delta_out_db.L = coeffs_c->alphaRelease * states_c->prev_out_dB.L + 2.2*(1.0 - coeffs_c->alphaRelease) * states_c->delta_in_db.R;    // attenuate
+            states_c->g_s.R = coeffs_c->alphaRelease* states_c->g_sPrev.R + (1.0 - coeffs_c->alphaRelease)*states_c->g_c.R;
         }
 
+        states_c->g_sPrev.R = states_c->g_s.R;
+        states_c->g_m.R = states_c->g_s.R * coeffs_c->makeUpGain;
 
-        states_c->c_gain.R = pow(10.0, ((coeffs_c->makeUpGain - states_c->delta_out_db.R) / 20));
-        states_c->prev_out_dB.R = states_c->delta_out_db.R;
 
-        states_c->out_amp.R = states_c->in_amp.R * states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].R = states_c->out_amp.R;
-
-        /*if (fabsf(states_c->in_amp.R) < 0.000001)
-        {
-            states_c->in_dB.R = -120;                                       // input signal AMP -> GAIN conversion
-        }
-        else
-        {
-            states_c->in_dB.R = 20 * log10f(fabsf(states_c->in_amp.R));   // input signal AMP -> GAIN conversion
-        }
-
-        if (states_c->in_dB.R >= coeffs_c->threshold)
-        {
-            states_c->out_dB.R = coeffs_c->threshold + ((states_c->in_dB.R - coeffs_c->threshold) / coeffs_c->ratio);     //hard knee gain computition
-        }
-        else
-        {
-            states_c->out_dB.R = states_c->in_dB.R;
-        }
-
-        states_c->delta_in_db.R = states_c->in_dB.R - states_c->out_dB.R;
-
-        if (states_c->delta_in_db.R > states_c->prev_out_dB.R)
-        {
-            states_c->delta_out_db.R = (coeffs_c->alphaAttack * states_c->prev_out_dB.R) + (1.0 - coeffs_c->alphaAttack) * states_c->delta_in_db.R;
-        }
-        else
-        {
-            states_c->delta_out_db.R = coeffs_c->alphaRelease * states_c->prev_out_dB.R + (1.0 - coeffs_c->alphaRelease) * states_c->delta_in_db.R;
-        }
-
-        states_c->c_gain.R = pow(10.0, ((coeffs_c->makeUpGain - states_c->delta_out_db.R) / 20));
-        states_c->prev_out_dB.R = states_c->delta_out_db.R;
-
-        states_c->out_amp.R = states_c->in_amp.R*states_c->c_gain.R;
-        ((tStereo*)audio_c)[i].R = states_c->out_amp.R;*/
-
+        ((tStereo*)audio_c)[i].L = states_c->x.L * states_c->g_m.L;
+        ((tStereo*)audio_c)[i].R = states_c->x.R * states_c->g_m.R;
     }
 }
 

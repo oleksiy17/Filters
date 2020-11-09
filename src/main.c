@@ -25,7 +25,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/pcm.wav";
+    fileAdd = "C:/Filters/test_signal/in_level_pcm.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");     /*  Open existance .wav file    */
@@ -50,14 +50,25 @@ int main()
     effect_params.freq = 15600.0;
     effect_params.gain = 18.0;
 
-
-    effect_par_comp.fmt = ptrFMT;
+    /*effect_par_comp.fmt = ptrFMT; // for compressor
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
     effect_par_comp.threshold = -18;
-    effect_par_comp.ratio = 50;
-    effect_par_comp.tauAttack = 100;
+    effect_par_comp.ratio = 40;
+    effect_par_comp.tauAttack = 70;
     effect_par_comp.tauRelease = 300;
+    effect_par_comp.makeUpGain = 0;
+
+    effect_par_comp.envAtt = 0;
+    effect_par_comp.envRel = 50;*/
+
+    effect_par_comp.fmt = ptrFMT; // for compressor
+    effect_par_comp.data = ptrDATA;
+    effect_par_comp.audio = audio;
+    effect_par_comp.threshold = -2;
+    effect_par_comp.ratio = 40;
+    effect_par_comp.tauAttack = 30;
+    effect_par_comp.tauRelease = 100;
     effect_par_comp.makeUpGain = 0;
 
     effect_par_comp.envAtt = 0;
@@ -86,26 +97,38 @@ int main()
     int c = fclose(ptrWavFile);
     c = fclose(ptrNewWavFIR);
     
-
-    printf("%d\n", float_To_Fixed(-120.4119982655924780854955578898, Q23));
-    /*printf("%d\n", float_To_Fixed(-0.905224025, Q23));
-    printf("%d\n", float_To_Fixed(0.90102905, Q23));
-    printf("%d\n", float_To_Fixed(0.000412888, Q23));
-    printf("%d\n\n", float_To_Fixed(0.0000577, Q23));
-
-    printf("%d\n", float_To_Fixed(-27.6097908, Q23));
-    printf("%d\n", float_To_Fixed(0, Q23));
-    printf("%d\n", float_To_Fixed(1, Q23));
-    printf("%d\n", float_To_Fixed(0.0009709, Q23));
-    printf("%d\n\n", float_To_Fixed(0.000036265, Q23));
-
-    printf("%d\n", float_To_Fixed(-13.428091, Q23));
-    printf("%d\n", float_To_Fixed(-4.52618980, Q23));
-    printf("%d\n", float_To_Fixed(0.593868792, Q23));
-    printf("%d\n", float_To_Fixed(0.00114267506, Q23));
-    printf("%d\n\n", float_To_Fixed(-0.00024351, Q23));
+    float e = 0.50141;
+    float r = 0.975;
     
-    printf("%d\n", float_To_Fixed(0.0004582, Q23));*/
+    
+    printf("pow %f^%f = %f\n", e, r,  pow(e,r));
+
+    my_sint32 k = float_To_Fixed(e, Q31);
+    my_sint32 l = float_To_Fixed(r, Q31);
+    printf("%d %d\n", k, l);
+    printf("powx %f^%f = %f\n", e, r,  fixed_To_Float(my_pow(k, l), Q31));
+
+
+
+    /*for (int q = 0; q < 52; q++)
+    {
+        for (int w = 0; w < 10; w++)
+        {
+            printf("%d, ", float_To_Fixed(log2(e), Q27));
+            e += 1.0 / 512.0;
+        }
+
+        printf("\n");
+
+    }*/
+
+
+    /*e = 0.00316;
+    printf("log2 %f = %f\n", e, log2f(e));
+
+    my_sint32 k = float_To_Fixed(e, Q31);
+    printf("log2x %f = %f\n", e, fixed_To_Float(log2x(k), Q26));*/
+    
        return 0;
 }
 

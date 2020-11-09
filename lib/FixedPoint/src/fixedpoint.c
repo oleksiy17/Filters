@@ -544,7 +544,7 @@ my_sint32 pow10x(my_sint32 a)            //input parameter in Q5.26
     result = add32((my_sint32)delta, arr_pow10[Idx]);
 
     return result;
-}
+} 
 
 
 my_sint32 my_pow(my_sint32 a, my_sint32 x)
@@ -554,12 +554,13 @@ my_sint32 my_pow(my_sint32 a, my_sint32 x)
     my_sint32 result;
 
     logRetVal = (my_sint64)log2x(a);
-    powProd = mul64((my_sint64)logRetVal, (my_sint64)(rsh32(x, Q31_TO_Q26)) , (my_sint64)POW_BASE);
+    //powProd = mul64((my_sint64)logRetVal, (my_sint64)(rsh32(x, Q31_TO_Q26)) , (my_sint64)POW_BASE);
+    powProd = mul64((my_sint64)logRetVal, (my_sint64)x, (my_sint64)31);
     result = (my_sint32)pow2x((my_sint32)powProd);
 
     return result;
 }
-
+ 
 my_sint32 log10x(my_sint32 a)    // Input parameter in Q31
 {
     my_sint32 Idx;          // may be a structure

@@ -183,6 +183,12 @@ COMPRESSOR_float_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/COMPRESSOR_fl
 COMPRESSOR_float_SOURCE_DIR:STATIC=C:/Filters/build/lib/Effect/COMPRESSOR_float
 
 //Value Computed by CMake
+EXPANDER_fixed_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/EXPANDER_fixed
+
+//Value Computed by CMake
+EXPANDER_fixed_SOURCE_DIR:STATIC=C:/Filters/build/lib/Effect/EXPANDER_fixed
+
+//Value Computed by CMake
 EXPANDER_float_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/EXPANDER_float
 
 //Value Computed by CMake

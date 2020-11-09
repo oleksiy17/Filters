@@ -1,0 +1,5 @@
+﻿  effect_process.c
+c:\filters\lib\effect\src\expander_fixed\effect_process.c(110): warning C4716: 'effect_reset': must return a value
+c:\filters\lib\effect\src\expander_fixed\effect_process.c(286): warning C4716: 'effect_process': must return a value
+c:\filters\lib\effect\src\expander_fixed\effect_process.c(70): warning C4716: 'effect_process_get_sizes': must return a value
+  EXPANDER_fixed.vcxproj -> C:\Filters\build\tmp\lib\Effect\EXPANDER_fixed\Debug\EXPANDER_fixed.lib

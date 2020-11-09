@@ -214,7 +214,7 @@ int32_t effect_process(
         }
         else
         {
-            states_c->x_sc.L = coeffs_c->threshold + ((states_c->envelope.L - coeffs_c->threshold) / coeffs_c->ratio);
+            states_c->x_sc.L = coeffs_c->threshold * powf((states_c->envelope.L / coeffs_c->threshold), (1.0 / coeffs_c->ratio));
             states_c->g_c.L = states_c->x_sc.L / states_c->envelope.L;
         }
 
@@ -253,7 +253,7 @@ int32_t effect_process(
         }
         else
         {
-            states_c->x_sc.R = coeffs_c->threshold + ((states_c->envelope.R - coeffs_c->threshold) / coeffs_c->ratio);
+            states_c->x_sc.R = coeffs_c->threshold * powf((states_c->envelope.R / coeffs_c->threshold), (1.0 / coeffs_c->ratio));
             states_c->g_c.R = states_c->x_sc.R / states_c->envelope.R;
         }
 

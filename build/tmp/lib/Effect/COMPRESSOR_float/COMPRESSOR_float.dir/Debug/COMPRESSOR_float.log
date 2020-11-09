@@ -1,14 +1,16 @@
 ﻿  effect_process.c
 c:\filters\lib\effect\src\compressor_float\effect_process.c(201): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(205): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_float\effect_process.c(217): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(223): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(227): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(240): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(244): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\filters\lib\effect\src\compressor_float\effect_process.c(256): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(262): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(266): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\lib\effect\src\compressor_float\effect_process.c(133): warning C4101: 'axil1': unreferenced local variable
+c:\filters\lib\effect\src\compressor_float\effect_process.c(103): warning C4716: 'effect_reset': must return a value
 c:\filters\lib\effect\src\compressor_float\effect_process.c(61): warning C4716: 'effect_process_get_sizes': must return a value
 c:\filters\lib\effect\src\compressor_float\effect_process.c(276): warning C4716: 'effect_process': must return a value
-c:\filters\lib\effect\src\compressor_float\effect_process.c(103): warning C4716: 'effect_reset': must return a value
   COMPRESSOR_float.vcxproj -> C:\Filters\build\tmp\lib\Effect\COMPRESSOR_float\Debug\COMPRESSOR_float.lib
