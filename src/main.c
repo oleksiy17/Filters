@@ -1,4 +1,6 @@
 #include "main.h"
+#include "cJSON.h"
+#include "file_handler.h"
 
 int main()
 {
@@ -25,11 +27,11 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/in_level_pcm.wav";
+    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
-    ptrWavFile = fopen(fileAdd, "rb");     /*  Open existance .wav file    */
-    ptrNewWavFIR = fopen(newFileFIR, "w+b");      
+    ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file    
+    ptrNewWavFIR = fopen(newFileFIR, "w+b");   
 
     readHeader(ptrRIFF, ptrFMT, ptrDATA, ptrWavFile, &numRead, &diviation);
 
@@ -50,31 +52,40 @@ int main()
     effect_params.freq = 15600.0;
     effect_params.gain = 18.0;
 
-    /*effect_par_comp.fmt = ptrFMT; // for compressor
-    effect_par_comp.data = ptrDATA;
-    effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -18;
-    effect_par_comp.ratio = 40;
-    effect_par_comp.tauAttack = 70;
-    effect_par_comp.tauRelease = 300;
-    effect_par_comp.makeUpGain = 0;
-
-    effect_par_comp.envAtt = 0;
-    effect_par_comp.envRel = 50;*/
-
     effect_par_comp.fmt = ptrFMT; // for compressor
     effect_par_comp.data = ptrDATA;
     effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -2;
+    effect_par_comp.threshold = -6;
     effect_par_comp.ratio = 40;
     effect_par_comp.tauAttack = 30;
-    effect_par_comp.tauRelease = 100;
+    effect_par_comp.tauRelease = 70;
     effect_par_comp.makeUpGain = 0;
-
     effect_par_comp.envAtt = 0;
-    effect_par_comp.envRel = 50;
+    effect_par_comp.envRel = 30;
 
     numRead = fread(audio, 1, DATA.data_size, ptrWavFile);
+
+
+    effect_params_equalizer eqzr;
+    effect_params_equalizer *ptrEQZR;
+
+  
+    eqzr = (effect_params_equalizer){
+        {   (equalizer) {20, 0, 0.1, 2},
+            (equalizer) { 250, 0, 0.5, 1 },
+            (equalizer) { 500, 0, 0.5, 1 },
+            (equalizer) { 1000, 0, 4, 1 },
+            (equalizer) { 2000, 0, 20, 1 },
+            (equalizer) { 4000, 0, 4, 1 },
+            (equalizer) { 8000, 0, 10, 1 },
+            (equalizer) { 12000, 0, 8, 1 },
+            (equalizer) { 14000, 0, 0.1, 1 },
+            (equalizer) { 18000, 0, 0.1, 1 }},
+        (float) 48000,
+        ptrFMT,
+        ptrDATA,
+        audio
+    };
 
 #ifdef FIR_float
     effect_fir(effect_params);
@@ -92,44 +103,83 @@ int main()
     effect_compressor(effect_par_comp);
 #endif // COMPRESSOR
 
+#ifdef EQ
+    effect_equalizer(eqzr);
+#endif // Equalizer
+
     numWrite = fwrite(audio, 1, DATA.data_size, ptrNewWavFIR);
 
     int c = fclose(ptrWavFile);
     c = fclose(ptrNewWavFIR);
     
-    float e = 0.50141;
-    float r = 0.975;
-    
-    
-    printf("pow %f^%f = %f\n", e, r,  pow(e,r));
-
-    my_sint32 k = float_To_Fixed(e, Q31);
-    my_sint32 l = float_To_Fixed(r, Q31);
-    printf("%d %d\n", k, l);
-    printf("powx %f^%f = %f\n", e, r,  fixed_To_Float(my_pow(k, l), Q31));
-
-
-
-    /*for (int q = 0; q < 52; q++)
-    {
-        for (int w = 0; w < 10; w++)
-        {
-            printf("%d, ", float_To_Fixed(log2(e), Q27));
-            e += 1.0 / 512.0;
-        }
-
-        printf("\n");
-
-    }*/
-
-
-    /*e = 0.00316;
-    printf("log2 %f = %f\n", e, log2f(e));
-
-    my_sint32 k = float_To_Fixed(e, Q31);
-    printf("log2x %f = %f\n", e, fixed_To_Float(log2x(k), Q26));*/
-    
        return 0;
+}
+
+void effect_equalizer(effect_params_equalizer eqzr)
+{
+    size_t params_bytes;
+    size_t coeffs_bytes;
+    size_t states_bytes;
+
+    size_t i;
+    size_t band;
+    size_t param_num;
+
+    void* params;
+    void* coeffs;
+    void* states;
+
+    effect_control_get_sizes(&params_bytes, &coeffs_bytes);
+    effect_process_get_sizes(&states_bytes);
+
+    params = malloc(params_bytes);            // empty
+    coeffs = malloc(coeffs_bytes);            // for h
+    states = malloc(states_bytes);            // for circular buffer
+
+    effect_control_initialize(params, coeffs, eqzr.sampleRate);
+    effect_reset(coeffs, states);
+
+    for (i = 0; i < 39; i++)
+    {
+        band = i >> 2;
+        param_num = i - (4 * band);
+
+        switch (param_num)
+        {
+            case 0:
+            {
+                effect_set_parameter(params, i, eqzr.eq[band].freq);
+                break;
+            }
+
+            case 1:
+            {
+                effect_set_parameter(params, i, eqzr.eq[band].gain);
+                break;
+            }
+
+            case 2:
+            {
+                effect_set_parameter(params, i, eqzr.eq[band].Q);
+                break;
+            }
+
+            case 3:
+            {
+                effect_set_parameter(params, i, eqzr.eq[band].type);
+                break;
+            }
+
+            default:
+                break;
+        }
+    }
+
+    effect_set_parameter(params, 40, eqzr.sampleRate);
+
+    effect_update_coeffs(params, coeffs);
+
+    effect_process(coeffs, states, eqzr.audio, (eqzr.data->data_size / eqzr.fmt->block_align));
 }
 
 void effect_compressor(effect_params_compressor effect_par_comp)

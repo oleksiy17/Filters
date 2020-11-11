@@ -209,9 +209,11 @@ int32_t effect_process(
         states_c->g_sPrev.R = states_c->g_s.R;
         states_c->g_m.R = states_c->g_s.R * coeffs_c->makeUpGain;
 
+        ((tStereo*)audio_c)[i].L = states_c->x.L;
+        ((tStereo*)audio_c)[i].R = states_c->x.L * states_c->g_m.L;
 
-        ((tStereo*)audio_c)[i].L = states_c->x.L * states_c->g_m.L;
-        ((tStereo*)audio_c)[i].R = states_c->x.R * states_c->g_m.R;
+        //((tStereo*)audio_c)[i].L = states_c->x.L * states_c->g_m.L;
+        //((tStereo*)audio_c)[i].R = states_c->x.R * states_c->g_m.R;
     }
 }
 

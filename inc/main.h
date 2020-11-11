@@ -5,7 +5,8 @@
 //#define FIR_float
 //#define IIR_float
 //#define GAIN
-#define COMPRESSOR
+//#define COMPRESSOR
+#define EQ
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -62,9 +63,26 @@ typedef struct {
     float envRel;
 }effect_params_compressor;
 
+typedef struct {
+    float freq;
+    float gain;
+    float Q;
+    int type;
+}equalizer;
+
+typedef struct {
+    equalizer eq[10];
+    double sampleRate;
+
+    fmtHeader* fmt;
+    dataHeader* data;
+    void* audio;
+}effect_params_equalizer;
+
+
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
 
-
+void effect_equalizer(effect_params_equalizer eqzr);
 void effect_compressor(effect_params_compressor effect_par_comp);
 void effect_fir(effect_parameters effect_params);
 void effect_iir(effect_parameters effect_params);

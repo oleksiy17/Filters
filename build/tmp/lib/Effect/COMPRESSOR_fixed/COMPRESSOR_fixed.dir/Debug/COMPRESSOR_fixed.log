@@ -1,5 +1,0 @@
-﻿  effect_process.c
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(266): warning C4716: 'effect_process': must return a value
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(70): warning C4716: 'effect_process_get_sizes': must return a value
-c:\filters\lib\effect\src\compressor_fixed\effect_process.c(110): warning C4716: 'effect_reset': must return a value
-  COMPRESSOR_fixed.vcxproj -> C:\Filters\build\tmp\lib\Effect\COMPRESSOR_fixed\Debug\COMPRESSOR_fixed.lib

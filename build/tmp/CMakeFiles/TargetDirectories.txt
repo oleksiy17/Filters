@@ -1,8 +1,0 @@
-C:/Filters/build/tmp/CMakeFiles/ALL_BUILD.dir
-C:/Filters/build/tmp/CMakeFiles/ZERO_CHECK.dir
-C:/Filters/build/tmp/lib/FixedPoint/CMakeFiles/FixedPoint.dir
-C:/Filters/build/tmp/lib/FixedPoint/CMakeFiles/ALL_BUILD.dir
-C:/Filters/build/tmp/lib/Effect/EXPANDER_fixed/CMakeFiles/EXPANDER_fixed.dir
-C:/Filters/build/tmp/lib/Effect/EXPANDER_fixed/CMakeFiles/ALL_BUILD.dir
-C:/Filters/build/tmp/app/CMakeFiles/Filters.dir
-C:/Filters/build/tmp/app/CMakeFiles/ALL_BUILD.dir

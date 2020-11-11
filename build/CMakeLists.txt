@@ -4,8 +4,10 @@ project(Solution)
 
 add_subdirectory(lib/FixedPoint)
 
+add_subdirectory(lib/Effect/EQUALIZER_float)
+
 #add_subdirectory(lib/Effect/EXPANDER_float)
-add_subdirectory(lib/Effect/EXPANDER_fixed)
+#add_subdirectory(lib/Effect/EXPANDER_fixed)
 
 #add_subdirectory(lib/Effect/COMPRESSOR_float)
 #add_subdirectory(lib/Effect/COMPRESSOR_fixed)

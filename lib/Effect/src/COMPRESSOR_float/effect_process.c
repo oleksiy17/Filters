@@ -136,61 +136,6 @@ int32_t effect_process(
     {
         states_c->x = ((tStereo*)audio_c)[i];
 
-        /*
-        axil1 = fabsf(states_c->x.L);
-        if (axil1 > states_c->envelope_prev.L)              // comparison of current gain and previos gain
-        {
-            
-            states_c->envelope.L = coeffs_c->attackEnv * states_c->envelope_prev.L + (1.0 - coeffs_c->attackEnv) * axil1;     // if current gain higher than previous -> attac
-        }
-        else
-        {
-            states_c->envelope.L = coeffs_c->releaseEnv * states_c->envelope_prev.L + (1.0 - coeffs_c->releaseEnv) * axil1;    // attenuate
-        }
-
-        states_c->envelope_prev.L = states_c->envelope.L;
-
-        //      dB
-        if (states_c->envelope.L <= 0.000001)
-        {
-            states_c->x_dB.L = -120.0;
-        }
-        else
-        {
-            states_c->x_dB.L = 20 * log10f(states_c->envelope.L);
-        }
-        
-        //          Gain Computer
-        if (states_c->x_dB.L < coeffs_c->threshold)
-        {
-            states_c->x_sc.L = states_c->x_dB.L;
-        }
-        else
-        {
-            states_c->x_sc.L = coeffs_c->threshold + ((states_c->x_dB.L - coeffs_c->threshold) / coeffs_c->ratio);
-        }
-
-        states_c->g_c.L = states_c->x_sc.L - states_c->x_dB.L;
-
-        if (states_c->g_c.L <= states_c->g_sPrev.L)
-        {
-            states_c->g_s.L = coeffs_c->alphaAttack* states_c->g_sPrev.L + (1.0 - coeffs_c->alphaAttack)*states_c->g_c.L;
-        }
-        else
-        {
-            states_c->g_s.L = coeffs_c->alphaRelease* states_c->g_sPrev.L + (1.0 - coeffs_c->alphaRelease)*states_c->g_c.L;
-        }
-
-        states_c->g_sPrev.L = states_c->g_s.L;
-
-        states_c->g_m.L = states_c->g_s.L + coeffs_c->makeUpGain;
-
-        states_c->g_lin.L = powf(10.0, (states_c->g_m.L / 20.0));
-        
-        ((tStereo*)audio_c)[i].L = states_c->g_lin.L * states_c->x.L;
-        */
-
-
         // envelope of the signal
 
         xL_abs = fabsf(states_c->x.L);
@@ -269,9 +214,11 @@ int32_t effect_process(
         states_c->g_sPrev.R = states_c->g_s.R;
         states_c->g_m.R = states_c->g_s.R * coeffs_c->makeUpGain;
 
+        ((tStereo*)audio_c)[i].L = states_c->envelope.L;
+        ((tStereo*)audio_c)[i].R = states_c->x.L;
 
-        ((tStereo*)audio_c)[i].L = states_c->x.L * states_c->g_m.L;
-        ((tStereo*)audio_c)[i].R = states_c->x.R * states_c->g_m.R;
+        /*((tStereo*)audio_c)[i].L = states_c->x.L * states_c->g_m.L;
+        ((tStereo*)audio_c)[i].R = states_c->x.R * states_c->g_m.R;*/
     }
 }
 
