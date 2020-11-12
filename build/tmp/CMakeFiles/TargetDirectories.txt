@@ -1,0 +1,8 @@
+C:/Filters/build/tmp/CMakeFiles/ALL_BUILD.dir
+C:/Filters/build/tmp/CMakeFiles/ZERO_CHECK.dir
+C:/Filters/build/tmp/lib/FixedPoint/CMakeFiles/FixedPoint.dir
+C:/Filters/build/tmp/lib/FixedPoint/CMakeFiles/ALL_BUILD.dir
+C:/Filters/build/tmp/lib/Effect/CROSSOVER_float/CMakeFiles/CROSSOVER_float.dir
+C:/Filters/build/tmp/lib/Effect/CROSSOVER_float/CMakeFiles/ALL_BUILD.dir
+C:/Filters/build/tmp/app/CMakeFiles/Filters.dir
+C:/Filters/build/tmp/app/CMakeFiles/ALL_BUILD.dir

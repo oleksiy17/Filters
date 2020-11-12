@@ -15,7 +15,8 @@ target_include_directories(${PR_NAME} PRIVATE ../../lib/Effect/inc)
 
 target_link_libraries(${PR_NAME} PRIVATE FixedPoint)
 
-target_link_libraries(${PR_NAME} PRIVATE EQUALIZER_float)
+#target_link_libraries(${PR_NAME} PRIVATE EQUALIZER_float)
+target_link_libraries(${PR_NAME} PRIVATE CROSSOVER_float)
 
 #target_link_libraries(${PR_NAME} PRIVATE EXPANDER_fixed)
 #target_link_libraries(${PR_NAME} PRIVATE EXPANDER_float)

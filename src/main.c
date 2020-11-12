@@ -27,7 +27,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
+    fileAdd = "C:/Filters/test_signal/Sound.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file    
@@ -71,16 +71,16 @@ int main()
 
   
     eqzr = (effect_params_equalizer){
-        {   (equalizer) {20, 0, 0.1, 2},
-            (equalizer) { 250, 0, 0.5, 1 },
-            (equalizer) { 500, 0, 0.5, 1 },
-            (equalizer) { 1000, 0, 4, 1 },
-            (equalizer) { 2000, 0, 20, 1 },
-            (equalizer) { 4000, 0, 4, 1 },
-            (equalizer) { 8000, 0, 10, 1 },
-            (equalizer) { 12000, 0, 8, 1 },
-            (equalizer) { 14000, 0, 0.1, 1 },
-            (equalizer) { 18000, 0, 0.1, 1 }},
+        {   (equalizer) {20, -3, 1, 3},
+            (equalizer) { 250, 0, 0.5, 5 },
+            (equalizer) { 500, -3, 0.5, 2 },
+            (equalizer) { 1000, -3, 4, 2 },
+            (equalizer) { 2000, -3, 20, 2 },
+            (equalizer) { 4000, -3, 4, 2 },
+            (equalizer) { 8000, -3, 10, 2 },
+            (equalizer) { 12000, -3, 8, 2 },
+            (equalizer) { 14000, -3, 0.1, 4 },
+            (equalizer) { 18000, -12, 1, 0 }},
         (float) 48000,
         ptrFMT,
         ptrDATA,
