@@ -263,6 +263,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   <ItemGroup>
     <ClCompile Include="C:\Filters\lib\Effect\src\CROSSOVER_float\effect_control.c" />
     <ClCompile Include="C:\Filters\lib\Effect\src\CROSSOVER_float\effect_process.c" />
+    <ClCompile Include="C:\Filters\lib\Effect\src\CROSSOVER_float\process_fcns.c" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="C:\Filters\build\tmp\ZERO_CHECK.vcxproj">

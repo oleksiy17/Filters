@@ -7,6 +7,9 @@
     <ClCompile Include="C:\Filters\lib\Effect\src\CROSSOVER_float\effect_process.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Filters\lib\Effect\src\CROSSOVER_float\process_fcns.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Filters\build\lib\Effect\CROSSOVER_float\CMakeLists.txt" />

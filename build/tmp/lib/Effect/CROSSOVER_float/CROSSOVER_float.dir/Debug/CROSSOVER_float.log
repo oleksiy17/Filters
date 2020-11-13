@@ -1,0 +1,7 @@
+﻿  effect_process.c
+  process_fcns.c
+  Generating Code...
+c:\filters\lib\effect\src\crossover_float\effect_process.c(25): warning C4716: 'effect_process_get_sizes': must return a value
+c:\filters\lib\effect\src\crossover_float\effect_process.c(62): warning C4716: 'effect_process': must return a value
+c:\filters\lib\effect\src\crossover_float\effect_process.c(41): warning C4716: 'effect_reset': must return a value
+  CROSSOVER_float.vcxproj -> C:\Filters\build\tmp\lib\Effect\CROSSOVER_float\Debug\CROSSOVER_float.lib
