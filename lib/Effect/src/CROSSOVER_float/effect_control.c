@@ -4,34 +4,9 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "math.h"
+#include "crossover_datatypes.h"
 
-#define M_PI        3.1415926535f
-#define Q           0.70710678118f
-#define BAND_NUM    4u
 
-typedef enum {
-    CUTOFF_0 = 0,
-    CUTOFF_1 = 1,
-    CUTOFF_2 = 2,
-    SAMPLERATE = 3
-
-}crossover_params_enum;
-
-typedef struct {
-    float cutoff_freq[BAND_NUM - 1];
-    float samplerate;
-}crossover_params;
-
-typedef struct {
-    float k1_1st;
-
-    float k1_2nd;
-    float k2_2nd;
-}coeffs_apf;
-
-typedef struct {
-    coeffs_apf coeff[BAND_NUM - 1];
-}crossover_coeffs;
 
 /*******************************************************************************
  * Provides with the required data sizes for parameters and coefficients.
@@ -79,9 +54,9 @@ int32_t effect_control_initialize(
 
     for (i = 0; i < (BAND_NUM - 1); i++)
     {
-        init_coeffs->coeff[i].k1_1st = 0.0;
-        init_coeffs->coeff[i].k1_2nd = 0.0;
-        init_coeffs->coeff[i].k2_2nd = 0.0;
+        init_coeffs->coeff_band[i].k1_1st = 0.0;
+        init_coeffs->coeff_band[i].k1_2nd = 0.0;
+        init_coeffs->coeff_band[i].k2_2nd = 0.0;
     }
     
 }
@@ -168,9 +143,9 @@ int32_t effect_update_coeffs(
         var1 = (tanf(M_PI * (fb / init_params->samplerate)) - 1.0) / (tanf(M_PI * (fb / init_params->samplerate)) + 1.0);
         var2 = -cosf(2.0 * M_PI * init_params->cutoff_freq[i] / init_params->samplerate);
 
-        init_coeffs->coeff[i].k1_1st = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
-        init_coeffs->coeff[i].k1_2nd = var2 * (1.0 - var1);
-        init_coeffs->coeff[i].k2_2nd = -var1;
+        init_coeffs->coeff_band[i].k1_1st = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
+        init_coeffs->coeff_band[i].k1_2nd = var2 * (1.0 - var1);
+        init_coeffs->coeff_band[i].k2_2nd = -var1;
     }
 
 }
