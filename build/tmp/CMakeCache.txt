@@ -177,12 +177,6 @@ CROSSOVER_float_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/CROSSOVER_floa
 CROSSOVER_float_SOURCE_DIR:STATIC=C:/Filters/build/lib/Effect/CROSSOVER_float
 
 //Value Computed by CMake
-EQUALIZER_float_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/EQUALIZER_float
-
-//Value Computed by CMake
-EQUALIZER_float_SOURCE_DIR:STATIC=C:/Filters/build/lib/Effect/EQUALIZER_float
-
-//Value Computed by CMake
 Filters_BINARY_DIR:STATIC=C:/Filters/build/tmp/app
 
 //Value Computed by CMake
@@ -193,12 +187,6 @@ FixedPoint_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/FixedPoint
 
 //Value Computed by CMake
 FixedPoint_SOURCE_DIR:STATIC=C:/Filters/build/lib/FixedPoint
-
-//Value Computed by CMake
-GAIN_float_BINARY_DIR:STATIC=C:/Filters/build/tmp/lib/Effect/CROSSOVER_float
-
-//Value Computed by CMake
-GAIN_float_SOURCE_DIR:STATIC=C:/Filters/build/lib/Effect/CROSSOVER_float
 
 //Value Computed by CMake
 Solution_BINARY_DIR:STATIC=C:/Filters/build/tmp

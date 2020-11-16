@@ -1,7 +1,7 @@
 ﻿  effect_process.c
-  process_fcns.c
-  Generating Code...
-c:\filters\lib\effect\src\crossover_float\effect_process.c(25): warning C4716: 'effect_process_get_sizes': must return a value
-c:\filters\lib\effect\src\crossover_float\effect_process.c(62): warning C4716: 'effect_process': must return a value
-c:\filters\lib\effect\src\crossover_float\effect_process.c(41): warning C4716: 'effect_reset': must return a value
+c:\filters\lib\effect\src\crossover_float\effect_process.c(122): warning C4101: 'compensation_2': unreferenced local variable
+c:\filters\lib\effect\src\crossover_float\effect_process.c(121): warning C4101: 'compensation_1': unreferenced local variable
+c:\filters\lib\effect\src\crossover_float\effect_process.c(22): warning C4716: 'effect_process_get_sizes': must return a value
+c:\filters\lib\effect\src\crossover_float\effect_process.c(86): warning C4716: 'effect_reset': must return a value
+c:\filters\lib\effect\src\crossover_float\effect_process.c(308): warning C4716: 'effect_process': must return a value
   CROSSOVER_float.vcxproj -> C:\Filters\build\tmp\lib\Effect\CROSSOVER_float\Debug\CROSSOVER_float.lib

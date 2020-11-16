@@ -27,7 +27,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/Sound.wav";
+    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file    
@@ -87,6 +87,11 @@ int main()
         audio
     };
 
+    effect_params_crossover cross;
+    effect_params_crossover* ptrCross = &cross;
+
+    cross = (effect_params_crossover){ 100.0, 1000.0, 10000.0, ptrFMT, ptrDATA, audio};
+
 #ifdef FIR_float
     effect_fir(effect_params);
 #endif // FIR
@@ -107,6 +112,10 @@ int main()
     effect_equalizer(eqzr);
 #endif // Equalizer
 
+#ifdef CROSS
+    effect_crossover(cross);
+#endif // Equalizer
+
     numWrite = fwrite(audio, 1, DATA.data_size, ptrNewWavFIR);
 
     int c = fclose(ptrWavFile);
@@ -114,6 +123,39 @@ int main()
     
        return 0;
 }
+
+
+void effect_crossover(effect_params_crossover cross)
+{
+    size_t params_bytes;
+    size_t coeffs_bytes;
+    size_t states_bytes;
+
+    void* params;
+    void* coeffs;
+    void* states;
+
+    effect_control_get_sizes(&params_bytes, &coeffs_bytes);
+    effect_process_get_sizes(&states_bytes);
+
+    params = malloc(params_bytes);            // empty
+    coeffs = malloc(coeffs_bytes);            // for h
+    states = malloc(states_bytes);            // for circular buffer
+
+    effect_control_initialize(params, coeffs, cross.fmt->sample_rate);
+    effect_reset(coeffs, states);
+
+    effect_set_parameter(params, 0, cross.cutoff_1);
+    effect_set_parameter(params, 1, cross.cutoff_2);
+    effect_set_parameter(params, 2, cross.cutoff_3);
+    effect_set_parameter(params, 3, cross.fmt->sample_rate);
+
+    effect_update_coeffs(params, coeffs);
+
+    effect_process(coeffs, states, cross.audio, (cross.data->data_size / cross.fmt->block_align));
+}
+
+
 
 void effect_equalizer(effect_params_equalizer eqzr)
 {

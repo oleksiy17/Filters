@@ -47,16 +47,20 @@ int32_t effect_control_initialize(
     init_params = (crossover_params*)params;
     init_coeffs = (crossover_coeffs*)coeffs;
 
-    init_params->cutoff_freq[0] = 0.0;
-    init_params->cutoff_freq[1] = 0.0;
-    init_params->cutoff_freq[2] = 0.0;
+    init_params->cutoff_freq[LOW_CUTOFF] = 0.0;
+    init_params->cutoff_freq[MID_CUTOFF] = 0.0;
+    init_params->cutoff_freq[HIG_CUTOFF] = 0.0;
     init_params->samplerate = sample_rate;
 
     for (i = 0; i < (BAND_NUM - 1); i++)
     {
-        init_coeffs->coeff_band[i].k1_1st = 0.0;
-        init_coeffs->coeff_band[i].k1_2nd = 0.0;
-        init_coeffs->coeff_band[i].k2_2nd = 0.0;
+        init_coeffs->band[i].k0 = 0.0;
+        init_coeffs->band[i].k1 = 0.0;
+        init_coeffs->band[i].k2 = 0.0;
+
+        init_coeffs->band[i].negk0 = 0.0;
+        init_coeffs->band[i].negk1 = 0.0;
+        init_coeffs->band[i].negk2 = 0.0;
     }
     
 }
@@ -82,21 +86,21 @@ int32_t effect_set_parameter(
 
     switch (id)
     {
-        case CUTOFF_0:
+        case LOW_CUTOFF:
         {
-            set_params->cutoff_freq[CUTOFF_0] = value;
+            set_params->cutoff_freq[LOW_CUTOFF] = value;
             break;
         }
 
-        case CUTOFF_1:
+        case MID_CUTOFF:
         {
-            set_params->cutoff_freq[CUTOFF_1] = value;
+            set_params->cutoff_freq[MID_CUTOFF] = value;
             break;
         }
 
-        case CUTOFF_2:
+        case HIG_CUTOFF:
         {
-            set_params->cutoff_freq[CUTOFF_2] = value;
+            set_params->cutoff_freq[HIG_CUTOFF] = value;
             break;
         }
 
@@ -143,9 +147,13 @@ int32_t effect_update_coeffs(
         var1 = (tanf(M_PI * (fb / init_params->samplerate)) - 1.0) / (tanf(M_PI * (fb / init_params->samplerate)) + 1.0);
         var2 = -cosf(2.0 * M_PI * init_params->cutoff_freq[i] / init_params->samplerate);
 
-        init_coeffs->coeff_band[i].k1_1st = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
-        init_coeffs->coeff_band[i].k1_2nd = var2 * (1.0 - var1);
-        init_coeffs->coeff_band[i].k2_2nd = -var1;
+        init_coeffs->band[i].k0 = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
+        init_coeffs->band[i].k1 = var2 * (1.0 - var1);
+        init_coeffs->band[i].k2 = -var1;
+
+        init_coeffs->band[i].negk0 = -init_coeffs->band[i].k0;
+        init_coeffs->band[i].negk1 = -init_coeffs->band[i].k1;
+        init_coeffs->band[i].negk2 = -init_coeffs->band[i].k2;
     }
 
 }

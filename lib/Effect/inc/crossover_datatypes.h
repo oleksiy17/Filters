@@ -8,13 +8,21 @@
 #define BAND_NUM    4u
 
 typedef enum {
-    CUTOFF_0 = 0,
-    CUTOFF_1 = 1,
-    CUTOFF_2 = 2,
+    LOW_CUTOFF = 0,
+    MID_CUTOFF = 1,
+    HIG_CUTOFF = 2,
     SAMPLERATE = 3
 
 }crossover_params_enum;
 
+typedef enum {
+    PAR_1 = 0,
+    PAR_2 = 1,
+    SERIAL = 2,
+    NORM_LOW = 0,
+    NORM_HIG = 1
+
+}crossover_states_enum;
 
 typedef struct {
     my_float L;
@@ -31,14 +39,14 @@ typedef struct {
     tStereo band_2;
     tStereo band_3;
     tStereo band_4;
-};
+}split_band;
 
 /*
 *   PARAMETERS
 */
 typedef struct {
-    float cutoff_freq[BAND_NUM - 1];
-    float samplerate;
+    my_float cutoff_freq[BAND_NUM - 1];
+    my_float samplerate;
 }crossover_params;
 
 
@@ -46,14 +54,17 @@ typedef struct {
 *   COEFFICIENTS
 */
 typedef struct {
-    float k1_1st;
+    my_float k0;
+    my_float k1;
+    my_float k2;
 
-    float k1_2nd;
-    float k2_2nd;
+    my_float negk0;
+    my_float negk1;
+    my_float negk2;
 }band_coeffs;
 
 typedef struct {
-    band_coeffs coeff_band[BAND_NUM - 1];
+    band_coeffs band[BAND_NUM - 1];
 }crossover_coeffs;
 
 
@@ -65,7 +76,23 @@ typedef struct {
 
 
 typedef struct {
+    tStereo in;
 
+    tStereo cd1_ord1[2];
+    tStereo cd1_delay_1[3];
+    tStereo cd1_delay_2[3];
+
+    tStereo norm_ord1[2];
+    tStereo norm_delay_1[2];
+    tStereo norm_delay_2[2];
+
+    tStereo cd2_ord1[2];
+    tStereo cd2_delay_1[3];
+    tStereo cd2_delay_2[3];
+
+    tStereo cd3_ord1[2];
+    tStereo cd3_delay_1[3];
+    tStereo cd3_delay_2[3];
 
 }crossover_states; // size = 18*3 + 2*6 = 54 + 12 = 66 floats
 

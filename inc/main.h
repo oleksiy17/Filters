@@ -6,7 +6,8 @@
 //#define IIR_float
 //#define GAIN
 //#define COMPRESSOR
-#define EQ
+//#define EQ
+#define CROSS
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -80,8 +81,19 @@ typedef struct {
 }effect_params_equalizer;
 
 
+typedef struct {
+    my_float cutoff_1;
+    my_float cutoff_2;
+    my_float cutoff_3;
+
+    fmtHeader* fmt;
+    dataHeader* data;
+    void* audio;
+}effect_params_crossover;
+
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
 
+void effect_crossover(effect_params_crossover cross);
 void effect_equalizer(effect_params_equalizer eqzr);
 void effect_compressor(effect_params_compressor effect_par_comp);
 void effect_fir(effect_parameters effect_params);
