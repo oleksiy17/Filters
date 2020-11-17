@@ -1,5 +1,5 @@
-//#ifndef __FIXEDPOINT_H_
-//#define __FIXEDPOINT_H_
+#ifndef __FIXEDPOINT_H_
+#define __FIXEDPOINT_H_
 
 #include <stdint.h>
 #include <stdio.h>
@@ -117,4 +117,4 @@ my_sint32 pow10x(my_sint32 a);
 my_sint32 my_pow(my_sint32 a, my_sint32 x);
 my_sint32 log10x(my_sint32 a);
 
-//#endif // !__FIXEDPOINT_H_
+#endif // !__FIXEDPOINT_H_

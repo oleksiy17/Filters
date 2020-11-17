@@ -1,6 +1,5 @@
 #include "main.h"
 #include "cJSON.h"
-#include "file_handler.h"
 
 int main()
 {
@@ -27,7 +26,7 @@ int main()
     effect_parameters effect_params;
     effect_params_compressor effect_par_comp;
 
-    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
+    fileAdd = "C:/Filters/test_signal/a.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file    
@@ -125,7 +124,7 @@ int main()
 }
 
 
-void effect_crossover(effect_params_crossover cross)
+/*void effect_crossover(effect_params_crossover cross)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -153,11 +152,9 @@ void effect_crossover(effect_params_crossover cross)
     effect_update_coeffs(params, coeffs);
 
     effect_process(coeffs, states, cross.audio, (cross.data->data_size / cross.fmt->block_align));
-}
+}*/
 
-
-
-void effect_equalizer(effect_params_equalizer eqzr)
+/*void effect_equalizer(effect_params_equalizer eqzr)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -222,9 +219,9 @@ void effect_equalizer(effect_params_equalizer eqzr)
     effect_update_coeffs(params, coeffs);
 
     effect_process(coeffs, states, eqzr.audio, (eqzr.data->data_size / eqzr.fmt->block_align));
-}
+}*/
 
-void effect_compressor(effect_params_compressor effect_par_comp)
+/*void effect_compressor(effect_params_compressor effect_par_comp)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -257,9 +254,9 @@ void effect_compressor(effect_params_compressor effect_par_comp)
     effect_update_coeffs(params, coeffs);
 
     effect_process(coeffs, states, effect_par_comp.audio, (effect_par_comp.data->data_size / effect_par_comp.fmt->block_align));
-}
+}*/
 
-void effect_gain(effect_parameters effect_params)
+/*void effect_gain(effect_parameters effect_params)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -283,9 +280,9 @@ void effect_gain(effect_parameters effect_params)
     effect_update_coeffs(params, coeffs);
 
     effect_process(coeffs, states, effect_params.audio, (effect_params.data->data_size / effect_params.fmt->block_align));
-}
+}*/
 
-void effect_fir(effect_parameters effect_params)
+/*void effect_fir(effect_parameters effect_params)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -307,9 +304,9 @@ void effect_fir(effect_parameters effect_params)
     effect_reset(coeffs, states);
     printf("coeffs[0] = %d, coeffs[1] = %d, coeffs[2] = %d\n", ((my_sint32*)coeffs)[0], ((my_sint32*)coeffs)[1], ((my_sint32*)coeffs)[2]);
     effect_process(coeffs, states, effect_params.audio, (effect_params.data->data_size/effect_params.fmt->block_align));
-}
+}*/
 
-void effect_iir(effect_parameters effect_params)
+/*void effect_iir(effect_parameters effect_params)
 {
     size_t params_bytes;
     size_t coeffs_bytes;
@@ -339,7 +336,7 @@ void effect_iir(effect_parameters effect_params)
     effect_update_coeffs(params, coeffs);
 
     effect_process(coeffs, states, effect_params.audio, (effect_params.data->data_size / effect_params.fmt->block_align));
-}
+}*/
 
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation)
 {

@@ -111,7 +111,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\Debug\FixedPoint.lib;..\lib\Effect\CROSSOVER_float\Debug\CROSSOVER_float.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\Debug\FixedPoint.lib;..\chain\chain_float\chain\Debug\chain.lib;..\chain\chain_float\compressor_4ch\Debug\compressor_4ch.lib;..\chain\chain_float\crossover\Debug\crossover.lib;..\chain\chain_float\equalizer\Debug\equalizer.lib;..\lib\FixedPoint\Debug\FixedPoint.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -154,7 +154,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\Release\FixedPoint.lib;..\lib\Effect\CROSSOVER_float\Release\CROSSOVER_float.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\Release\FixedPoint.lib;..\chain\chain_float\chain\Release\chain.lib;..\chain\chain_float\compressor_4ch\Release\compressor_4ch.lib;..\chain\chain_float\crossover\Release\crossover.lib;..\chain\chain_float\equalizer\Release\equalizer.lib;..\lib\FixedPoint\Release\FixedPoint.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -197,7 +197,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\MinSizeRel\FixedPoint.lib;..\lib\Effect\CROSSOVER_float\MinSizeRel\CROSSOVER_float.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\MinSizeRel\FixedPoint.lib;..\chain\chain_float\chain\MinSizeRel\chain.lib;..\chain\chain_float\compressor_4ch\MinSizeRel\compressor_4ch.lib;..\chain\chain_float\crossover\MinSizeRel\crossover.lib;..\chain\chain_float\equalizer\MinSizeRel\equalizer.lib;..\lib\FixedPoint\MinSizeRel\FixedPoint.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -239,7 +239,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\lib\FixedPoint\RelWithDebInfo\FixedPoint.lib;..\lib\Effect\CROSSOVER_float\RelWithDebInfo\CROSSOVER_float.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>..\lib\FixedPoint\RelWithDebInfo\FixedPoint.lib;..\chain\chain_float\chain\RelWithDebInfo\chain.lib;..\chain\chain_float\compressor_4ch\RelWithDebInfo\compressor_4ch.lib;..\chain\chain_float\crossover\RelWithDebInfo\crossover.lib;..\chain\chain_float\equalizer\RelWithDebInfo\equalizer.lib;..\lib\FixedPoint\RelWithDebInfo\FixedPoint.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -318,13 +318,25 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{B2BC5E6F-E3F7-3068-AA25-CDD2B4DC89C0}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\lib\Effect\CROSSOVER_float\CROSSOVER_float.vcxproj">
-      <Project>{64278EDE-31FF-370F-8690-B3778179F506}</Project>
-      <Name>CROSSOVER_float</Name>
-    </ProjectReference>
     <ProjectReference Include="C:\Filters\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
       <Project>{9A9681EC-0338-30BE-AC58-1103B4C9775D}</Project>
       <Name>FixedPoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\chain\chain.vcxproj">
+      <Project>{87929144-29A5-363D-8940-1FB776418ED0}</Project>
+      <Name>chain</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\compressor_4ch\compressor_4ch.vcxproj">
+      <Project>{09E0CDBF-5FC3-3811-BC75-99CB92D86FF0}</Project>
+      <Name>compressor_4ch</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\crossover\crossover.vcxproj">
+      <Project>{3F1D4915-CF20-3B10-9073-315D0B7E5D54}</Project>
+      <Name>crossover</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\equalizer\equalizer.vcxproj">
+      <Project>{954C6980-3E6D-3706-8121-A902268EC30C}</Project>
+      <Name>equalizer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -7,7 +7,7 @@
 //#define GAIN
 //#define COMPRESSOR
 //#define EQ
-#define CROSS
+//#define CROSS
 
 #include "stdlib.h"
 #include "stdio.h"

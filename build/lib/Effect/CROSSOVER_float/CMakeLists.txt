@@ -6,8 +6,7 @@ project(${LIB_NAME})
 
 add_library(${LIB_NAME} STATIC
 	../../../../lib/Effect/src/${LIB_NAME}/effect_control.c
-	../../../../lib/Effect/src/${LIB_NAME}/effect_process.c
-	../../../../lib/Effect/src/${LIB_NAME}/process_fcns.c)
+	../../../../lib/Effect/src/${LIB_NAME}/effect_process.c)
 
 target_include_directories(${LIB_NAME} PRIVATE  ../../../../lib/Effect/inc
 						../../../../lib/FixedPoint/inc)

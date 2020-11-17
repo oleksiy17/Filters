@@ -297,8 +297,10 @@ int32_t effect_process(
        
        
 
-        ((tStereo*)pr_audio)[i].L = band.band_1.L + band.band_3.L;
-        ((tStereo*)pr_audio)[i].R = band.band_2.L + band.band_4.L;
+        
+        ((tStereo*)pr_audio)[i].L = band.band_1.L + band.band_2.L;
+        ((tStereo*)pr_audio)[i].R = band.band_1.L + band.band_2.L;
+        //((tStereo*)pr_audio)[i].R = band.band_3.L + band.band_4.L;
 
 
         
