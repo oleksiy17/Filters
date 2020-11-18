@@ -1,11 +1,1 @@
-﻿  effect_control.c
-  effect_process.c
-  Generating Code...
-c:\filters\chain_float\chain\src\effect_process.c(59): warning C4716: 'effect_process': must return a value
-c:\filters\chain_float\chain\src\effect_process.c(38): warning C4716: 'effect_reset': must return a value
-c:\filters\chain_float\chain\src\effect_process.c(22): warning C4716: 'effect_process_get_sizes': must return a value
-c:\filters\chain_float\chain\src\effect_control.c(65): warning C4716: 'effect_set_parameter': must return a value
-c:\filters\chain_float\chain\src\effect_control.c(47): warning C4716: 'effect_control_initialize': must return a value
-c:\filters\chain_float\chain\src\effect_control.c(24): warning C4716: 'effect_control_get_sizes': must return a value
-c:\filters\chain_float\chain\src\effect_control.c(85): warning C4716: 'effect_update_coeffs': must return a value
-  chain.vcxproj -> C:\Filters\build\tmp\chain\chain_float\chain\Debug\chain.lib
+﻿  chain.vcxproj -> C:\Filters\build\tmp\chain\chain_float\chain\Debug\chain.lib

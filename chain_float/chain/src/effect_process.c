@@ -36,7 +36,8 @@ int32_t effect_reset(
     chain_states* resrt_states = (chain_states*)states;
 
     compressor_4ch_reset((compressor_4ch_coeffs*)&reset_coeffs->compr_4ch_coef, (compressor_4ch_states*)&resrt_states->compr_4ch_st);
-    crossover_reset((), ());
+    crossover_reset((crossover_coeffs*)&reset_coeffs->cross_coef, (crossover_states*)&resrt_states->cross_st);
+    equalizer_reset((equalizer_coeffs*)&reset_coeffs->equal_coef , (equalizer_states*)&resrt_states->equal_st);
 }
 
 
@@ -57,5 +58,16 @@ int32_t effect_process(
     void*       audio,
     size_t      samples_count)
 {
-    
+    chain_coeffs* process_coeffs = (chain_coeffs*)coeffs;
+    chain_states* process_states = (chain_states*)states;
+    stereo* in = (stereo*)audio;
+
+    size_t i;
+
+    for (i = 0; i < samples_count; i++)
+    {
+        equalizer_process((equalizer_coeffs*)&process_coeffs->equal_coef, (equalizer_states*)&process_states->equal_st, audio, samples_count);
+
+    }
+
 }

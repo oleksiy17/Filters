@@ -1,1 +1,10 @@
-﻿  Filters.vcxproj -> C:\Filters\build\tmp\app\Debug\Filters.exe
+﻿  main.c
+c:\filters\src\main.c(65): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\filters\src\main.c(55): warning C4244: 'initializing': conversion from 'uint32_t' to 'float', possible loss of data
+c:\filters\src\main.c(102): warning C4101: 'numWrite': unreferenced local variable
+c:\filters\src\main.c(101): warning C4101: 'numRead': unreferenced local variable
+c:\filters\src\main.c(104): warning C4101: 'i': unreferenced local variable
+c:\filters\src\main.c(358): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+c:\filters\src\main.c(359): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+c:\filters\src\main.c(364): warning C4047: '=': 'size_t *' differs in levels of indirection from 'size_t'
+  Filters.vcxproj -> C:\Filters\build\tmp\app\Debug\Filters.exe

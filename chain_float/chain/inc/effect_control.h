@@ -10,6 +10,11 @@
 #include "fixedpoint.h"
 
 typedef struct {
+    my_float L;
+    my_float R;
+}stereo;
+
+typedef struct {
     comprssor_4ch_params compr_4ch_par;
     crossover_params cross_par;
     equalizer_params equal_par;

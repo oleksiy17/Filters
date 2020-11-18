@@ -1,8 +1,1 @@
-﻿  equalizer_control.c
-c:\filters\chain_float\equalizer\src\equalizer_control.c(50): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
-c:\filters\chain_float\equalizer\src\equalizer_control.c(51): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
-c:\filters\chain_float\equalizer\src\equalizer_control.c(52): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
-c:\filters\chain_float\equalizer\src\equalizer_control.c(53): warning C4244: '=': conversion from 'double' to 'uint32_t', possible loss of data
-  equalizer_process.c
-  Generating Code...
-  equalizer.vcxproj -> C:\Filters\build\tmp\chain\chain_float\equalizer\Debug\equalizer.lib
+﻿  equalizer.vcxproj -> C:\Filters\build\tmp\chain\chain_float\equalizer\Debug\equalizer.lib

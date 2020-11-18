@@ -4,124 +4,172 @@
 int main()
 {
     static FILE* ptrWavFile;
-
     FILE newWavFIR;
     FILE* ptrNewWavFIR = &newWavFIR;
+    int closeFile;
+    size_t numRead;
+    size_t numWrite;
 
     char* fileAdd;
     char* newFileFIR;
-    char* newFileIIR;
-    int diviation = 0;
+    int diviation;
 
-    size_t numRead = 0;
-    size_t numWrite = 0;
+    wav_t wav;
+    size_t audio_bytes;
+    audio_buf bands;
+    size_t samples_count;
 
-    riffHeader RIFF;
-    riffHeader* ptrRIFF = &RIFF;
-    fmtHeader FMT;
-    fmtHeader* ptrFMT = &FMT; 
-    dataHeader DATA;
-    dataHeader* ptrDATA = &DATA;
+    effect_parameter_chain chain;
 
-    effect_parameters effect_params;
-    effect_params_compressor effect_par_comp;
+    numRead = 0;
+    numWrite = 0;
+    diviation = 0;
+    audio_bytes = (uint32_t)BUFFER_SIZE;
 
-    fileAdd = "C:/Filters/test_signal/a.wav";
+    bands.audio = malloc(audio_bytes);
+    bands.band_1 = malloc(audio_bytes);
+    bands.band_2 = malloc(audio_bytes);
+    bands.band_3 = malloc(audio_bytes);
+    bands.band_4 = malloc(audio_bytes);
+
+    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
-    ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file    
+    ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file  
     ptrNewWavFIR = fopen(newFileFIR, "w+b");   
 
-    readHeader(ptrRIFF, ptrFMT, ptrDATA, ptrWavFile, &numRead, &diviation);
+    readHeader((riffHeader*)(&wav.riff), (fmtHeader*)(&wav.format), (dataHeader*)(&wav.data), ptrWavFile, &numRead, &diviation);
 
-    numWrite = fwrite(ptrRIFF, sizeof(uint8_t), sizeof(riffHeader), ptrNewWavFIR);
-    numWrite = fwrite(ptrFMT, sizeof(uint8_t), sizeof(fmtHeader), ptrNewWavFIR);
-    numWrite = fwrite(ptrDATA, sizeof(uint8_t), sizeof(dataHeader), ptrNewWavFIR);
-
-    size_t audio_bytes;
-    audio_bytes = DATA.data_size;
-    void* audio = malloc(audio_bytes);
-
-    size_t samples_count = DATA.data_size / FMT.block_align;
-
-    effect_params.fmt = ptrFMT;
-    effect_params.data = ptrDATA;
-    effect_params.audio = audio;
-    effect_params.Q = 0.5;
-    effect_params.freq = 15600.0;
-    effect_params.gain = 18.0;
-
-    effect_par_comp.fmt = ptrFMT; // for compressor
-    effect_par_comp.data = ptrDATA;
-    effect_par_comp.audio = audio;
-    effect_par_comp.threshold = -6;
-    effect_par_comp.ratio = 40;
-    effect_par_comp.tauAttack = 30;
-    effect_par_comp.tauRelease = 70;
-    effect_par_comp.makeUpGain = 0;
-    effect_par_comp.envAtt = 0;
-    effect_par_comp.envRel = 30;
-
-    numRead = fread(audio, 1, DATA.data_size, ptrWavFile);
-
-
-    effect_params_equalizer eqzr;
-    effect_params_equalizer *ptrEQZR;
+    numWrite = fwrite((riffHeader*)(&wav.riff), sizeof(uint8_t), sizeof(riffHeader), ptrNewWavFIR);
+    numWrite = fwrite((fmtHeader*)(&wav.format), sizeof(uint8_t), sizeof(fmtHeader), ptrNewWavFIR);
+    numWrite = fwrite((dataHeader*)(&wav.data), sizeof(uint8_t), sizeof(dataHeader), ptrNewWavFIR);
 
   
-    eqzr = (effect_params_equalizer){
-        {   (equalizer) {20, -3, 1, 3},
-            (equalizer) { 250, 0, 0.5, 5 },
-            (equalizer) { 500, -3, 0.5, 2 },
-            (equalizer) { 1000, -3, 4, 2 },
-            (equalizer) { 2000, -3, 20, 2 },
-            (equalizer) { 4000, -3, 4, 2 },
-            (equalizer) { 8000, -3, 10, 2 },
-            (equalizer) { 12000, -3, 8, 2 },
-            (equalizer) { 14000, -3, 0.1, 4 },
-            (equalizer) { 18000, -12, 1, 0 }},
-        (float) 48000,
-        ptrFMT,
-        ptrDATA,
-        audio
+    chain = (effect_parameter_chain) {
+        (FILE*)ptrWavFile,
+        (FILE*)ptrNewWavFIR,
+        (wav_t*)(&wav),
+
+        (audio_buf*)(&bands),
+
+        (effect_params_equalizer) {
+            {
+                (equalizer) {20, -3, 1, 3},
+                (equalizer) {250, 0, 0.5, 5},
+                (equalizer) {500, -3, 0.5, 2},
+                (equalizer) {1000, -3, 4, 2},
+                (equalizer) {2000, -3, 20, 2},
+                (equalizer) {4000, -3, 4, 2},
+                (equalizer) { 8000, -3, 10, 2},
+                (equalizer) {12000, -3, 8, 2},
+                (equalizer) { 14000, -3, 0.1, 4},
+                (equalizer) {18000, -12, 1, 0}
+            },
+                wav.format.sample_rate
+        },
+
+        (effect_params_crossover){500, 5000, 1000},
+
+        (effect_params_compressor) {-3, 2, 30, 40, 0, 0, 30, 0},
+        (effect_params_compressor) {-3, 2, 30, 40, 0, 0, 30, 0},
+        (effect_params_compressor) {-3, 2, 30, 40, 0, 0, 30, 0},
+        (effect_params_compressor) {-3, 2, 30, 40, 0, 0, 30, 0}
     };
 
-    effect_params_crossover cross;
-    effect_params_crossover* ptrCross = &cross;
+    //samples_count = wav.data.data_size / wav.format.block_align;
+    //numRead = fread(bands.audio, 1, wav.data.data_size, ptrWavFile);
 
-    cross = (effect_params_crossover){ 100.0, 1000.0, 10000.0, ptrFMT, ptrDATA, audio};
-
-#ifdef FIR_float
-    effect_fir(effect_params);
-#endif // FIR
-
-#ifdef IIR_float
-    effect_iir(effect_params);
-#endif // IIR_float
-
-#ifdef GAIN
-    effect_gain(effect_params);
-#endif // GAIN
-
-#ifdef COMPRESSOR
-    effect_compressor(effect_par_comp);
-#endif // COMPRESSOR
-
-#ifdef EQ
-    effect_equalizer(eqzr);
+#ifdef CHAIN
+    effect_chain(&chain);
 #endif // Equalizer
 
-#ifdef CROSS
-    effect_crossover(cross);
-#endif // Equalizer
+    //numWrite = fwrite(bands.audio, 1, wav.data.data_size, ptrNewWavFIR);
 
-    numWrite = fwrite(audio, 1, DATA.data_size, ptrNewWavFIR);
-
-    int c = fclose(ptrWavFile);
-    c = fclose(ptrNewWavFIR);
+    closeFile = fclose(ptrWavFile);
+    closeFile = fclose(ptrNewWavFIR);
     
-       return 0;
+    return 0;
 }
+
+void effect_chain(effect_parameter_chain* chain)
+{
+    size_t params_bytes;
+    size_t coeffs_bytes;
+    size_t states_bytes;
+
+    size_t numRead;
+    size_t numWrite;
+
+    size_t i;           // counter
+    size_t loops;       // number of full cycles of 4096 bytes procession
+    size_t last;        // number os 
+
+    loops = chain->wav->data.data_size >> BUFFER_SHIFT;
+    last = chain->wav->data.data_size - loops * BUFFER_SIZE;
+
+    void* params;
+    void* coeffs;
+    void* states;
+
+    //i = chain->wav->data
+    effect_control_get_sizes(&params_bytes, &coeffs_bytes);
+    effect_process_get_sizes(&states_bytes);
+
+    params = malloc(params_bytes);
+    coeffs = malloc(coeffs_bytes);
+    states = malloc(states_bytes);
+
+    effect_control_initialize(params, coeffs, chain->wav->format.sample_rate);
+    effect_reset(coeffs, states);
+
+    //
+    effect_set_parameter();
+    //
+
+    effect_update_coeffs(params, coeffs);
+
+    for (i = 0; i < loops; i++)
+    {
+        numRead = fread((chain->audio)->audio, 1, BUFFER_SIZE, chain->source);
+        effect_process(coeffs, states, chain->audio, 512);
+        numWrite = fwrite((chain->audio)->audio, 1, BUFFER_SIZE, chain->destin);
+    }
+    if (last != 0)
+    {
+        numRead = fread((chain->audio)->audio, 1, last, chain->source);
+        effect_process(coeffs, states, chain->audio, (last/chain->wav->format.block_align));
+        numWrite = fwrite((chain->audio)->audio, 1, last, chain->destin);
+    }
+}
+
+void set_params(void * params)
+{
+
+    FILE * js = fopen("C:/Filters/chain_float/parser.json", "r");
+
+    fseek(js, 0, SEEK_END);
+    size_t size = ftell(js);
+    fseek(js, 0, SEEK_SET);
+
+    char * buffer = malloc(size);
+    memset(buffer, 0, size);
+    fread(buffer, size, 1, js);
+
+    const cJSON *band = NULL;
+    const cJSON *bands = NULL;
+
+    cJSON *json = cJSON_Parse(buffer);
+
+    bands = cJSON_GetObjectItemCaseSensitive(json, "eq_params");
+    cJSON_ArrayForEach(band, bands)
+    {
+        cJSON *id = cJSON_GetObjectItemCaseSensitive(band, "id");
+        cJSON *value = cJSON_GetObjectItemCaseSensitive(band, "val");
+
+        effect_set_parameter(params, id->valueint, (float)value->valuedouble);
+    }
+}
+
 
 
 /*void effect_crossover(effect_params_crossover cross)

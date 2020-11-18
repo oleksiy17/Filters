@@ -8,6 +8,10 @@
 //#define COMPRESSOR
 //#define EQ
 //#define CROSS
+#define CHAIN
+
+#define BUFFER_SIZE 4096u
+#define BUFFER_SHIFT 12u
 
 #include "stdlib.h"
 #include "stdio.h"
@@ -41,6 +45,12 @@ typedef struct {
 }dataHeader;
 
 typedef struct {
+    riffHeader riff;
+    fmtHeader format;
+    dataHeader data;
+}wav_t;
+
+typedef struct {
     fmtHeader* fmt;
     dataHeader* data;
     void* audio;
@@ -51,9 +61,9 @@ typedef struct {
 
 
 typedef struct {
-    fmtHeader* fmt;
-    dataHeader* data;
-    void* audio;
+    //fmtHeader* fmt;
+    //dataHeader* data;
+    //void* audio;
     float threshold;
     float ratio;
     float tauAttack;
@@ -62,6 +72,8 @@ typedef struct {
     
     float envAtt;
     float envRel;
+
+    uint32_t bpass;
 }effect_params_compressor;
 
 typedef struct {
@@ -73,11 +85,11 @@ typedef struct {
 
 typedef struct {
     equalizer eq[10];
-    double sampleRate;
+    float sampleRate;
 
-    fmtHeader* fmt;
-    dataHeader* data;
-    void* audio;
+    //fmtHeader* fmt;
+    //dataHeader* data;
+    //void* audio;
 }effect_params_equalizer;
 
 
@@ -86,10 +98,38 @@ typedef struct {
     my_float cutoff_2;
     my_float cutoff_3;
 
-    fmtHeader* fmt;
-    dataHeader* data;
-    void* audio;
+    //fmtHeader* fmt;
+    //dataHeader* data;
+    //void* audio;
 }effect_params_crossover;
+
+typedef struct {
+    void* band_1;
+    void* band_2;
+    void* band_3;
+    void* band_4;
+}band_buf;
+
+typedef struct {
+    void* audio;
+    band_buf bands;
+}audio_buf;
+
+typedef struct {
+    FILE* source;
+    FILE* destin;
+    wav_t* wav;
+
+    audio_buf* audio;
+
+    effect_params_equalizer equalizer;
+    effect_params_crossover crossover;
+    effect_params_compressor comp_ch1;
+    effect_params_compressor comp_ch2;
+    effect_params_compressor comp_ch3;
+    effect_params_compressor comp_ch4;
+
+}effect_parameter_chain;
 
 void readHeader(riffHeader* ptrRIFF, fmtHeader* ptrFMT, dataHeader* ptrDATA, FILE* ptrWavFile, size_t* numRead, int* diviation);
 
@@ -99,6 +139,9 @@ void effect_compressor(effect_params_compressor effect_par_comp);
 void effect_fir(effect_parameters effect_params);
 void effect_iir(effect_parameters effect_params);
 void effect_gain(effect_parameters effect_params);
+
+void effect_chain(effect_parameter_chain* chain);
+
 
 #endif // !__MAIN_H_
 

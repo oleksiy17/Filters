@@ -1,0 +1,12 @@
+{
+  "eq_params": [
+    
+
+        { "id"  : 0, "val" : 20,   "name": "1_freq" },
+        { "id"  : 1, "val" : -6,   "name": "1_gain" }, 
+        { "id"  : 2, "val" : 0.1,  "name": "1_Q" },
+        { "id"  : 3, "val" : 1,    "name": "1_type" },
+    
+
+  ]
+}

@@ -295,6 +295,180 @@ int32_t crossover_process(
         
         ((tStereo_cross*)pr_audio)[i].L = band.band_1.L + band.band_2.L;
         ((tStereo_cross*)pr_audio)[i].R = band.band_1.L + band.band_2.L;
+
+
+
+
+
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//          Parallel calculation 1
+//
+        xh = mac_f(pr_coeffs->band[MID_CUTOFF].negk0, pr_states->cd1_ord1[PAR_1].R, pr_states->in.R);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[MID_CUTOFF].k0, pr_states->cd1_ord1[PAR_1].R);
+        pr_states->cd1_ord1[PAR_1].R = xh;
+
+        accum_1 = y_ord_1;
+
+        // [in] on 1-st 2-nd order in parallel
+        y_ord_2 = mac_f(pr_states->in.R, pr_coeffs->band[MID_CUTOFF].k2, pr_states->cd1_delay_1[PAR_1].R);
+        pr_states->cd1_delay_1[PAR_1].R = mac_f(pr_states->in.R, pr_coeffs->band[MID_CUTOFF].k1, pr_states->cd1_delay_2[PAR_1].R);
+        pr_states->cd1_delay_1[PAR_1].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk1, y_ord_2, pr_states->cd1_delay_1[PAR_1].R);
+        pr_states->cd1_delay_2[PAR_1].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk2, y_ord_2, pr_states->in.R);
+
+
+        // parallel connected 1 cascade all-passes accumulation
+        accum_par = y_ord_1 + y_ord_2;
+        accum_par /= 2.0;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//          Parallel calculation 1
+//
+        xh = mac_f(pr_coeffs->band[MID_CUTOFF].negk0, pr_states->cd1_ord1[PAR_2].R, accum_par);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[MID_CUTOFF].k0, pr_states->cd1_ord1[PAR_2].R);
+        pr_states->cd1_ord1[PAR_2].R = xh;
+
+        // [in] on 2-st 2-nd order in parallel
+        y_ord_2 = mac_f(accum_par, pr_coeffs->band[MID_CUTOFF].k2, pr_states->cd1_delay_1[PAR_2].R);
+        pr_states->cd1_delay_1[PAR_2].R = mac_f(accum_par, pr_coeffs->band[MID_CUTOFF].k1, pr_states->cd1_delay_2[PAR_2].R);
+        pr_states->cd1_delay_1[PAR_2].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk1, y_ord_2, pr_states->cd1_delay_1[PAR_2].R);
+        pr_states->cd1_delay_2[PAR_2].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk2, y_ord_2, accum_par);
+
+        low_pass = y_ord_1 + y_ord_2;
+        low_pass /= 2.0;
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//      Serial calculation
+//
+        y_ord_2 = mac_f(accum_1, pr_coeffs->band[MID_CUTOFF].k2, pr_states->cd1_delay_1[SERIAL].R);
+        pr_states->cd1_delay_1[SERIAL].R = mac_f(accum_1, pr_coeffs->band[MID_CUTOFF].k1, pr_states->cd1_delay_2[SERIAL].R);
+        pr_states->cd1_delay_1[SERIAL].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk1, y_ord_2, pr_states->cd1_delay_1[SERIAL].R);
+        pr_states->cd1_delay_2[SERIAL].R = mac_f(pr_coeffs->band[MID_CUTOFF].negk2, y_ord_2, accum_1);
+
+        high_pass = y_ord_2 - low_pass;         // ne trogat
+
+
+        //
+        // low pass splitting on BAND_3 friquency
+        //
+
+        xh = mac_f(pr_coeffs->band[HIG_CUTOFF].negk0, pr_states->norm_ord1[NORM_LOW].R, low_pass);
+        y_ord_1 = mac_f(xh, pr_coeffs->band[HIG_CUTOFF].k0, pr_states->norm_ord1[NORM_LOW].R);
+        pr_states->norm_ord1[NORM_LOW].R = xh;           // verno
+
+        y_ord_2 = mac_f(y_ord_1, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->norm_delay_1[NORM_LOW].R);
+        pr_states->norm_delay_1[NORM_LOW].R = mac_f(y_ord_1, pr_coeffs->band[HIG_CUTOFF].k1, pr_states->norm_delay_2[NORM_LOW].R);
+        pr_states->norm_delay_1[NORM_LOW].R = mac_f(y_ord_2, pr_coeffs->band[HIG_CUTOFF].negk1, pr_states->norm_delay_1[NORM_LOW].R);
+        pr_states->norm_delay_2[NORM_LOW].R = mac_f(y_ord_2, pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_1);       //verno
+
+        low_pass = y_ord_2;
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//          Cascade 2   low_pass [in]
+//
+
+        xh = mac_f(pr_coeffs->band[LOW_CUTOFF].negk0, pr_states->cd2_ord1[PAR_1].R, low_pass);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[LOW_CUTOFF].k0, pr_states->cd2_ord1[PAR_1].R);
+        pr_states->cd2_ord1[PAR_1].R = xh;
+        accum_1 = y_ord_1;
+
+        // [in] on 1-st 2-nd order in parallel
+        y_ord_2 = mac_f(low_pass, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->cd2_delay_1[PAR_1].R);
+        pr_states->cd2_delay_1[PAR_1].R = mac_f(low_pass, pr_coeffs->band[LOW_CUTOFF].k1, pr_states->cd2_delay_2[PAR_1].R);
+        pr_states->cd2_delay_1[PAR_1].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk1, y_ord_2, pr_states->cd2_delay_1[PAR_1].R);
+        pr_states->cd2_delay_2[PAR_1].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk2, y_ord_2, low_pass);
+
+        accum_par = y_ord_1 + y_ord_2;
+        accum_par /= 2.0;
+
+        ///////////////////////////////////
+
+        xh = mac_f(pr_coeffs->band[LOW_CUTOFF].negk0, pr_states->cd2_ord1[PAR_2].R, accum_par);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[LOW_CUTOFF].k0, pr_states->cd2_ord1[PAR_2].R);
+        pr_states->cd2_ord1[PAR_2].R = xh;
+
+        y_ord_2 = mac_f(accum_par, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->cd2_delay_1[PAR_2].R);
+        pr_states->cd2_delay_1[PAR_2].R = mac_f(accum_par, pr_coeffs->band[LOW_CUTOFF].k1, pr_states->cd2_delay_2[PAR_2].R);
+        pr_states->cd2_delay_1[PAR_2].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk1, y_ord_2, pr_states->cd2_delay_1[PAR_2].R);
+        pr_states->cd2_delay_2[PAR_2].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk2, y_ord_2, accum_par);
+
+        accum_par = y_ord_1 + y_ord_2;
+        accum_par /= 2.0;                               // band 1
+
+        band.band_1.R = accum_par;
+        /////////////////////////////////////
+
+        y_ord_2 = mac_f(accum_1, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->cd2_delay_1[SERIAL].R);
+        pr_states->cd2_delay_1[PAR_1].R = mac_f(accum_1, pr_coeffs->band[LOW_CUTOFF].k1, pr_states->cd2_delay_2[SERIAL].R);
+        pr_states->cd2_delay_1[PAR_1].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk1, y_ord_2, pr_states->cd2_delay_1[PAR_1].R);
+        pr_states->cd2_delay_2[PAR_1].R = mac_f(pr_coeffs->band[LOW_CUTOFF].negk2, y_ord_2, accum_1);
+
+        band.band_2.R = y_ord_2 - band.band_1.R;
+
+
+
+        //
+        // high-pass splitting on BAND_4 friquency [in] = high_pass 
+        //
+
+        xh = mac_f(pr_coeffs->band[LOW_CUTOFF].negk0, pr_states->norm_ord1[NORM_HIG].R, high_pass);
+        y_ord_1 = mac_f(xh, pr_coeffs->band[LOW_CUTOFF].k0, pr_states->norm_ord1[NORM_HIG].R);
+        pr_states->norm_ord1[NORM_HIG].R = xh;           // verno
+
+        y_ord_2 = mac_f(y_ord_1, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->norm_delay_1[NORM_HIG].R);
+        pr_states->norm_delay_1[NORM_HIG].R = mac_f(y_ord_1, pr_coeffs->band[LOW_CUTOFF].k1, pr_states->norm_delay_2[NORM_HIG].R);
+        pr_states->norm_delay_1[NORM_HIG].R = mac_f(y_ord_2, pr_coeffs->band[LOW_CUTOFF].negk1, pr_states->norm_delay_1[NORM_HIG].R);
+        pr_states->norm_delay_2[NORM_HIG].R = mac_f(y_ord_2, pr_coeffs->band[LOW_CUTOFF].negk2, y_ord_1);       //verno
+
+        high_pass = y_ord_2;
+
+        //      **************************
+        //      Cascade 3 [in] = high_pass
+        //      **************************
+
+        xh = mac_f(pr_coeffs->band[HIG_CUTOFF].negk0, pr_states->cd3_ord1[PAR_1].R, high_pass);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[HIG_CUTOFF].k0, pr_states->cd3_ord1[PAR_1].R);
+        pr_states->cd3_ord1[PAR_1].R = xh;
+        accum_1 = y_ord_1;
+
+        // [in] on 1-st 2-nd order in parallel
+        y_ord_2 = mac_f(high_pass, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->cd3_delay_1[PAR_1].R);
+        pr_states->cd3_delay_1[PAR_1].R = mac_f(high_pass, pr_coeffs->band[HIG_CUTOFF].k1, pr_states->cd3_delay_2[PAR_1].R);
+        pr_states->cd3_delay_1[PAR_1].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk1, y_ord_2, pr_states->cd3_delay_1[PAR_1].R);
+        pr_states->cd3_delay_2[PAR_1].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_2, high_pass);
+
+        accum_par = y_ord_1 + y_ord_2;
+        accum_par /= 2.0;
+
+        ///////////////////////////////////
+        xh = mac_f(pr_coeffs->band[HIG_CUTOFF].negk0, pr_states->cd3_ord1[PAR_2].R, accum_par);        // replace by nmac_f
+        y_ord_1 = mac_f(xh, pr_coeffs->band[HIG_CUTOFF].k0, pr_states->cd3_ord1[PAR_2].R);
+        pr_states->cd3_ord1[PAR_2].R = xh;
+
+        y_ord_2 = mac_f(accum_par, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->cd3_delay_1[PAR_2].R);
+        pr_states->cd3_delay_1[PAR_2].R = mac_f(accum_par, pr_coeffs->band[HIG_CUTOFF].k1, pr_states->cd3_delay_2[PAR_2].R);
+        pr_states->cd3_delay_1[PAR_2].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk1, y_ord_2, pr_states->cd3_delay_1[PAR_2].R);
+        pr_states->cd3_delay_2[PAR_2].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_2, accum_par);
+
+        accum_par = y_ord_1 + y_ord_2;
+        accum_par /= 2.0;
+
+        band.band_3.R = accum_par;
+
+        ///////
+        y_ord_2 = mac_f(accum_1, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->cd3_delay_1[SERIAL].R);
+        pr_states->cd3_delay_1[SERIAL].R = mac_f(accum_1, pr_coeffs->band[HIG_CUTOFF].k1, pr_states->cd3_delay_2[SERIAL].R);
+        pr_states->cd3_delay_1[SERIAL].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk1, y_ord_2, pr_states->cd3_delay_1[SERIAL].R);
+        pr_states->cd3_delay_2[SERIAL].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_2, accum_1);
+
+        band.band_4.R = y_ord_2 - band.band_3.R;
+
+        ((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
+        ((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
     }
 }
 
