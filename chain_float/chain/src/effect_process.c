@@ -67,7 +67,7 @@ int32_t effect_process(
      equalizer_process((equalizer_coeffs*)&process_coeffs->equal_coef, (equalizer_states*)&process_states->equal_st, audio_in->audio, samples_count);
      crossover_process((crossover_coeffs*)&process_coeffs->cross_coef, (crossover_states*)&process_states->cross_st, audio_in, samples_count);
      compressor_4ch_process((compressor_4ch_coeffs*)&process_coeffs->compr_4ch_coef, (compressor_4ch_states*)&process_states->compr_4ch_st, audio_in->cross_b, samples_count);
-   
+     mux_audio((audio_proc*)audio_in, samples_count);
 }
 
 void mux_audio(audio_proc* audio, size_t samples_count)
@@ -75,12 +75,21 @@ void mux_audio(audio_proc* audio, size_t samples_count)
     size_t i;
 
     audio_proc* audio_in = (audio_proc*)audio;
-    stereo in = ((stereo*)audio_in->audio)[i];
+    stereo in;
+    stereo band_1;
+    stereo band_2;
+    stereo band_3;
+    stereo band_4;
 
     for (i = 0; i < samples_count; i++)
     {
         in = ((stereo*)audio_in->audio)[i];
+        band_1 = ((stereo*)audio_in->cross_b->band_1)[i];
+        band_2 = ((stereo*)audio_in->cross_b->band_2)[i];
+        band_3 = ((stereo*)audio_in->cross_b->band_3)[i];
+        band_4 = ((stereo*)audio_in->cross_b->band_4)[i];
 
-
+        in.L = band_1.L + band_2.L + band_3.L + band_4.L;
+        in.R = band_1.R + band_2.R + band_3.R + band_4.R;
     }
 }
