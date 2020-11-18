@@ -51,8 +51,14 @@
         { "id"  : 38, "val" : 0.1,  "name": "10_Q" },
         { "id"  : 39, "val" : 0,    "name": "10_type" },
  
-        { "id"  : 40, "val" : 48000,"name": "sample_rate"}
+        { "id"  : 40, "val" : 48000,"name": "sample_rate"},
     
+        { "id"  : 100, "val" : -3,"name": "treshold"},
+        { "id"  : 100, "val" : -3,"name": "ratio"},
+        { "id"  : 100, "val" : -3,"name": "t_Attack"},
+        { "id"  : 100, "val" : -3,"name": "t_Release"},
+        { "id"  : 100, "val" : -3,"name": "makeUp"},
+
 
 
   ]
