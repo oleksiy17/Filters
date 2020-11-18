@@ -27,10 +27,10 @@ int main()
     audio_bytes = (uint32_t)BUFFER_SIZE;
 
     bands.audio = malloc(audio_bytes);
-    bands.band_1 = malloc(audio_bytes);
-    bands.band_2 = malloc(audio_bytes);
-    bands.band_3 = malloc(audio_bytes);
-    bands.band_4 = malloc(audio_bytes);
+    bands.cross_b.band_1 = malloc(audio_bytes);
+    bands.cross_b.band_2 = malloc(audio_bytes);
+    bands.cross_b.band_3 = malloc(audio_bytes);
+    bands.cross_b.band_4 = malloc(audio_bytes);
 
     fileAdd = "C:/Filters/test_signal/in_sweep.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
@@ -123,7 +123,7 @@ void effect_chain(effect_parameter_chain* chain)
     effect_reset(coeffs, states);
 
     //
-    effect_set_parameter();
+    set_params(params);
     //
 
     effect_update_coeffs(params, coeffs);

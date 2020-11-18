@@ -112,7 +112,7 @@ typedef struct {
 
 typedef struct {
     void* audio;
-    band_buf bands;
+    band_buf cross_b;
 }audio_buf;
 
 typedef struct {
@@ -142,6 +142,7 @@ void effect_gain(effect_parameters effect_params);
 
 void effect_chain(effect_parameter_chain* chain);
 
+void set_params(void * params);
 
 #endif // !__MAIN_H_
 

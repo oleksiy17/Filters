@@ -61,9 +61,21 @@ int32_t effect_set_parameter(
     int32_t     id,
     float       value)
 {
-    equalizer_set_parameter(params, id, value);
-    compressor_4ch_set_parameter(params, id, value);
-    crossover_set_parameter(params, id, value);
+    if (id >= 0 && id < 100)
+    {
+        equalizer_set_parameter(params, id, value);
+    }
+    
+    if (id >= 100 && id < 199)
+    {
+        compressor_4ch_set_parameter(params, id, value);
+    }
+
+    if (id >= 200 && id < 299)
+    {
+        crossover_set_parameter(params, id, value);
+    }
+     
 }
 
 
