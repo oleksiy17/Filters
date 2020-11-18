@@ -27,6 +27,17 @@ typedef enum {
 
 }crossover_states_enum;
 
+typedef struct {
+    void* band_1;
+    void* band_2;
+    void* band_3;
+    void* band_4;
+}band_buf_cross;
+
+typedef struct {
+    void* audio;
+    band_buf_cross* cross_b;
+}audio_buf_cross;
 
 typedef struct {
     my_float L;

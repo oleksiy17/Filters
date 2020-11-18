@@ -87,7 +87,13 @@ int main()
 
     closeFile = fclose(ptrWavFile);
     closeFile = fclose(ptrNewWavFIR);
-    
+
+    free(bands.audio);
+    free(bands.cross_b.band_1);
+    free(bands.cross_b.band_2);
+    free(bands.cross_b.band_3);
+    free(bands.cross_b.band_4);
+
     return 0;
 }
 
@@ -105,7 +111,7 @@ void effect_chain(effect_parameter_chain* chain)
     size_t last;        // number os 
 
     loops = chain->wav->data.data_size >> BUFFER_SHIFT;
-    last = chain->wav->data.data_size - loops * BUFFER_SIZE;
+    last = chain->wav->data.data_size - (loops << BUFFER_SIZE);
 
     void* params;
     void* coeffs;
@@ -120,18 +126,16 @@ void effect_chain(effect_parameter_chain* chain)
 
     effect_control_initialize(params, coeffs, chain->wav->format.sample_rate);
     effect_reset(coeffs, states);
-
     //
     set_params(params);
     //
-
     effect_update_coeffs(params, coeffs);
 
     for (i = 0; i < loops; i++)
     {
-        numRead = fread((chain->audio)->audio, 1, BUFFER_SIZE, chain->source);
+        numRead = fread((chain->audio)->audio, sizeof(float), BUFFER_SIZE, chain->source);
         effect_process(coeffs, states, chain->audio, 512);
-        numWrite = fwrite((chain->audio)->audio, 1, BUFFER_SIZE, chain->destin);
+        numWrite = fwrite((chain->audio)->audio, sizeof(float), BUFFER_SIZE, chain->destin);
     }
     if (last != 0)
     {

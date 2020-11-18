@@ -9,6 +9,18 @@
 #define M_e    ((float)2.71828182846)
 
 typedef struct {
+    void* band_1;
+    void* band_2;
+    void* band_3;
+    void* band_4;
+}band_buf_comp;
+
+typedef struct {
+    void* audio;
+    band_buf_comp* cross_b;
+}audio_buf_comp;
+
+typedef struct {
     float threshold;
     float ratio;
     float tauAttack;

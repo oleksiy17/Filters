@@ -103,7 +103,9 @@ int32_t crossover_process(
 {
     crossover_coeffs* pr_coeffs;
     crossover_states* pr_states;
-    tStereo_cross* pr_audio;
+    //tStereo_cross* pr_audio;
+    audio_buf_cross* pr_audio;
+
     split_band band;
 
     my_float xh;
@@ -118,13 +120,14 @@ int32_t crossover_process(
 
     float compensation_1;
     float compensation_2;
+
     pr_coeffs = (crossover_coeffs*)coeffs;
     pr_states = (crossover_states*)states;
-    pr_audio = (tStereo_cross*)audio;
+    pr_audio = (audio_buf_cross*)audio;
 
     for (my_uint32 i = 0; i < samples_count; i++)
     {
-        pr_states->in = ((tStereo_cross*)pr_audio)[i];
+        pr_states->in = ((tStereo_cross*)pr_audio->audio)[i];
         
 
                 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,6 +229,9 @@ int32_t crossover_process(
         accum_par /= 2.0;                               // band 1
 
         band.band_1.L = accum_par;
+
+        ((tStereo_cross*)pr_audio->cross_b->band_1)[i].L = band.band_1.L;
+
         /////////////////////////////////////
 
         y_ord_2 = mac_f(accum_1, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->cd2_delay_1[SERIAL].L);
@@ -234,7 +240,7 @@ int32_t crossover_process(
         pr_states->cd2_delay_2[PAR_1].L = mac_f(pr_coeffs->band[LOW_CUTOFF].negk2, y_ord_2,accum_1);
 
         band.band_2.L = y_ord_2 - band.band_1.L;
-
+        ((tStereo_cross*)pr_audio->cross_b->band_2)[i].L = band.band_2.L
 
 
         //
@@ -285,6 +291,8 @@ int32_t crossover_process(
 
         band.band_3.L = accum_par;
 
+        ((tStereo_cross*)pr_audio->cross_b->band_3)[i].L = band.band_3.L;
+
         ///////
         y_ord_2 = mac_f(accum_1, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->cd3_delay_1[SERIAL].L);
         pr_states->cd3_delay_1[SERIAL].L = mac_f(accum_1, pr_coeffs->band[HIG_CUTOFF].k1, pr_states->cd3_delay_2[SERIAL].L);
@@ -292,9 +300,10 @@ int32_t crossover_process(
         pr_states->cd3_delay_2[SERIAL].L = mac_f(pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_2, accum_1);
 
         band.band_4.L = y_ord_2 - band.band_3.L;
-        
-        ((tStereo_cross*)pr_audio)[i].L = band.band_1.L + band.band_2.L;
-        ((tStereo_cross*)pr_audio)[i].R = band.band_1.L + band.band_2.L;
+        ((tStereo_cross*)pr_audio->cross_b->band_4)[i].L = band.band_4.L;
+
+        //((tStereo_cross*)pr_audio)[i].L = band.band_1.L + band.band_2.L;
+        //((tStereo_cross*)pr_audio)[i].R = band.band_1.L + band.band_2.L;
 
 
 
@@ -400,6 +409,9 @@ int32_t crossover_process(
         accum_par /= 2.0;                               // band 1
 
         band.band_1.R = accum_par;
+
+        ((tStereo_cross*)pr_audio->cross_b->band_1)[i].R = band.band_1.R;
+
         /////////////////////////////////////
 
         y_ord_2 = mac_f(accum_1, pr_coeffs->band[LOW_CUTOFF].k2, pr_states->cd2_delay_1[SERIAL].R);
@@ -409,6 +421,7 @@ int32_t crossover_process(
 
         band.band_2.R = y_ord_2 - band.band_1.R;
 
+        ((tStereo_cross*)pr_audio->cross_b->band_2)[i].R = band.band_2.R;
 
 
         //
@@ -458,6 +471,7 @@ int32_t crossover_process(
         accum_par /= 2.0;
 
         band.band_3.R = accum_par;
+        ((tStereo_cross*)pr_audio->cross_b->band_3)[i].R = band.band_3.R;
 
         ///////
         y_ord_2 = mac_f(accum_1, pr_coeffs->band[HIG_CUTOFF].k2, pr_states->cd3_delay_1[SERIAL].R);
@@ -466,9 +480,10 @@ int32_t crossover_process(
         pr_states->cd3_delay_2[SERIAL].R = mac_f(pr_coeffs->band[HIG_CUTOFF].negk2, y_ord_2, accum_1);
 
         band.band_4.R = y_ord_2 - band.band_3.R;
+        ((tStereo_cross*)pr_audio->cross_b->band_4)[i].R = band.band_4.R;
 
-        ((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
-        ((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
+        //((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
+        //((tStereo_cross*)pr_audio)[i].R = band.band_1.R + band.band_2.R;
     }
 }
 
