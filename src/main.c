@@ -111,7 +111,6 @@ void effect_chain(effect_parameter_chain* chain)
     void* coeffs;
     void* states;
 
-    //i = chain->wav->data
     effect_control_get_sizes(&params_bytes, &coeffs_bytes);
     effect_process_get_sizes(&states_bytes);
 

@@ -15,6 +15,18 @@ typedef struct {
 }stereo;
 
 typedef struct {
+    void* band_1;
+    void* band_2;
+    void* band_3;
+    void* band_4;
+}band_proc;
+
+typedef struct {
+    void* audio;
+    band_proc* cross_b;
+}audio_proc;
+
+typedef struct {
     comprssor_4ch_params compr_4ch_par;
     crossover_params cross_par;
     equalizer_params equal_par;

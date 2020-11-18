@@ -60,14 +60,27 @@ int32_t effect_process(
 {
     chain_coeffs* process_coeffs = (chain_coeffs*)coeffs;
     chain_states* process_states = (chain_states*)states;
-    stereo* in = (stereo*)audio;
+    audio_proc* audio_in = (audio_proc*)audio;
 
     size_t i;
+    
+     equalizer_process((equalizer_coeffs*)&process_coeffs->equal_coef, (equalizer_states*)&process_states->equal_st, audio_in->audio, samples_count);
+     crossover_process((crossover_coeffs*)&process_coeffs->cross_coef, (crossover_states*)&process_states->cross_st, audio_in, samples_count);
+     compressor_4ch_process((compressor_4ch_coeffs*)&process_coeffs->compr_4ch_coef, (compressor_4ch_states*)&process_states->compr_4ch_st, audio_in->cross_b, samples_count);
+   
+}
+
+void mux_audio(audio_proc* audio, size_t samples_count)
+{
+    size_t i;
+
+    audio_proc* audio_in = (audio_proc*)audio;
+    stereo in = ((stereo*)audio_in->audio)[i];
 
     for (i = 0; i < samples_count; i++)
     {
-        equalizer_process((equalizer_coeffs*)&process_coeffs->equal_coef, (equalizer_states*)&process_states->equal_st, audio, samples_count);
+        in = ((stereo*)audio_in->audio)[i];
+
 
     }
-
 }

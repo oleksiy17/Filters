@@ -4,6 +4,8 @@
 #include <stdint.h>
 #include <stddef.h>
 
+#include "effect_control.h"
+
 #include "compressor_4ch_process.h"
 #include "crossover_process.h"
 #include "equalizer_process.h"
@@ -50,5 +52,7 @@ int32_t effect_process(
     void*       audio,
     size_t      samples_count);
 
+
+void mux_audio(audio_proc* audio);
 
 #endif
