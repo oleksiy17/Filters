@@ -112,7 +112,7 @@ typedef struct {
 
 typedef struct {
     void* audio;
-    band_buf cross_b;
+    band_buf cross_b; //* absence 
 }audio_buf;
 
 typedef struct {

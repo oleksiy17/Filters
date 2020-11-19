@@ -36,7 +36,7 @@ typedef struct {
 
 typedef struct {
     void* audio;
-    band_buf_cross* cross_b;
+    band_buf_cross cross_b;
 }audio_buf_cross;
 
 typedef struct {
@@ -58,13 +58,22 @@ typedef struct {
 
 typedef struct {
     my_float k0;
+    my_float negk0;
+}coef_1_ord;
+
+typedef struct {
     my_float k1;
     my_float k2;
 
-    my_float negk0;
     my_float negk1;
     my_float negk2;
+}coef_2_ord;
+
+typedef struct {
+    coef_1_ord ord_1;
+    coef_2_ord ord_2;
 }band_coeffs;
+
 
 typedef struct {
     band_coeffs band[BAND_NUM - 1];
@@ -73,7 +82,7 @@ typedef struct {
 typedef struct {
     tStereo_cross in;
 
-    tStereo_cross cd1_ord1[2];
+    tStereo_cross cd1_ord1[3];
     tStereo_cross cd1_delay_1[3];
     tStereo_cross cd1_delay_2[3];
 
@@ -81,11 +90,11 @@ typedef struct {
     tStereo_cross norm_delay_1[2];
     tStereo_cross norm_delay_2[2];
 
-    tStereo_cross cd2_ord1[2];
+    tStereo_cross cd2_ord1[3];
     tStereo_cross cd2_delay_1[3];
     tStereo_cross cd2_delay_2[3];
 
-    tStereo_cross cd3_ord1[2];
+    tStereo_cross cd3_ord1[3];
     tStereo_cross cd3_delay_1[3];
     tStereo_cross cd3_delay_2[3];
 

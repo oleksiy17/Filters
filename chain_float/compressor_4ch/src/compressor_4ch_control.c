@@ -46,7 +46,9 @@ int32_t compressor_4ch_control_initialize(
     init_params->comp_ch_1_par.tauRelease = 0.0;
     init_params->comp_ch_1_par.makeUpGain = 0.0;
     init_params->comp_ch_1_par.samplerate = 0.0;
-    init_params->comp_ch_1_par.bpass = 0.0;
+    init_params->comp_ch_1_par.tauEnvAtt = 0.0;
+    init_params->comp_ch_1_par.tauEnvRel = 0.0;
+    init_params->comp_ch_1_par.bpass = 0;
 
     init_coeffs->comp_ch_1_coef.threshold = 0.0;
     init_coeffs->comp_ch_1_coef.ratio = 0.0;
@@ -54,7 +56,9 @@ int32_t compressor_4ch_control_initialize(
     init_coeffs->comp_ch_1_coef.alphaRelease = 0.0;
     init_coeffs->comp_ch_1_coef.makeUpGain = 0.0;
     init_coeffs->comp_ch_1_coef.samplerate = 0.0;
-    init_coeffs->comp_ch_1_coef.bpass = 0.0;
+    init_coeffs->comp_ch_1_coef.attackEnv = 0.0;
+    init_coeffs->comp_ch_1_coef.releaseEnv = 0.0;
+    init_coeffs->comp_ch_1_coef.bpass = 0;
 
     //  ch_2
     init_params->comp_ch_2_par.threshold = 0.0;
@@ -63,7 +67,9 @@ int32_t compressor_4ch_control_initialize(
     init_params->comp_ch_2_par.tauRelease = 0.0;
     init_params->comp_ch_2_par.makeUpGain = 0.0;
     init_params->comp_ch_2_par.samplerate = 0.0;
-    init_params->comp_ch_2_par.bpass = 0.0;
+    init_params->comp_ch_2_par.tauEnvAtt = 0.0;
+    init_params->comp_ch_2_par.tauEnvRel = 0.0;
+    init_params->comp_ch_2_par.bpass = 0;
 
     init_coeffs->comp_ch_2_coef.threshold = 0.0;
     init_coeffs->comp_ch_2_coef.ratio = 0.0;
@@ -71,7 +77,9 @@ int32_t compressor_4ch_control_initialize(
     init_coeffs->comp_ch_2_coef.alphaRelease = 0.0;
     init_coeffs->comp_ch_2_coef.makeUpGain = 0.0;
     init_coeffs->comp_ch_2_coef.samplerate = 0.0;
-    init_coeffs->comp_ch_2_coef.bpass = 0.0;
+    init_coeffs->comp_ch_2_coef.attackEnv = 0.0;
+    init_coeffs->comp_ch_2_coef.releaseEnv = 0.0;
+    init_coeffs->comp_ch_2_coef.bpass = 0;
 
     //  ch_3
     init_params->comp_ch_3_par.threshold = 0.0;
@@ -80,7 +88,9 @@ int32_t compressor_4ch_control_initialize(
     init_params->comp_ch_3_par.tauRelease = 0.0;
     init_params->comp_ch_3_par.makeUpGain = 0.0;
     init_params->comp_ch_3_par.samplerate = 0.0;
-    init_params->comp_ch_3_par.bpass = 0.0;
+    init_params->comp_ch_3_par.tauEnvAtt = 0.0;
+    init_params->comp_ch_3_par.tauEnvRel = 0.0;
+    init_params->comp_ch_3_par.bpass = 0;
 
     init_coeffs->comp_ch_3_coef.threshold = 0.0;
     init_coeffs->comp_ch_3_coef.ratio = 0.0;
@@ -88,7 +98,9 @@ int32_t compressor_4ch_control_initialize(
     init_coeffs->comp_ch_3_coef.alphaRelease = 0.0;
     init_coeffs->comp_ch_3_coef.makeUpGain = 0.0;
     init_coeffs->comp_ch_3_coef.samplerate = 0.0;
-    init_coeffs->comp_ch_3_coef.bpass = 0.0;
+    init_coeffs->comp_ch_3_coef.attackEnv = 0.0;
+    init_coeffs->comp_ch_3_coef.releaseEnv = 0.0;
+    init_coeffs->comp_ch_3_coef.bpass = 0;
 
     //  ch_4
     init_params->comp_ch_4_par.threshold = 0.0;
@@ -97,7 +109,9 @@ int32_t compressor_4ch_control_initialize(
     init_params->comp_ch_4_par.tauRelease = 0.0;
     init_params->comp_ch_4_par.makeUpGain = 0.0;
     init_params->comp_ch_4_par.samplerate = 0.0;
-    init_params->comp_ch_4_par.bpass = 0.0;
+    init_params->comp_ch_4_par.tauEnvAtt = 0.0;
+    init_params->comp_ch_4_par.tauEnvRel = 0.0;
+    init_params->comp_ch_4_par.bpass = 0;
 
     init_coeffs->comp_ch_4_coef.threshold = 0.0;
     init_coeffs->comp_ch_4_coef.ratio = 0.0;
@@ -105,7 +119,9 @@ int32_t compressor_4ch_control_initialize(
     init_coeffs->comp_ch_4_coef.alphaRelease = 0.0;
     init_coeffs->comp_ch_4_coef.makeUpGain = 0.0;
     init_coeffs->comp_ch_4_coef.samplerate = 0.0;
-    init_coeffs->comp_ch_4_coef.bpass = 0.0;
+    init_coeffs->comp_ch_4_coef.attackEnv = 0.0;
+    init_coeffs->comp_ch_4_coef.releaseEnv = 0.0;
+    init_coeffs->comp_ch_4_coef.bpass = 0;
 }
 
 
@@ -407,7 +423,7 @@ int32_t compressor_4ch_update_coeffs(
 
     update_coeffs->comp_ch_1_coef.makeUpGain = powf(10.0, (update_params->comp_ch_1_par.makeUpGain/20.0));
     update_coeffs->comp_ch_1_coef.samplerate = update_params->comp_ch_1_par.samplerate;
-
+    update_coeffs->comp_ch_1_coef.bpass = update_params->comp_ch_1_par.bpass;
 
     // CH_2
     update_coeffs->comp_ch_2_coef.threshold = powf(10.0, (update_params->comp_ch_2_par.threshold / 20.0));  //in linear
@@ -421,7 +437,7 @@ int32_t compressor_4ch_update_coeffs(
 
     update_coeffs->comp_ch_2_coef.makeUpGain = powf(10.0, (update_params->comp_ch_2_par.makeUpGain / 20.0));
     update_coeffs->comp_ch_2_coef.samplerate = update_params->comp_ch_2_par.samplerate;
-
+    update_coeffs->comp_ch_2_coef.bpass = update_params->comp_ch_2_par.bpass;
 
     // CH_3
     update_coeffs->comp_ch_3_coef.threshold = powf(10.0, (update_params->comp_ch_3_par.threshold / 20.0));  //in linear
@@ -435,7 +451,7 @@ int32_t compressor_4ch_update_coeffs(
 
     update_coeffs->comp_ch_3_coef.makeUpGain = powf(10.0, (update_params->comp_ch_3_par.makeUpGain / 20.0));
     update_coeffs->comp_ch_3_coef.samplerate = update_params->comp_ch_3_par.samplerate;
-
+    update_coeffs->comp_ch_3_coef.bpass = update_params->comp_ch_3_par.bpass;
 
     // CH_4
     update_coeffs->comp_ch_4_coef.threshold = powf(10.0, (update_params->comp_ch_4_par.threshold / 20.0));  //in linear
@@ -449,4 +465,5 @@ int32_t compressor_4ch_update_coeffs(
 
     update_coeffs->comp_ch_4_coef.makeUpGain = powf(10.0, (update_params->comp_ch_4_par.makeUpGain / 20.0));
     update_coeffs->comp_ch_4_coef.samplerate = update_params->comp_ch_4_par.samplerate;
+    update_coeffs->comp_ch_4_coef.bpass = update_params->comp_ch_4_par.bpass;
 }

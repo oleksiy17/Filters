@@ -53,6 +53,6 @@ int32_t effect_process(
     size_t      samples_count);
 
 
-void mux_audio(audio_proc* audio);
+void mix_audio(audio_proc* audio, size_t samples_count);
 
 #endif

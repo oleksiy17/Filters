@@ -30,17 +30,17 @@ typedef enum {
 }eParam;
 
 typedef struct {
-    uint32_t Id;
+    //uint32_t Id;
     double value;
 
 }equalizer_param_set;
 
 typedef struct {
-    double sample_rate;
     equalizer_param_set  freq[BANDS];
     equalizer_param_set  gain[BANDS];
     equalizer_param_set   Q_f[BANDS];
     equalizer_param_set  type[BANDS];
+    float sample_rate;
 
 }equalizer_params;      // parameters
 

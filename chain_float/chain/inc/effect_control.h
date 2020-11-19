@@ -23,10 +23,11 @@ typedef struct {
 
 typedef struct {
     void* audio;
-    band_proc* cross_b;
+    band_proc cross_b;  // * deleted
 }audio_proc;
 
 typedef struct {
+    
     comprssor_4ch_params compr_4ch_par;
     crossover_params cross_par;
     equalizer_params equal_par;

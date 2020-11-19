@@ -51,13 +51,13 @@ int32_t crossover_control_initialize(
 
     for (i = 0; i < (BAND_NUM - 1); i++)
     {
-        init_coeffs->band[i].k0 = 0.0;
-        init_coeffs->band[i].k1 = 0.0;
-        init_coeffs->band[i].k2 = 0.0;
+        init_coeffs->band[i].ord_1.k0 = 0.0;
+        init_coeffs->band[i].ord_2.k1 = 0.0;
+        init_coeffs->band[i].ord_2.k2 = 0.0;
 
-        init_coeffs->band[i].negk0 = 0.0;
-        init_coeffs->band[i].negk1 = 0.0;
-        init_coeffs->band[i].negk2 = 0.0;
+        init_coeffs->band[i].ord_1.negk0 = 0.0;
+        init_coeffs->band[i].ord_2.negk1 = 0.0;
+        init_coeffs->band[i].ord_2.negk2 = 0.0;
     }
     
 }
@@ -83,25 +83,25 @@ int32_t crossover_set_parameter(
 
     switch (id)
     {
-        case LOW_CUTOFF:
+        case 200:
         {
             set_params->cutoff_freq[LOW_CUTOFF] = value;
             break;
         }
 
-        case MID_CUTOFF:
+        case 201:
         {
             set_params->cutoff_freq[MID_CUTOFF] = value;
             break;
         }
 
-        case HIG_CUTOFF:
+        case 202:
         {
             set_params->cutoff_freq[HIG_CUTOFF] = value;
             break;
         }
 
-        case SAMPLERATE:
+        case 210:
         {
             set_params->samplerate = value;
             break;
@@ -144,13 +144,13 @@ int32_t crossover_update_coeffs(
         var1 = (tanf(M_PI * (fb / init_params->samplerate)) - 1.0) / (tanf(M_PI * (fb / init_params->samplerate)) + 1.0);
         var2 = -cosf(2.0 * M_PI * init_params->cutoff_freq[i] / init_params->samplerate);
 
-        init_coeffs->band[i].k0 = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
-        init_coeffs->band[i].k1 = var2 * (1.0 - var1);
-        init_coeffs->band[i].k2 = -var1;
+        init_coeffs->band[i].ord_1.k0 = (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) - 1.0) / (tanf(M_PI * (init_params->cutoff_freq[i] / init_params->samplerate)) + 1.0);
+        init_coeffs->band[i].ord_2.k1 = var2 * (1.0 - var1);
+        init_coeffs->band[i].ord_2.k2 = -var1;
 
-        init_coeffs->band[i].negk0 = -init_coeffs->band[i].k0;
-        init_coeffs->band[i].negk1 = -init_coeffs->band[i].k1;
-        init_coeffs->band[i].negk2 = -init_coeffs->band[i].k2;
+        init_coeffs->band[i].ord_1.negk0 = -init_coeffs->band[i].ord_1.k0;
+        init_coeffs->band[i].ord_2.negk1 = -init_coeffs->band[i].ord_2.k1;
+        init_coeffs->band[i].ord_2.negk2 = -init_coeffs->band[i].ord_2.k2;
     }
 
 }

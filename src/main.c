@@ -32,7 +32,7 @@ int main()
     bands.cross_b.band_3 = malloc(audio_bytes);
     bands.cross_b.band_4 = malloc(audio_bytes);
 
-    fileAdd = "C:/Filters/test_signal/in_sweep.wav";
+    fileAdd = "C:/Filters/test_signal/sweep.wav";
     newFileFIR = "C:/Filters/test_signal/out/fir.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file  
@@ -88,12 +88,6 @@ int main()
     closeFile = fclose(ptrWavFile);
     closeFile = fclose(ptrNewWavFIR);
 
-    free(bands.audio);
-    free(bands.cross_b.band_1);
-    free(bands.cross_b.band_2);
-    free(bands.cross_b.band_3);
-    free(bands.cross_b.band_4);
-
     return 0;
 }
 
@@ -111,7 +105,7 @@ void effect_chain(effect_parameter_chain* chain)
     size_t last;        // number os 
 
     loops = chain->wav->data.data_size >> BUFFER_SHIFT;
-    last = chain->wav->data.data_size - (loops << BUFFER_SIZE);
+    last = chain->wav->data.data_size - (loops << BUFFER_SHIFT);
 
     void* params;
     void* coeffs;
@@ -133,9 +127,9 @@ void effect_chain(effect_parameter_chain* chain)
 
     for (i = 0; i < loops; i++)
     {
-        numRead = fread((chain->audio)->audio, sizeof(float), BUFFER_SIZE, chain->source);
+        numRead = fread((chain->audio)->audio, 1, BUFFER_SIZE, chain->source);
         effect_process(coeffs, states, chain->audio, 512);
-        numWrite = fwrite((chain->audio)->audio, sizeof(float), BUFFER_SIZE, chain->destin);
+        numWrite = fwrite((chain->audio)->audio, 1, BUFFER_SIZE, chain->destin);
     }
     if (last != 0)
     {
@@ -143,11 +137,11 @@ void effect_chain(effect_parameter_chain* chain)
         effect_process(coeffs, states, chain->audio, (last/chain->wav->format.block_align));
         numWrite = fwrite((chain->audio)->audio, 1, last, chain->destin);
     }
+
 }
 
 void set_params(void * params)
 {
-
     FILE * js = fopen("C:/Filters/chain_float/parser.json", "r");
 
     fseek(js, 0, SEEK_END);

@@ -61,7 +61,24 @@ int32_t effect_set_parameter(
     int32_t     id,
     float       value)
 {
+    chain_params* set_params = (chain_params*)params;
+
     if (id >= 0 && id < 100)
+    {
+        equalizer_set_parameter(&set_params->equal_par, id, value);
+    }
+
+    if (id >= 100 && id < 199)
+    {
+        compressor_4ch_set_parameter(&set_params->compr_4ch_par, id, value);
+    }
+
+    if (id >= 200 && id < 299)
+    {
+        crossover_set_parameter(&set_params->cross_par, id, value);
+    }
+
+    /*if (id >= 0 && id < 100)
     {
         equalizer_set_parameter(params, id, value);
     }
@@ -74,7 +91,7 @@ int32_t effect_set_parameter(
     if (id >= 200 && id < 299)
     {
         crossover_set_parameter(params, id, value);
-    }
+    }*/
      
 }
 
@@ -95,7 +112,8 @@ int32_t effect_update_coeffs(
     chain_params* update_params = (chain_params*)params;
     chain_coeffs* update_coeffs = (chain_coeffs*)coeffs;
 
-    compressor_4ch_update_coeffs((comprssor_4ch_params*)&update_params->compr_4ch_par, (compressor_4ch_coeffs*)&update_coeffs->compr_4ch_coef);
-    crossover_update_coeffs((crossover_params*)&update_params->cross_par, (crossover_coeffs*)&update_coeffs->cross_coef);
-    equalizer_update_coeffs((equalizer_params*)&update_params->equal_par, (equalizer_coeffs*)&update_coeffs->equal_coef);
+    equalizer_update_coeffs(&update_params->equal_par, &update_coeffs->equal_coef);
+    compressor_4ch_update_coeffs(&update_params->compr_4ch_par, &update_coeffs->compr_4ch_coef);
+    crossover_update_coeffs(&update_params->cross_par, &update_coeffs->cross_coef);
+    
 }

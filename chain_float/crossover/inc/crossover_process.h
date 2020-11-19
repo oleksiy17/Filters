@@ -48,4 +48,7 @@ int32_t crossover_process(
     size_t      samples_count);
 
 
+tStereo_cross order_1(tStereo_cross *in, coef_1_ord *coeffs, tStereo_cross *delay);
+tStereo_cross order_2(tStereo_cross *in, coef_2_ord *coeffs, tStereo_cross *delay1, tStereo_cross *delay2);
+
 #endif

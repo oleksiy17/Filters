@@ -1,4 +1,4 @@
-#include <stdint.h>
+ #include <stdint.h>
 #include <stddef.h>
 #include "fixedpoint.h"
 
@@ -129,22 +129,22 @@ int32_t compressor_4ch_process(
 
     if (coeffs_4ch_c->comp_ch_1_coef.bpass != 1)
     {
-        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_1_coef, (compressor_states*)&states_4ch_c->comp_ch_1_st, ((band_buf_comp*)audio_c->cross_b)->band_1, samples_count);
+        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_1_coef, (compressor_states*)&states_4ch_c->comp_ch_1_st, (audio_buf_comp*)audio_c->band_1, samples_count);
     }
 
     if (coeffs_4ch_c->comp_ch_2_coef.bpass != 1)
     {
-        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_2_coef, (compressor_states*)&states_4ch_c->comp_ch_2_st, ((band_buf_comp*)audio_c->cross_b)->band_2, samples_count);
+        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_2_coef, (compressor_states*)&states_4ch_c->comp_ch_2_st, (audio_buf_comp*)audio_c->band_2, samples_count);
     }
     
     if (coeffs_4ch_c->comp_ch_3_coef.bpass != 1)
     {
-        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_3_coef, (compressor_states*)&states_4ch_c->comp_ch_3_st, ((band_buf_comp*)audio_c->cross_b)->band_3, samples_count);
+        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_3_coef, (compressor_states*)&states_4ch_c->comp_ch_3_st, (audio_buf_comp*)audio_c->band_3, samples_count);
     }
 
     if (coeffs_4ch_c->comp_ch_4_coef.bpass != 1)
     {
-        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_4_coef, (compressor_states*)&states_4ch_c->comp_ch_4_st, ((band_buf_comp*)audio_c->cross_b)->band_4, samples_count);
+        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_4_coef, (compressor_states*)&states_4ch_c->comp_ch_4_st, (audio_buf_comp*)audio_c->band_4, samples_count);
     }
     
     

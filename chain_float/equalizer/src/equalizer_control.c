@@ -47,10 +47,10 @@ int32_t equalizer_control_initialize(
     
     for (i = 0; i < (size_t)BANDS; i++)
     {
-        init_params->freq[i].Id = 0.0 + (float)i * 4.0;
-        init_params->gain[i].Id = 1.0 + (float)i * 4.0;
-        init_params->Q_f[i].Id =    2.0 + (float)i * 4.0;
-        init_params->type[i].Id = 3.0 + (float)i * 4.0;
+        //init_params->freq[i].Id = 0.0 + (float)i * 4.0;
+        //init_params->gain[i].Id = 1.0 + (float)i * 4.0;
+        //init_params->Q_f[i].Id =    2.0 + (float)i * 4.0;
+        //init_params->type[i].Id = 3.0 + (float)i * 4.0;
 
         init_params->freq[i].value = 0.0;
         init_params->gain[i].value = 0.0;
