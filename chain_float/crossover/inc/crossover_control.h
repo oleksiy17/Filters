@@ -83,20 +83,20 @@ typedef struct {
     tStereo_cross in;
 
     tStereo_cross cd1_ord1[3];
-    tStereo_cross cd1_delay_1[3];
-    tStereo_cross cd1_delay_2[3];
+    tStereo_cross cd1_delay_1[2];
+    tStereo_cross cd1_delay_2[2];
 
     tStereo_cross norm_ord1[2];
     tStereo_cross norm_delay_1[2];
     tStereo_cross norm_delay_2[2];
 
     tStereo_cross cd2_ord1[3];
-    tStereo_cross cd2_delay_1[3];
-    tStereo_cross cd2_delay_2[3];
+    tStereo_cross cd2_delay_1[2];
+    tStereo_cross cd2_delay_2[2];
 
     tStereo_cross cd3_ord1[3];
-    tStereo_cross cd3_delay_1[3];
-    tStereo_cross cd3_delay_2[3];
+    tStereo_cross cd3_delay_1[2];
+    tStereo_cross cd3_delay_2[2];
 
 }crossover_states;                          // states
 

@@ -38,14 +38,14 @@ int32_t crossover_reset(
 
     reset_states->cd1_ord1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd1_ord1[1] = (tStereo_cross) { 0.0, 0.0 };
+    reset_states->cd1_ord1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd1_delay_1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd1_delay_1[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd1_delay_1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd1_delay_2[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd1_delay_2[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd1_delay_2[2] = (tStereo_cross) { 0.0, 0.0 };
+
 
 
     reset_states->norm_ord1[0] = (tStereo_cross) { 0.0, 0.0 };
@@ -53,35 +53,34 @@ int32_t crossover_reset(
 
     reset_states->norm_delay_1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->norm_delay_1[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->norm_delay_1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->norm_delay_2[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->norm_delay_2[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->norm_delay_2[2] = (tStereo_cross) { 0.0, 0.0 };
+
 
 
     reset_states->cd2_ord1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd2_ord1[1] = (tStereo_cross) { 0.0, 0.0 };
+    reset_states->cd2_ord1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd2_delay_1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd2_delay_1[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd2_delay_1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd2_delay_2[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd2_delay_2[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd2_delay_2[2] = (tStereo_cross) { 0.0, 0.0 };
 
+     
 
     reset_states->cd3_ord1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd3_ord1[1] = (tStereo_cross) { 0.0, 0.0 };
+    reset_states->cd3_ord1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd3_delay_1[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd3_delay_1[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd3_delay_1[2] = (tStereo_cross) { 0.0, 0.0 };
 
     reset_states->cd3_delay_2[0] = (tStereo_cross) { 0.0, 0.0 };
     reset_states->cd3_delay_2[1] = (tStereo_cross) { 0.0, 0.0 };
-    reset_states->cd3_delay_2[2] = (tStereo_cross) { 0.0, 0.0 };
+
 
 }
 

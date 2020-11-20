@@ -119,30 +119,30 @@ int32_t compressor_4ch_process(
 {
     compressor_4ch_coeffs* coeffs_4ch_c;
     compressor_4ch_states* states_4ch_c;
-    //tStereo_compr* audio_c;
     audio_buf_comp* audio_c;
+
     uint32_t i;
 
     coeffs_4ch_c = (compressor_4ch_coeffs*)coeffs;
     states_4ch_c = (compressor_4ch_states*)states;
     audio_c = (audio_buf_comp*)audio;
 
-    if (coeffs_4ch_c->comp_ch_1_coef.bpass != 1)
+    if (coeffs_4ch_c->comp_ch_1_coef.bpass == 0)
     {
-        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_1_coef, (compressor_states*)&states_4ch_c->comp_ch_1_st, (audio_buf_comp*)audio_c->band_1, samples_count);
+        compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_1_coef, (compressor_states*)&states_4ch_c->comp_ch_1_st, (audio_buf_comp*)audio_c->band_4, samples_count);
     }
 
-    if (coeffs_4ch_c->comp_ch_2_coef.bpass != 1)
+    if (coeffs_4ch_c->comp_ch_2_coef.bpass == 0)
     {
         compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_2_coef, (compressor_states*)&states_4ch_c->comp_ch_2_st, (audio_buf_comp*)audio_c->band_2, samples_count);
     }
     
-    if (coeffs_4ch_c->comp_ch_3_coef.bpass != 1)
+    if (coeffs_4ch_c->comp_ch_3_coef.bpass == 0)
     {
         compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_3_coef, (compressor_states*)&states_4ch_c->comp_ch_3_st, (audio_buf_comp*)audio_c->band_3, samples_count);
     }
 
-    if (coeffs_4ch_c->comp_ch_4_coef.bpass != 1)
+    if (coeffs_4ch_c->comp_ch_4_coef.bpass == 0)
     {
         compressor_process((compressor_coeffs*)&coeffs_4ch_c->comp_ch_4_coef, (compressor_states*)&states_4ch_c->comp_ch_4_st, (audio_buf_comp*)audio_c->band_4, samples_count);
     }

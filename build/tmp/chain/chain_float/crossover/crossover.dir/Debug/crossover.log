@@ -1,7 +1,7 @@
 ﻿  crossover_process.c
-c:\filters\chain_float\crossover\src\crossover_process.c(110): warning C4101: 'band': unreferenced local variable
-c:\filters\chain_float\crossover\src\crossover_process.c(200): warning C4101: 'norm': unreferenced local variable
-c:\filters\chain_float\crossover\src\crossover_process.c(86): warning C4716: 'crossover_reset': must return a value
-c:\filters\chain_float\crossover\src\crossover_process.c(234): warning C4716: 'crossover_process': must return a value
+c:\filters\chain_float\crossover\src\crossover_process.c(109): warning C4101: 'band': unreferenced local variable
+c:\filters\chain_float\crossover\src\crossover_process.c(199): warning C4101: 'norm': unreferenced local variable
 c:\filters\chain_float\crossover\src\crossover_process.c(20): warning C4716: 'crossover_process_get_sizes': must return a value
+c:\filters\chain_float\crossover\src\crossover_process.c(85): warning C4716: 'crossover_reset': must return a value
+c:\filters\chain_float\crossover\src\crossover_process.c(233): warning C4716: 'crossover_process': must return a value
   crossover.vcxproj -> C:\Filters\build\tmp\chain\chain_float\crossover\Debug\crossover.lib

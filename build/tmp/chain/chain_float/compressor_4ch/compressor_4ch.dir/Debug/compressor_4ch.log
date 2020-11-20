@@ -11,8 +11,8 @@ c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(234): warning
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(246): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(251): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(255): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(20): warning C4716: 'compressor_4ch_process_get_sizes': must return a value
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(152): warning C4716: 'compressor_4ch_process': must return a value
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(100): warning C4716: 'compressor_4ch_reset': must return a value
-c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(20): warning C4716: 'compressor_4ch_process_get_sizes': must return a value
 c:\filters\chain_float\compressor_4ch\src\compressor_4ch_process.c(264): warning C4716: 'compressor_process': must return a value
   compressor_4ch.vcxproj -> C:\Filters\build\tmp\chain\chain_float\compressor_4ch\Debug\compressor_4ch.lib

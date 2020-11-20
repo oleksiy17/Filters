@@ -1,6 +1,6 @@
 ﻿  effect_process.c
 c:\filters\chain_float\chain\src\effect_process.c(65): warning C4101: 'i': unreferenced local variable
-c:\filters\chain_float\chain\src\effect_process.c(71): warning C4716: 'effect_process': must return a value
-c:\filters\chain_float\chain\src\effect_process.c(20): warning C4716: 'effect_process_get_sizes': must return a value
 c:\filters\chain_float\chain\src\effect_process.c(41): warning C4716: 'effect_reset': must return a value
+c:\filters\chain_float\chain\src\effect_process.c(20): warning C4716: 'effect_process_get_sizes': must return a value
+c:\filters\chain_float\chain\src\effect_process.c(71): warning C4716: 'effect_process': must return a value
   chain.vcxproj -> C:\Filters\build\tmp\chain\chain_float\chain\Debug\chain.lib
