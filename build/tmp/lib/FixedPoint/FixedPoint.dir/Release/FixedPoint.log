@@ -1,0 +1,50 @@
+﻿  fixedpoint.c
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(17): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(19): warning C4090: 'function': different 'const' qualifiers
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(31): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(33): warning C4090: 'function': different 'const' qualifiers
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(45): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(47): warning C4090: 'function': different 'const' qualifiers
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(59): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(61): warning C4090: 'function': different 'const' qualifiers
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(77): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(82): warning C4554: '>>': check operator precedence for possible error; use parentheses to clarify precedence
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(114): warning C4028: formal parameter 3 different from declaration
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(125): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(127): warning C4133: 'function': incompatible types - from 'my_sint32 *' to 'my_sint64 *'
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(127): warning C4244: '=': conversion from 'my_sint64' to 'my_sint32', possible loss of data
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(143): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(152): warning C4028: formal parameter 3 different from declaration
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(159): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(164): warning C4244: 'return': conversion from 'my_sint64' to 'my_sint32', possible loss of data
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(177): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(208): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(212): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(216): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(222): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(237): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(240): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(243): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(249): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(265): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(267): warning C4018: '<': signed/unsigned mismatch
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(270): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(285): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(290): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(323): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(327): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(340): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(344): warning C4146: unary minus operator applied to unsigned type, result still unsigned
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(362): warning C4142: 'float_To_Fixed': benign redefinition of type
+  c:\chain_scalar\lib\fixedpoint\inc\fixedpoint.h(104): note: see declaration of 'float_To_Fixed'
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(363): warning C4244: 'return': conversion from 'float' to 'my_sint32', possible loss of data
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(368): warning C4028: formal parameter 1 different from declaration
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(373): warning C4142: 'double_To_Fixed': benign redefinition of type
+  c:\chain_scalar\lib\fixedpoint\inc\fixedpoint.h(106): note: see declaration of 'double_To_Fixed'
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(374): warning C4244: 'return': conversion from 'my_double' to 'my_sint32', possible loss of data
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(379): warning C4028: formal parameter 1 different from declaration
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(473): warning C4244: '=': conversion from 'my_sint64' to 'my_uint32', possible loss of data
+c:\chain_scalar\lib\fixedpoint\src\fixedpoint.c(481): warning C4101: 'ret': unreferenced local variable
+  tables.c
+  Generating Code...
+  FixedPoint.vcxproj -> C:\Chain_scalar\build\tmp\lib\FixedPoint\Release\FixedPoint.lib

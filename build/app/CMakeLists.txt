@@ -12,8 +12,8 @@ add_executable(${PR_NAME}
 target_include_directories(${PR_NAME} PRIVATE ../../inc)
 target_include_directories(${PR_NAME} PRIVATE ../../lib/FixedPoint/inc)
 target_include_directories(${PR_NAME} PRIVATE ../../lib/Effect/inc)
-target_include_directories(${PR_NAME} PRIVATE ../../chain_float/chain/inc)
-
+#target_include_directories(${PR_NAME} PRIVATE ../../chain/chain_float/chain/inc)
+target_include_directories(${PR_NAME} PRIVATE ../../chain/chain_fixed/chain/inc)
 
 target_link_libraries(${PR_NAME} PRIVATE FixedPoint)
 target_link_libraries(${PR_NAME} PRIVATE chain)

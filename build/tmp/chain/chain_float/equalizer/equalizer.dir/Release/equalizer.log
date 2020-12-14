@@ -1,0 +1,7 @@
+﻿  Building Custom Rule C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt
+  CMake does not need to re-run because C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp is up-to-date.
+  equalizer_control.c
+c:\chain_scalar\chain\chain_float\equalizer\src\equalizer_control.c(46): warning C4244: '=': conversion from 'uint32_t' to 'float', possible loss of data
+  equalizer_process.c
+  Generating Code...
+  equalizer.vcxproj -> C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\Release\equalizer.lib

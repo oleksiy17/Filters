@@ -1,0 +1,18 @@
+﻿  crossover_control.c
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(50): warning C4244: '=': conversion from 'uint32_t' to 'my_float', possible loss of data
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(144): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(145): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(147): warning C4244: '=': conversion from 'double' to 'my_float', possible loss of data
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(148): warning C4244: '=': conversion from 'double' to 'my_float', possible loss of data
+  crossover_process.c
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_process.c(109): warning C4101: 'band': unreferenced local variable
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_process.c(200): warning C4101: 'norm': unreferenced local variable
+  Generating Code...
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_process.c(20): warning C4716: 'crossover_process_get_sizes': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_process.c(85): warning C4716: 'crossover_reset': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_process.c(237): warning C4716: 'crossover_process': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(23): warning C4716: 'crossover_control_get_sizes': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(63): warning C4716: 'crossover_control_initialize': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(113): warning C4716: 'crossover_set_parameter': must return a value
+c:\chain_scalar\chain\chain_fixed\crossover\src\crossover_control.c(156): warning C4716: 'crossover_update_coeffs': must return a value
+  crossover.vcxproj -> C:\Chain_scalar\build\tmp\chain\chain_fixed\crossover\Release\crossover.lib

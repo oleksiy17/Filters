@@ -5,11 +5,11 @@ set(LIB_NAME "equalizer")
 project(${LIB_NAME})
 
 add_library(${LIB_NAME} 
-		../../../../chain_float/${LIB_NAME}/src/equalizer_control.c
-		../../../../chain_float/${LIB_NAME}/src/equalizer_process.c)
+		../../../../chain/chain_float/${LIB_NAME}/src/equalizer_control.c
+		../../../../chain/chain_float/${LIB_NAME}/src/equalizer_process.c)
 
 target_include_directories(${LIB_NAME} PRIVATE
-		../../../../chain_float/${LIB_NAME}/inc
+		../../../../chain/chain_float/${LIB_NAME}/inc
 		../../../../lib/FixedPoint/inc
 )
 

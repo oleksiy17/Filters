@@ -1,0 +1,14 @@
+﻿  Building Custom Rule C:/Chain_scalar/build/chain/chain_float/chain/CMakeLists.txt
+  CMake does not need to re-run because C:/Chain_scalar/build/tmp/chain/chain_float/chain/CMakeFiles/generate.stamp is up-to-date.
+  effect_control.c
+  effect_process.c
+c:\chain_scalar\chain\chain_float\chain\src\effect_process.c(65): warning C4101: 'i': unreferenced local variable
+  Generating Code...
+c:\chain_scalar\chain\chain_float\chain\src\effect_process.c(20): warning C4716: 'effect_process_get_sizes': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_process.c(41): warning C4716: 'effect_reset': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_process.c(71): warning C4716: 'effect_process': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_control.c(21): warning C4716: 'effect_control_get_sizes': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_control.c(44): warning C4716: 'effect_control_initialize': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_control.c(78): warning C4716: 'effect_set_parameter': must return a value
+c:\chain_scalar\chain\chain_float\chain\src\effect_control.c(100): warning C4716: 'effect_update_coeffs': must return a value
+  chain.vcxproj -> C:\Chain_scalar\build\tmp\chain\chain_float\chain\Release\chain.lib

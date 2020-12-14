@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{954C6980-3E6D-3706-8121-A902268EC30C}</ProjectGuid>
+    <ProjectGuid>{97FC0CE9-92F4-3D1B-8AAE-BDB9963255ED}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
@@ -56,26 +56,26 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">equalizer.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">equalizer</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">equalizer.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">equalizer</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">equalizer.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">equalizer</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.lib</TargetExt>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">equalizer.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">equalizer</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsC</CompileAs>
@@ -92,10 +92,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -108,7 +108,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <ExceptionHandling>
@@ -125,10 +125,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -141,7 +141,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <ExceptionHandling>
@@ -158,10 +158,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -174,7 +174,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -190,10 +190,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\chain_float\equalizer\inc;C:\Filters\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\chain\chain_float\equalizer\inc;C:\Chain_scalar\build\chain\chain_float\equalizer\..\..\..\..\lib\FixedPoint\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -205,10 +205,10 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -216,12 +216,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -229,12 +229,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -242,12 +242,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -255,22 +255,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Filters/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Filters\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Filters\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Chain_scalar/build/chain/chain_float/equalizer/CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;C:\Chain_scalar\build\chain\chain_float\equalizer\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Filters\chain_float\equalizer\src\equalizer_control.c" />
-    <ClCompile Include="C:\Filters\chain_float\equalizer\src\equalizer_process.c" />
+    <ClCompile Include="C:\Chain_scalar\chain\chain_float\equalizer\src\equalizer_control.c" />
+    <ClCompile Include="C:\Chain_scalar\chain\chain_float\equalizer\src\equalizer_process.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Filters\build\tmp\ZERO_CHECK.vcxproj">
-      <Project>{B2BC5E6F-E3F7-3068-AA25-CDD2B4DC89C0}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\ZERO_CHECK.vcxproj">
+      <Project>{F5E222E6-62E0-353F-B8F4-1ACA3C4E9C40}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
-      <Project>{9A9681EC-0338-30BE-AC58-1103B4C9775D}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
+      <Project>{488BBC2D-6F43-3B1B-B1D4-34F76AF501E8}</Project>
       <Name>FixedPoint</Name>
     </ProjectReference>
   </ItemGroup>

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{C7C63A8C-780A-323B-95E8-B878EA0006BD}</ProjectGuid>
+    <ProjectGuid>{B0582937-FC7A-3D1C-898B-181E406E0CDB}</ProjectGuid>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>Win32</Platform>
@@ -56,25 +56,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Filters\build\tmp\app\Debug\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Chain_scalar\build\tmp\app\Debug\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Filters.dir\Debug\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Filters</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Filters\build\tmp\app\Release\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Chain_scalar\build\tmp\app\Release\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Filters.dir\Release\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Filters</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Filters\build\tmp\app\MinSizeRel\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Chain_scalar\build\tmp\app\MinSizeRel\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Filters.dir\MinSizeRel\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Filters</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">true</GenerateManifest>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Filters\build\tmp\app\RelWithDebInfo\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Chain_scalar\build\tmp\app\RelWithDebInfo\</OutDir>
     <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Filters.dir\RelWithDebInfo\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Filters</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">.exe</TargetExt>
@@ -83,7 +83,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsC</CompileAs>
@@ -100,10 +100,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -116,8 +116,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Filters/build/tmp/app/Debug/Filters.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Filters/build/tmp/app/Debug/Filters.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Chain_scalar/build/tmp/app/Debug/Filters.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Chain_scalar/build/tmp/app/Debug/Filters.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -126,7 +126,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <ExceptionHandling>
@@ -143,10 +143,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -159,8 +159,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Filters/build/tmp/app/Release/Filters.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Filters/build/tmp/app/Release/Filters.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Chain_scalar/build/tmp/app/Release/Filters.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Chain_scalar/build/tmp/app/Release/Filters.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -169,7 +169,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <ExceptionHandling>
@@ -186,10 +186,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -202,8 +202,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Filters/build/tmp/app/MinSizeRel/Filters.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Filters/build/tmp/app/MinSizeRel/Filters.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Chain_scalar/build/tmp/app/MinSizeRel/Filters.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Chain_scalar/build/tmp/app/MinSizeRel/Filters.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -212,7 +212,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
       <CompileAs>CompileAsC</CompileAs>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -228,10 +228,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Filters\build\app\..\..\inc;C:\Filters\build\app\..\..\lib\FixedPoint\inc;C:\Filters\build\app\..\..\lib\Effect\inc;C:\Filters\build\app\..\..\chain_float\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Chain_scalar\build\app\..\..\inc;C:\Chain_scalar\build\app\..\..\lib\FixedPoint\inc;C:\Chain_scalar\build\app\..\..\lib\Effect\inc;C:\Chain_scalar\build\app\..\..\chain\chain_fixed\chain\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -244,8 +244,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:X86</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>C:/Filters/build/tmp/app/RelWithDebInfo/Filters.lib</ImportLibrary>
-      <ProgramDataBaseFile>C:/Filters/build/tmp/app/RelWithDebInfo/Filters.pdb</ProgramDataBaseFile>
+      <ImportLibrary>C:/Chain_scalar/build/tmp/app/RelWithDebInfo/Filters.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/Chain_scalar/build/tmp/app/RelWithDebInfo/Filters.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -253,10 +253,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Filters\build\app\CMakeLists.txt">
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Filters/build/app/CMakeLists.txt</Message>
+    <CustomBuild Include="C:\Chain_scalar\build\app\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Building Custom Rule C:/Chain_scalar/build/app/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/app/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/app/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -264,12 +264,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Filters/build/app/CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Filters\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:/Chain_scalar/build/app/CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">C:\Chain_scalar\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Filters/build/app/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Building Custom Rule C:/Chain_scalar/build/app/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/app/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/app/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -277,12 +277,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Filters/build/app/CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Filters\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:/Chain_scalar/build/app/CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">C:\Chain_scalar\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Filters/build/app/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">Building Custom Rule C:/Chain_scalar/build/app/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/app/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/app/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -290,12 +290,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Filters/build/app/CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Filters\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:/Chain_scalar/build/app/CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">C:\Chain_scalar\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|Win32'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Filters/build/app/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">Building Custom Rule C:/Chain_scalar/build/app/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">setlocal
-"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Filters/build -BC:/Filters/build/tmp --check-stamp-file C:/Filters/build/tmp/app/CMakeFiles/generate.stamp
+"C:\Program Files\CMake 3.12\bin\cmake.exe" -HC:/Chain_scalar/build -BC:/Chain_scalar/build/tmp --check-stamp-file C:/Chain_scalar/build/tmp/app/CMakeFiles/generate.stamp
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -303,39 +303,39 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Filters/build/app/CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;C:\Filters\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Filters\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:/Chain_scalar/build/app/CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;C:\Chain_scalar\build\app\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">C:\Chain_scalar\build\tmp\app\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|Win32'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Filters\src\main.c" />
-    <ClCompile Include="C:\Filters\src\cJSON.c" />
-    <ClCompile Include="C:\Filters\src\file_handler.c" />
+    <ClCompile Include="C:\Chain_scalar\src\main.c" />
+    <ClCompile Include="C:\Chain_scalar\src\cJSON.c" />
+    <ClCompile Include="C:\Chain_scalar\src\file_handler.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Filters\build\tmp\ZERO_CHECK.vcxproj">
-      <Project>{B2BC5E6F-E3F7-3068-AA25-CDD2B4DC89C0}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\ZERO_CHECK.vcxproj">
+      <Project>{F5E222E6-62E0-353F-B8F4-1ACA3C4E9C40}</Project>
       <Name>ZERO_CHECK</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
-      <Project>{9A9681EC-0338-30BE-AC58-1103B4C9775D}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\lib\FixedPoint\FixedPoint.vcxproj">
+      <Project>{488BBC2D-6F43-3B1B-B1D4-34F76AF501E8}</Project>
       <Name>FixedPoint</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\chain\chain.vcxproj">
-      <Project>{87929144-29A5-363D-8940-1FB776418ED0}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\chain\chain_float\chain\chain.vcxproj">
+      <Project>{C0E50385-A03A-35C6-AFEB-AE400290BA11}</Project>
       <Name>chain</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\compressor_4ch\compressor_4ch.vcxproj">
-      <Project>{09E0CDBF-5FC3-3811-BC75-99CB92D86FF0}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\chain\chain_float\compressor_4ch\compressor_4ch.vcxproj">
+      <Project>{FE415AB4-A929-3B62-AF89-002299C6C2E7}</Project>
       <Name>compressor_4ch</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\crossover\crossover.vcxproj">
-      <Project>{3F1D4915-CF20-3B10-9073-315D0B7E5D54}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\chain\chain_float\crossover\crossover.vcxproj">
+      <Project>{DEEA9925-CBC3-34F4-96EE-C3587C3E5E1A}</Project>
       <Name>crossover</Name>
     </ProjectReference>
-    <ProjectReference Include="C:\Filters\build\tmp\chain\chain_float\equalizer\equalizer.vcxproj">
-      <Project>{954C6980-3E6D-3706-8121-A902268EC30C}</Project>
+    <ProjectReference Include="C:\Chain_scalar\build\tmp\chain\chain_float\equalizer\equalizer.vcxproj">
+      <Project>{97FC0CE9-92F4-3D1B-8AAE-BDB9963255ED}</Project>
       <Name>equalizer</Name>
     </ProjectReference>
   </ItemGroup>

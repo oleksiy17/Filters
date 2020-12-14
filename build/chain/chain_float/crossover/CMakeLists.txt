@@ -5,11 +5,11 @@ set(LIB_NAME "crossover")
 project(${LIB_NAME})
 
 add_library(${LIB_NAME} 
-		../../../../chain_float/${LIB_NAME}/src/crossover_control.c
-		../../../../chain_float/${LIB_NAME}/src/crossover_process.c)
+		../../../../chain/chain_float/${LIB_NAME}/src/crossover_control.c
+		../../../../chain/chain_float/${LIB_NAME}/src/crossover_process.c)
 
 target_include_directories(${LIB_NAME} PRIVATE
-		../../../../chain_float/${LIB_NAME}/inc
+		../../../../chain/chain_float/${LIB_NAME}/inc
 		../../../../lib/FixedPoint/inc
 )
 

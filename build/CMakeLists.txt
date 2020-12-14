@@ -4,6 +4,12 @@ project(Solution)
 
 add_subdirectory(lib/FixedPoint)
 
+#add_subdirectory(chain/chain_fixed/compressor_4ch)
+#add_subdirectory(chain/chain_fixed/crossover)
+#add_subdirectory(chain/chain_fixed/biquad)
+#add_subdirectory(chain/chain_fixed/equalizer)
+#add_subdirectory(chain/chain_fixed/chain)
+
 add_subdirectory(chain/chain_float/compressor_4ch)
 add_subdirectory(chain/chain_float/crossover)
 add_subdirectory(chain/chain_float/equalizer)

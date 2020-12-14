@@ -1,0 +1,6 @@
+﻿  biquad_control.c
+c:\chain_scalar\chain\chain_fixed\biquad\src\biquad_control.c(46): warning C4244: '=': conversion from 'uint32_t' to 'my_float', possible loss of data
+c:\chain_scalar\chain\chain_fixed\biquad\src\biquad_control.c(42): warning C4101: 'i': unreferenced local variable
+  biquad_process.c
+  Generating Code...
+  biquad.vcxproj -> C:\Chain_scalar\build\tmp\chain\chain_fixed\biquad\Release\biquad.lib

@@ -5,11 +5,11 @@ set(LIB_NAME "compressor_4ch")
 project(${LIB_NAME})
 
 add_library(${LIB_NAME} 
-		../../../../chain_float/${LIB_NAME}/src/compressor_4ch_control.c
-		../../../../chain_float/${LIB_NAME}/src/compressor_4ch_process.c)
+		../../../../chain/chain_float/${LIB_NAME}/src/compressor_4ch_control.c
+		../../../../chain/chain_float/${LIB_NAME}/src/compressor_4ch_process.c)
 
 target_include_directories(${LIB_NAME} PRIVATE
-		../../../../chain_float/${LIB_NAME}/inc
+		../../../../chain/chain_float/${LIB_NAME}/inc
 		../../../../lib/FixedPoint/inc
 )
 

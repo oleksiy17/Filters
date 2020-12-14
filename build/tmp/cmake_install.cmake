@@ -1,4 +1,4 @@
-# Install script for directory: C:/Filters/build
+# Install script for directory: C:/Chain_scalar/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,12 +34,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Filters/build/tmp/lib/FixedPoint/cmake_install.cmake")
-  include("C:/Filters/build/tmp/chain/chain_float/compressor_4ch/cmake_install.cmake")
-  include("C:/Filters/build/tmp/chain/chain_float/crossover/cmake_install.cmake")
-  include("C:/Filters/build/tmp/chain/chain_float/equalizer/cmake_install.cmake")
-  include("C:/Filters/build/tmp/chain/chain_float/chain/cmake_install.cmake")
-  include("C:/Filters/build/tmp/app/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/lib/FixedPoint/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/chain/chain_float/compressor_4ch/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/chain/chain_float/crossover/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/chain/chain_float/equalizer/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/chain/chain_float/chain/cmake_install.cmake")
+  include("C:/Chain_scalar/build/tmp/app/cmake_install.cmake")
 
 endif()
 
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Filters/build/tmp/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Chain_scalar/build/tmp/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

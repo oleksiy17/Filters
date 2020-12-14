@@ -18,7 +18,7 @@ my_sint32 add32(const my_sint32 a, const my_sint32 b)
     {
         c = saturation32(&c, &a);
     }   
-
+    
     return c;   // positive + negative always returns right result
 }
 
@@ -182,6 +182,23 @@ my_sint64 msub64(const my_sint32 a, const my_sint32 b, const my_sint64 c)
     return dif;
 }
 
+/*my_sint64 msub64(const my_sint32 a, const my_sint32 b, const my_sint64 c)
+{
+    my_sint64 acc;
+    my_sint64 dif;
+
+    acc = (my_sint64)a * (my_sint64)b;
+    acc = acc << 1;
+
+    dif = c - acc;
+
+    if (((c ^ acc) & MIN_VAL_64) == 1)
+    {
+        dif = saturation64(&dif, &acc);
+    }
+
+    return dif;
+}*/
 
 my_sint32 lsh32(const my_sint32 a, const my_sint32 b)
 {
@@ -191,7 +208,9 @@ my_sint32 lsh32(const my_sint32 a, const my_sint32 b)
     if (a & MIN_VAL_32)     //case for negative numbers
     {
         c = a << b;
-        c = c | MIN_VAL_32;     // always add a sign bit
+        if (c >= 0)
+            c = MIN_VAL_32;
+        //c = c | MIN_VAL_32;     // always add a sign bit
     }
 
     if (((a & MIN_VAL_32) == 0))    // case for positive numbers
@@ -341,15 +360,22 @@ my_sint64 saturation64(my_sint64* sum, my_sint64* term)
 
 my_sint32 float_To_Fixed(float floatNum, my_uint8 shift)
 {
-    my_sint32 tmp = (floatNum * (1u << shift));
-    /*tmp = min(tmp, MAX_VAL_32);
-    tmp = max(tmp, MIN_VAL_32);*/
-
-    return tmp;
+    return (floatNum * (1u << shift));
 }
 
 
 my_float fixed_To_Float(my_sint32 fixedNum, my_uint8 shift)
+{
+    return ((my_float)fixedNum / (my_float)(1u << shift));
+}
+
+my_sint32 double_To_Fixed(my_double floatNum, my_uint8 shift)
+{
+    return (floatNum * (1u << shift));
+}
+
+
+my_double fixed_To_Double(my_sint32 fixedNum, my_uint8 shift)
 {
     return ((my_float)fixedNum / (my_float)(1u << shift));
 }
@@ -361,46 +387,54 @@ my_float fixed_To_Float(my_sint32 fixedNum, my_uint8 shift)
 *
 *****************************************************/
 
-my_float add_f(const my_float a, const my_float b)
+/*inline my_float add_f(const my_float a, const my_float b)
 {
     return (a + b);
 }
 
 
-my_float sub_f(const my_float a, const my_float b)
+inline my_float sub_f(const my_float a, const my_float b)
 {
     return (a - b);
 }
 
 
-my_float mul_f(const my_float a, const my_float b)
+inline my_float mul_f(const my_float a, const my_float b)
 {
     return (a * b);
 }
 
+inline my_float div_f(const my_float a, const my_float b)
+{
+    return (a / b);
+}
 
-my_float mac_f(const my_float a, const my_float b, const my_float c)
+inline my_float mac_f(const my_float a, const my_float b, const my_float c)
 {
     return (a * b) + c;
 }
 
 
-my_float msub_f(const my_float a, const my_float b, const my_float c)
+inline my_float msub_f(const my_float a, const my_float b, const my_float c)
 {
     return (a * b) - c;
 }
 
+inline my_float pow_f(const my_float a, const my_float b)
+{
+    return powf(a, b);
+}
 
-my_float abs_f(const my_float a)
+inline my_float abs_f(const my_float a)
 {
     return ((a < 0) ? -a : a);
 }
 
 
-my_float neg_f(const my_float a)
+inline my_float neg_f(const my_float a)
 {
     return ((a < 0) ? a : -a);
-}
+}*/
 
 /****************************************************
 *
@@ -486,11 +520,7 @@ my_sint32 div32_1_x(const my_sint32 denuminator, const my_sint32 Q)
     return (my_sint32)estimate;
 }
 
-my_float div_f(const my_float numenator, const my_float denuminator)
-{
-    my_float result = numenator / denuminator;
-    return result;
-}
+
 
 
 my_sint32 log2x(my_sint32 a)    // Input parameter in Q31

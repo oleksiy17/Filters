@@ -1,0 +1,5 @@
+﻿  effect_control.c
+c:\chain_scalar\chain\chain_fixed\equalizer\inc\equalizer_datatypes.h(4): fatal error C1083: Cannot open include file: 'biquad_datatypes.h': No such file or directory
+  effect_process.c
+c:\chain_scalar\chain\chain_fixed\equalizer\inc\equalizer_datatypes.h(4): fatal error C1083: Cannot open include file: 'biquad_datatypes.h': No such file or directory
+  Generating Code...

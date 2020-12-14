@@ -74,6 +74,7 @@ typedef signed int              my_sint32;
 typedef signed long long int    my_sint64;
 
 typedef float                   my_float;
+typedef double                  my_double;
 
 
 my_sint32 add32(const my_sint32 a, const my_sint32 b);
@@ -83,6 +84,7 @@ my_sint32 mac32(const my_sint32 a, const my_sint32 b, my_sint32 c);
 my_sint64 mac64(const my_sint32 a, const my_sint32 b, const my_sint64 c);
 my_sint32 msub32(const my_sint32 a, const my_sint32 b, my_sint32 c);
 my_sint64 msub64(const my_sint32 a, const my_sint32 b, const my_sint64 c);
+my_sint64 nmsub64(const my_sint32 a, const my_sint32 b, const my_sint64 c);
 my_sint32 abs32(const my_sint32 a);
 my_sint32 neg32(const my_sint32 a);
 my_sint32 lsh32(const my_sint32 a, const my_sint32 b);
@@ -101,20 +103,78 @@ my_sint64 saturation64(my_sint64* sum, my_sint64* term);
 
 my_uint32 float_To_Fixed(my_float floatNum, my_uint8 shift);
 my_float fixed_To_Float(my_uint32 fixedNum, my_uint8 shift);
+my_uint32 double_To_Fixed(my_double floatNum, my_uint8 shift);
+my_double fixed_To_Double(my_uint32 fixedNum, my_uint8 shift);
 
-my_float add_f(const my_float a, const my_float b);
-my_float sub_f(const my_float a, const my_float b);
-my_float mul_f(const my_float a, const my_float b);
-my_float mac_f(const my_float a, const my_float b, const my_float c);
-my_float msub_f(const my_float a, const my_float b, const my_float c);
-my_float abs_f(const my_float a);
-my_float neg_f(const my_float a);
-my_float div_f(const my_float numenator, const my_float denuminator);
+//extern my_float add_f(const my_float a, const my_float b);
+//extern my_float sub_f(const my_float a, const my_float b);
+//extern my_float mul_f(const my_float a, const my_float b);
+//extern my_float div_f(const my_float a, const my_float b);
+//extern my_float mac_f(const my_float a, const my_float b, const my_float c);
+//extern my_float msub_f(const my_float a, const my_float b, const my_float c);
+//extern my_float abs_f(const my_float a);
+//extern my_float neg_f(const my_float a);
+//extern my_float pow_f(const my_float a, const my_float b);
 
 my_sint32 log2x(my_sint32 a);
 my_sint32 pow2x(my_sint32 a);
 my_sint32 pow10x(my_sint32 a);
 my_sint32 my_pow(my_sint32 a, my_sint32 x);
 my_sint32 log10x(my_sint32 a);
+
+
+static __forceinline my_float add_f(const my_float a, const my_float b)
+{
+    return (a + b);
+}
+
+
+static __forceinline my_float sub_f(const my_float a, const my_float b)
+{
+    return (a - b);
+}
+
+
+static __forceinline my_float mul_f(const my_float a, const my_float b)
+{
+    return (a * b);
+}
+
+static __forceinline my_float div_f(const my_float a, const my_float b)
+{
+    return (a / b);
+}
+
+static __forceinline my_float mac_f(const my_float a, const my_float b, const my_float c)
+{
+    return (a * b) + c;
+}
+
+
+static __forceinline my_float msub_f(const my_float a, const my_float b, const my_float c)
+{
+    return (a * b) - c;
+}
+
+static __forceinline my_float nmsub_f(const my_float a, const my_float b, const my_float c)
+{
+    return c - (a * b);
+}
+
+static __forceinline my_float pow_f(const my_float a, const my_float b)
+{
+    return powf(a, b);
+}
+
+static __forceinline my_float abs_f(const my_float a)
+{
+    return ((a < 0) ? -a : a);
+}
+
+
+static __forceinline my_float neg_f(const my_float a)
+{
+    return ((a < 0) ? a : -a);
+}
 
 #endif // !__FIXEDPOINT_H_

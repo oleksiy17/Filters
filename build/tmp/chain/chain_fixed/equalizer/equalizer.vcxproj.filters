@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Chain_scalar\chain\chain_fixed\equalizer\src\equalizer_control.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Chain_scalar\chain\chain_fixed\equalizer\src\equalizer_process.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Chain_scalar\build\chain\chain_fixed\equalizer\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6496A8B5-8EA4-3B4F-8A6B-99AC4279EB2F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

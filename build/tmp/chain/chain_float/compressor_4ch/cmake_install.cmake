@@ -1,4 +1,4 @@
-# Install script for directory: C:/Filters/build/chain/chain_float/compressor_4ch
+# Install script for directory: C:/Chain_scalar/build/chain/chain_float/compressor_4ch
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

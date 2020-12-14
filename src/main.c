@@ -1,5 +1,9 @@
 #include "main.h"
 #include "cJSON.h"
+#include "time.h"
+#include "stdio.h"
+#include "windows.h"
+#include "winnt.h"
 
 int main()
 {
@@ -31,9 +35,15 @@ int main()
     bands.cross_b.band_2 = malloc(audio_bytes);
     bands.cross_b.band_3 = malloc(audio_bytes);
     bands.cross_b.band_4 = malloc(audio_bytes);
+    
+    memset(bands.audio, 0, audio_bytes);
+    memset(bands.cross_b.band_1, 0, audio_bytes);
+    memset(bands.cross_b.band_2, 0, audio_bytes);
+    memset(bands.cross_b.band_3, 0, audio_bytes);
+    memset(bands.cross_b.band_4, 0, audio_bytes);
 
-    fileAdd = "C:/Filters/test_signal/sweep.wav";
-    newFileFIR = "C:/Filters/test_signal/out/fir.wav";
+    fileAdd = "C:/Chain_scalar/test_signal/sweeplog.wav";
+    newFileFIR = "C:/test_audio/cross.wav";
 
     ptrWavFile = fopen(fileAdd, "rb");      // Open existance .wav file  
     ptrNewWavFIR = fopen(newFileFIR, "w+b");   
@@ -60,9 +70,9 @@ int main()
                 (equalizer) {1000, -3, 4, 2},
                 (equalizer) {2000, -3, 20, 2},
                 (equalizer) {4000, -3, 4, 2},
-                (equalizer) { 8000, -3, 10, 2},
+                (equalizer) {8000, -3, 10, 2},
                 (equalizer) {12000, -3, 8, 2},
-                (equalizer) { 14000, -3, 0.1, 4},
+                (equalizer) {14000, -3, 0.1, 4},
                 (equalizer) {18000, -12, 1, 0}
             },
                 wav.format.sample_rate
@@ -104,6 +114,17 @@ void effect_chain(effect_parameter_chain* chain)
     size_t loops;       // number of full cycles of 4096 bytes procession
     size_t last;        // number os 
 
+    FILETIME lpCreationTime;
+    FILETIME lpExistTime;
+    FILETIME lpKernelTime;
+    FILETIME lpUserTime;
+
+    float begin_ms;
+    float end_ms;
+    float time = 0.0;
+    SYSTEMTIME begin;
+    SYSTEMTIME end;
+
     loops = chain->wav->data.data_size >> BUFFER_SHIFT;
     last = chain->wav->data.data_size - (loops << BUFFER_SHIFT);
 
@@ -118,6 +139,10 @@ void effect_chain(effect_parameter_chain* chain)
     coeffs = malloc(coeffs_bytes);
     states = malloc(states_bytes);
 
+    memset(params, 0, params_bytes);
+    memset(coeffs, 0, coeffs_bytes);
+    memset(states, 0, states_bytes);
+
     effect_control_initialize(params, coeffs, chain->wav->format.sample_rate);
     effect_reset(coeffs, states);
     //
@@ -125,24 +150,54 @@ void effect_chain(effect_parameter_chain* chain)
     //
     effect_update_coeffs(params, coeffs);
 
+    clock_t beginp = clock();
+
     for (i = 0; i < loops; i++)
     {
         numRead = fread((chain->audio)->audio, 1, BUFFER_SIZE, chain->source);
+
+        GetProcessTimes(GetCurrentProcess(), &lpCreationTime, &lpExistTime, &lpKernelTime, &lpUserTime);
+        FileTimeToSystemTime(&lpUserTime, &begin);
+
         effect_process(coeffs, states, chain->audio, 512);
+
+        GetProcessTimes(GetCurrentProcess(), &lpCreationTime, &lpExistTime, &lpKernelTime, &lpUserTime);
+        FileTimeToSystemTime(&lpUserTime, &end);
+
+        begin_ms = (begin.wMinute * 60000) + (begin.wSecond * 1000) + begin.wMilliseconds;
+        end_ms = (end.wMinute * 60000) + (end.wSecond * 1000) + end.wMilliseconds;
+        time += (end_ms - begin_ms) / 1000;
+
         numWrite = fwrite((chain->audio)->audio, 1, BUFFER_SIZE, chain->destin);
     }
     if (last != 0)
     {
         numRead = fread((chain->audio)->audio, 1, last, chain->source);
+
+        GetProcessTimes(GetCurrentProcess(), &lpCreationTime, &lpExistTime, &lpKernelTime, &lpUserTime);
+        FileTimeToSystemTime(&lpUserTime, &begin);
+
         effect_process(coeffs, states, chain->audio, (last/chain->wav->format.block_align));
+
+        GetProcessTimes(GetCurrentProcess(), &lpCreationTime, &lpExistTime, &lpKernelTime, &lpUserTime);
+        FileTimeToSystemTime(&lpUserTime, &end);
+
+        begin_ms = (begin.wMinute * 60000) + (begin.wSecond * 1000) + begin.wMilliseconds;
+        end_ms = (end.wMinute * 60000) + (end.wSecond * 1000) + end.wMilliseconds;
+        time += (end_ms - begin_ms) / 1000;
+
         numWrite = fwrite((chain->audio)->audio, 1, last, chain->destin);
     }
 
+    printf("%lf\n", time);
+
+    clock_t endp = clock();
+    printf("%lf\n", (double)(endp - beginp) / CLOCKS_PER_SEC);
 }
 
 void set_params(void * params)
 {
-    FILE * js = fopen("C:/Filters/chain_float/parser.json", "r");
+    FILE * js = fopen("C:/Chain_scalar/chain/chain_float/parser.json", "r");
 
     fseek(js, 0, SEEK_END);
     size_t size = ftell(js);

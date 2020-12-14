@@ -1,4 +1,4 @@
-# Install script for directory: C:/Filters/build/app
+# Install script for directory: C:/Chain_scalar/build/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

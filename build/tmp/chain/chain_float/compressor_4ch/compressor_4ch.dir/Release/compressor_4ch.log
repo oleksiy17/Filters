@@ -1,0 +1,63 @@
+﻿  Building Custom Rule C:/Chain_scalar/build/chain/chain_float/compressor_4ch/CMakeLists.txt
+  CMake does not need to re-run because C:/Chain_scalar/build/tmp/chain/chain_float/compressor_4ch/CMakeFiles/generate.stamp is up-to-date.
+  compressor_4ch_control.c
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(218): warning C4244: '=': conversion from 'float' to 'uint32_t', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(280): warning C4244: '=': conversion from 'float' to 'uint32_t', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(343): warning C4244: '=': conversion from 'float' to 'uint32_t', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(406): warning C4244: '=': conversion from 'float' to 'uint32_t', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(435): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(438): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(439): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(441): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(442): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(444): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(448): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(449): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(450): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(451): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(452): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(455): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(458): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(459): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(461): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(462): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(464): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(468): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(469): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(470): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(471): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(472): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(475): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(478): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(479): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(481): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(482): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(484): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(488): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(489): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(490): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(491): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(492): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(495): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(498): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(499): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(501): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(502): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(504): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(508): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(509): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(510): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(511): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(512): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  compressor_4ch_process.c
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_process.c(93): warning C4101: 'i': unreferenced local variable
+  Generating Code...
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_process.c(69): warning C4716: 'compressor_4ch_reset': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\inc\compressor_4ch_process.h(122): warning C4716: 'compressor_process': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_process.c(20): warning C4716: 'compressor_4ch_process_get_sizes': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_process.c(122): warning C4716: 'compressor_4ch_process': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(22): warning C4716: 'compressor_4ch_control_get_sizes': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(145): warning C4716: 'compressor_4ch_control_initialize': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(415): warning C4716: 'compressor_4ch_set_parameter': must return a value
+c:\chain_scalar\chain\chain_float\compressor_4ch\src\compressor_4ch_control.c(513): warning C4716: 'compressor_4ch_update_coeffs': must return a value
+  compressor_4ch.vcxproj -> C:\Chain_scalar\build\tmp\chain\chain_float\compressor_4ch\Release\compressor_4ch.lib

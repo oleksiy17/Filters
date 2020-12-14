@@ -1,4 +1,4 @@
-# Install script for directory: C:/Filters/build/chain/chain_float/chain
+# Install script for directory: C:/Chain_scalar/build/chain/chain_float/chain
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
